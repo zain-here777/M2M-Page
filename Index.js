@@ -1,9 +1,8 @@
+const productDetails = document.getElementById('column');
 
-const productDetails = document.getElementById('column')
-
- async function fetchData() {
+async function fetchData() {
     try {
-        const response = await fetch('ApiData.Json');
+        const response = await fetch('ApiData.json');
         if (response.ok) {
             const data = await response.json();
             return data;
@@ -15,7 +14,6 @@ const productDetails = document.getElementById('column')
         return [];
     }
 }
-
 
 async function renderProductCards() {
     const columnsContainer = document.getElementById('columnsContainer');
@@ -34,48 +32,52 @@ async function renderProductCards() {
                         <div>
                             <span>${product.features}</span>
                         </div>
-                       
                     </div>
                 </div>
             </div>
         `;
         columnsContainer.appendChild(column);
-        column.addEventListener("click",()=>{
-            showProductDetails(product);
-        })
 
-        function showProductDetails(product) {
-            productDetails.innerHTML = `
-            <div class="p-header">
-                <div>
-                    <h2 class="property-title">${product.title}</h2>
-                    <p>${product.price}4</p>
-                </div>
-                <div class="add-fvrt">
-                    <a href="">
-                        <button>Add to Favourite</button>
-                    </a>
-                </div>
+        column.addEventListener("click", () => {
+            showProductDetails(product);
+        });
+    });
+
+    // Show details for the first product by default
+    if (products.length > 0) {
+        showProductDetails(products[0]);
+    }
+}
+
+function showProductDetails(product) {
+    productDetails.innerHTML = `
+        <div class="p-header">
+            <div>
+                <h2 class="property-title">${product.title}</h2>
+                <p>${product.price}</p>
             </div>
-            <div class="detail-img">
-                <img src="${product.image}" alt="">
+            <div class="add-fvrt">
+                <a href="#">
+                    <button>Add to Favorite</button>
+                </a>
+            </div>
+        </div>
+        <div class="detail-img">
+            <img src="${product.image}" alt="Product Image">
+            <div>
                 <div>
                     <div>
-                        <div>
-                            <p>Ref. Number</p>
-                            <h6>#54546</h6>
-                        </div>
-                        <div>
-                            <p>Ref. Number</p>
-                            <h6>#54546</h6>
-                        </div>
+                        <p>Ref. Number</p>
+                        <h6>#54546</h6>
+                    </div>
+                    <div>
+                        <p>Ref. Number</p>
+                        <h6>#54546</h6>
                     </div>
                 </div>
             </div>
-            `;
-        }
-
-    });
+        </div>
+    `;
 }
 
 renderProductCards();
