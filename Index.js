@@ -1,7 +1,7 @@
 const productDetails = document.getElementById('column');
 
 function addToFavorites(product) {
- 
+
 
     const favoriteItem = document.createElement('div');
     favoriteItem.classList.add('favorite-item');
@@ -22,9 +22,8 @@ function addToFavorites(product) {
 }
 
 
-
 function handleAddToFavorites(product) {
-    return function(event) {
+    return function (event) {
         event.stopPropagation();
         addToFavorites(product);
     };
@@ -53,18 +52,20 @@ async function renderProductCards() {
         const column = document.createElement('div');
         column.classList.add('column');
         column.innerHTML = `
-            <div class="card_h">
-                <img class="card-img" src="${product.image}" alt="Product Image">
-                <div>
-                    <div class="title_h">${product.title}</div>
-                    <p class="price">$${product.price}</p>
-                    <div class="property-features">
-                        <div>
-                            <span>${product.features}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
+  <div class="row align-items-center">
+    <div class="col-md-4">
+      <img class = 'p-card-img' src=${product.image} class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body p-0">
+        <h6 class="card-title">${product.title}</h6>
+        <p class="p-card-price card-text m-0">€${product.price}</p>
+        <p class="card-text d-flex gap-2"><img style="width: 15px" src="./assets/img/location.svg" alt="">${product.location}</p>
+      </div>
+    </div>
+  </div>
+</div>
         `;
         columnsContainer.appendChild(column);
 
@@ -88,7 +89,7 @@ function showProductDetails(product) {
         <div class="p-header">
             <div>
                 <h2 class="property-title">${product.title}</h2>
-                <p>${product.price}</p>
+                <h3 class="p-ref-no">${product.refNo}</h3>
             </div>
             <div class="add-fvrt">
                 <a href="#">
@@ -98,25 +99,19 @@ function showProductDetails(product) {
         </div>
         <div class="detail-img">
             <img src="${product.image}" alt="Product Image">
-            <div>
-                <div>
-                    <div>
-                        <p>Ref. Number</p>
-                        <h6>#54546</h6>
-                    </div>
-                    <div>
-                        <p>Ref. Number</p>
-                        <h6>#54546</h6>
-                    </div>
-                </div>
-            </div>
         </div>
+         <div class="property-detail">
+                        <div class="price">
+                            <h1>$${product.price} / Year</h1>
+                            <p class="card-text d-flex gap-2"><img style="width: 15px" src="./assets/img/location.svg" alt="">${product.location}</p>
+                        </div>
+                    </div>
     `;
 
     const addFvrtDiv = productDetails.querySelector('.add-fvrt');
     addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    renderProductCards(); 
+document.addEventListener('DOMContentLoaded', function () {
+    renderProductCards();
 });
