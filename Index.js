@@ -43,13 +43,35 @@ async function renderProductCards() {
         column.addEventListener("click",()=>{
             showProductDetails(product);
         })
-        
+
         function showProductDetails(product) {
             productDetails.innerHTML = `
-                <h2>${product.title}</h2>
-                <p>${product.description}</p>
-                <p>Price: ${product.price}</p>
-                <img src="${product.image}" />
+            <div class="p-header">
+                <div>
+                    <h2 class="property-title">${product.title}</h2>
+                    <p>${product.price}4</p>
+                </div>
+                <div class="add-fvrt">
+                    <a href="">
+                        <button>Add to Favourite</button>
+                    </a>
+                </div>
+            </div>
+            <div class="detail-img">
+                <img src="${product.image}" alt="">
+                <div>
+                    <div>
+                        <div>
+                            <p>Ref. Number</p>
+                            <h6>#54546</h6>
+                        </div>
+                        <div>
+                            <p>Ref. Number</p>
+                            <h6>#54546</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
             `;
         }
 
