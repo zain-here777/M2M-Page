@@ -1,5 +1,35 @@
 const productDetails = document.getElementById('column');
 
+function addToFavorites(product) {
+ 
+
+    const favoriteItem = document.createElement('div');
+    favoriteItem.classList.add('favorite-item');
+    favoriteItem.innerHTML = `
+    <div class="favorite-item">
+        <div class="favorite-detail">
+            <div class="detail-img">
+                <img src="${product.image}" alt="Product Image">
+            </div>
+            <div>
+                <h3>${product.title}</h3>
+                <p>${product.price}</p>
+            </div>
+        </div>
+        </div>
+    `;
+    document.body.insertBefore(favoriteItem, document.body.firstChild);
+}
+
+
+
+function handleAddToFavorites(product) {
+    return function(event) {
+        event.stopPropagation();
+        addToFavorites(product);
+    };
+}
+
 async function fetchData() {
     try {
         const response = await fetch('ApiData.json');
@@ -18,7 +48,7 @@ async function fetchData() {
 async function renderProductCards() {
     const columnsContainer = document.getElementById('columnsContainer');
     const products = await fetchData();
-    
+
     products.forEach(product => {
         const column = document.createElement('div');
         column.classList.add('column');
@@ -43,13 +73,17 @@ async function renderProductCards() {
         });
     });
 
-    // Show details for the first product by default
     if (products.length > 0) {
         showProductDetails(products[0]);
     }
 }
 
 function showProductDetails(product) {
+    const favoriteBtn = document.createElement('button');
+    favoriteBtn.classList.add('favorite-btn');
+    favoriteBtn.textContent = 'Add to Favorite';
+    favoriteBtn.addEventListener('click', handleAddToFavorites(product));
+
     productDetails.innerHTML = `
         <div class="p-header">
             <div>
@@ -58,7 +92,7 @@ function showProductDetails(product) {
             </div>
             <div class="add-fvrt">
                 <a href="#">
-                    <button>Add to Favorite</button>
+                    <!-- Place the favorite button here -->
                 </a>
             </div>
         </div>
@@ -78,6 +112,11 @@ function showProductDetails(product) {
             </div>
         </div>
     `;
+
+    const addFvrtDiv = productDetails.querySelector('.add-fvrt');
+    addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
 }
 
-renderProductCards();
+document.addEventListener('DOMContentLoaded', function() {
+    renderProductCards(); 
+});
