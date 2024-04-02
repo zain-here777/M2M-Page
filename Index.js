@@ -1,24 +1,28 @@
 const productDetails = document.getElementById('column');
 
+
 function addToFavorites(product) {
+const Items = document.getElementById('fav-items')
 
 
-    const favoriteItem = document.createElement('div');
-    favoriteItem.classList.add('favorite-item');
+const favoriteItem = document.createElement('div');
+favoriteItem.classList.add('col-lg-2');
     favoriteItem.innerHTML = `
+  
     <div class="favorite-item">
         <div class="favorite-detail">
             <div class="detail-img">
                 <img src="${product.image}" alt="Product Image">
             </div>
             <div>
-                <h3>${product.title}</h3>
+                
                 <p>${product.price}</p>
             </div>
         </div>
         </div>
     `;
-    document.body.insertBefore(favoriteItem, document.body.firstChild);
+  
+    Items.appendChild(favoriteItem)   
 }
 
 
@@ -27,9 +31,7 @@ function handleAddToFavorites(product) {
         event.stopPropagation();
         addToFavorites(product);
         
-        // Store product data in cookies
-        const productData = JSON.stringify(product);
-        document.cookie = `favorite_product=${productData}; expires=Fri, 31 Dec 9999 23:59:59 GMT;`;
+       
     };
 }
 
