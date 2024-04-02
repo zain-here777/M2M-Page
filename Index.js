@@ -1,37 +1,42 @@
 const productDetails = document.getElementById('column');
 
-
 function addToFavorites(product) {
-const Items = document.getElementById('fav-items')
-
-
-const favoriteItem = document.createElement('div');
-favoriteItem.classList.add('col-lg-2');
-    favoriteItem.innerHTML = `
-  
-    <div class="favorite-item">
-        <div class="favorite-detail">
-            <div class="detail-img">
-                <img src="${product.image}" alt="Product Image">
+    const Items = document.getElementById('fav-items')
+    
+    
+    const favoriteItem = document.createElement('div');
+    favoriteItem.classList.add('col-lg-2');
+        favoriteItem.innerHTML = `
+      
+        <div class="favorite-item">
+            <div class="favorite-detail">
+                <div class="detail-img">
+                    <img src="${product.image}" alt="Product Image">
+                </div>
+                <div>
+                    
+                    <p>${product.price}</p>
+                </div>
             </div>
-            <div>
-                
-                <p>${product.price}</p>
             </div>
-        </div>
-        </div>
-    `;
-  
-    Items.appendChild(favoriteItem)   
-}
+        `;
+      
+        Items.appendChild(favoriteItem)  
+        Items.addEventListener("click", () => {
+            showProductDetails(product);
+        });
 
+    }
 
+    
 function handleAddToFavorites(product) {
     return function (event) {
         event.stopPropagation();
         addToFavorites(product);
         
-       
+        // Store product data in cookies
+        const productData = JSON.stringify(product);
+        document.cookie = `favorite_product=${productData}; expires=Fri, 31 Dec 9999 23:59:59 GMT;`;
     };
 }
 
