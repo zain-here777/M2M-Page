@@ -60,7 +60,7 @@ async function renderProductCards() {
     <div class="col-md-8">
       <div class="card-body p-0">
         <h6 class="card-title">${product.title}</h6>
-        <p class="p-card-price card-text m-0">€${product.price}</p>
+        <p class="p-card-price card-text m-0 py-2">€${product.price}</p>
         <p class="card-text d-flex gap-2"><img style="width: 15px" src="./assets/img/location.svg" alt="">${product.location}</p>
       </div>
     </div>
@@ -101,11 +101,85 @@ function showProductDetails(product) {
             <img src="${product.image}" alt="Product Image">
         </div>
          <div class="property-detail">
-                        <div class="price">
+                        <div class="price pt-3">
                             <h1>$${product.price} / Year</h1>
-                            <p class="card-text d-flex gap-2"><img style="width: 15px" src="./assets/img/location.svg" alt="">${product.location}</p>
+                            <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="./assets/img/location.svg" alt="">${product.location}</p>
                         </div>
                     </div>
+                    <div class="detail-border">
+                    
+</div>
+<section class="property-overview">
+<h6 class="py-4">Overview</h6>
+<div class="row">
+<div class="col-lg-3">
+<div class="feature">
+<img src="./assets/img/bed.svg" alt="">
+<div >
+<p>Bedroom</p>
+<p>4</p>
+</div>
+</div>
+<div class="feature">
+<img src="./assets/img/build.svg" alt="">
+<div >
+<p>Build Year</p>
+<p>2020</p>
+</div>
+</div>
+</div>
+<div class="col-lg-3">
+<div class="feature">
+<img src="./assets/img/home.svg" alt="">
+<div>
+<p>Type</p>
+<p>Home</p>
+</div>
+</div>
+<div class="feature">
+<img src="./assets/img/box.svg" alt="">
+<div>
+<p>Sqft</p>
+<p>2200</p>
+</div>
+</div>
+</div>
+<div class="col-lg-3">
+<div class="feature">
+<img src="./assets/img/bath.svg" alt="">
+<div >
+<p>Bath</p>
+<p>4</p>
+</div>
+</div>
+<div class="feature">
+<img src="./assets/img/parking.svg" alt="">
+<div >
+<p>Parking</p>
+<p>Yes</p>
+</div>
+</div>
+</div>
+<div class="col-lg-3"></div>
+</div>
+<div class="row align-items-center pb-4">
+<div class="col-lg-4">
+<div class="list-date">
+<img src="./assets/img/clock.svg" alt="">
+<span>Last Update Wednesday, March 27</span>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="list-date">
+<img src="./assets/img/calender.svg" alt="">
+<span>Listed on Wednesday, March 27</span>
+</div>
+</div>
+<div class="col-lg-4">
+<button class="export-btn btn"><img style="width: 25px" src="./assets/img/export.svg" alt="">Export Document</button>
+</div>
+</div>
+</section>
     `;
 
     const addFvrtDiv = productDetails.querySelector('.add-fvrt');
