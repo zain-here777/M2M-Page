@@ -5,7 +5,7 @@ function addToFavorites(product) {
     
     
     const favoriteItem = document.createElement('div');
-    favoriteItem.classList.add('col-lg-2');
+    favoriteItem.classList.add('col-lg-1');
         favoriteItem.innerHTML = `
       
         <div class="favorite-item">
@@ -13,9 +13,9 @@ function addToFavorites(product) {
                 <div class="detail-img">
                     <img src="${product.image}" alt="Product Image">
                 </div>
-                <div>
-                    
-                    <p>${product.price}</p>
+                <div class="d-flex align-items-center justify-content-between">
+                    <p style="font-size: 14px; color: orange">€${product.price}</p>
+                    <i class="fa-solid fa-heart" style="font-size: 12px; color: red"></i>
                 </div>
             </div>
             </div>
@@ -109,11 +109,15 @@ function showProductDetails(product) {
             </div>
         </div>
         <div class="detail-img">
-            <img src="${product.image}" alt="Product Image">
+            <img src="${product.image}" alt="Product Image  ">
         </div>
          <div class="property-detail">
                         <div class="price pt-3">
-                            <h1>$${product.price} / Year</h1>
+                        <div class="d-flex justify-content-between align-items-center">
+                        <h1>$${product.price} / Year</h1>
+                       <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
+</div>
+                            
                             <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="./assets/img/location.svg" alt="">${product.location}</p>
                         </div>
                     </div>
