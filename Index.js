@@ -1,32 +1,43 @@
 const productDetails = document.getElementById('column');
 
+const favoriteProductIds = [];
+
 function addToFavorites(product) {
-    const Items = document.getElementById('fav-items')
-    
-    
+    const Items = document.getElementById('fav-items');
+
+    if (favoriteProductIds.includes(product.id)) {
+        alert('This item is already in your favorites.');
+        return;
+    }
+
+    favoriteProductIds.push(product.id);
+
     const favoriteItem = document.createElement('div');
     favoriteItem.classList.add('col-lg-2');
-        favoriteItem.innerHTML = `
-      
+    favoriteItem.dataset.productId = product.id;
+    favoriteItem.innerHTML = `
         <div class="favorite-item">
             <div class="favorite-detail">
                 <div class="detail-img">
                     <img src="${product.image}" alt="Product Image">
                 </div>
                 <div>
-                    
                     <p>${product.price}</p>
                 </div>
             </div>
-            </div>
-        `;
-      
-        Items.appendChild(favoriteItem)  
-        Items.addEventListener("click", () => {
-            showProductDetails(product);
-        });
+        </div>
+    `;
 
-    }
+    Items.appendChild(favoriteItem);
+    localStorage.setItem("fav-btn",JSON.stringify(favoriteItem))
+    favoriteItem.addEventListener("click", () => {
+        showProductDetails(product);
+    });
+}
+
+
+
+
 
     
 function handleAddToFavorites(product) {
@@ -34,9 +45,8 @@ function handleAddToFavorites(product) {
         event.stopPropagation();
         addToFavorites(product);
         
-        // Store product data in cookies
         const productData = JSON.stringify(product);
-        document.cookie = `favorite_product=${productData}; expires=Fri, 31 Dec 9999 23:59:59 GMT;`;
+        
     };
 }
 
