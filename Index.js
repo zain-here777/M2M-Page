@@ -27,6 +27,10 @@ function handleAddToFavorites(product) {
     return function(event) {
         event.stopPropagation();
         addToFavorites(product);
+        
+        // Store product data in cookies
+        const productData = JSON.stringify(product);
+        document.cookie = `favorite_product=${productData}; expires=Fri, 31 Dec 9999 23:59:59 GMT;`;
     };
 }
 
