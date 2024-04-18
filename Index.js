@@ -97,16 +97,55 @@ async function renderProductCards() {
     }
 }
 
+
+function trimText(text, maxLength) {
+    if (text.length > maxLength) {
+        return text.substring(0, maxLength) + '...';
+    }
+    return text;
+}
+
+
+
+
+
+
+function updateProductDetails(product) {
+    let trimmedTitle;
+    if (window.innerWidth <= 576) {
+        trimmedTitle = trimText(product.title, 22);
+    } else if (window.innerWidth <= 992) {
+        trimmedTitle = trimText(product.title, 30);
+    }
+     else if (window.innerWidth <= 768) {
+        trimmedTitle = trimText(product.title, 30);
+    } else {
+        trimmedTitle = product.title;
+    }
+    console.log('Original Title:', product.title);
+    console.log('Trimmed Title:', trimmedTitle);
+
+    const titleElement = document.querySelector('.property-title');
+    if (titleElement) {
+        titleElement.textContent = trimmedTitle;
+    }
+}
+
+
+
+
+
 function showProductDetails(product) {
     const favoriteBtn = document.createElement('button');
     favoriteBtn.classList.add('favorite-btn');
     favoriteBtn.textContent = 'Add to Comparison';
     favoriteBtn.addEventListener('click', handleAddToFavorites(product));
+   
 
     productDetails.innerHTML = `
         <div class="p-header mb-3">
             <div>
-                <h2 class="property-title">${product.title}</h2>
+                <h2 class="property-title mb-2">${product.title}</h2>
             </div>
             <div class="add-fvrt">
                 <a href="#">
@@ -114,8 +153,8 @@ function showProductDetails(product) {
                 </a>
             </div>
         </div>
-        <div class="detail-img">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="detail-img ">
+            <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -230,6 +269,13 @@ function showProductDetails(product) {
 </div>
 </section>
     `;
+
+    updateProductDetails(product);
+
+    window.addEventListener('resize', function() {
+        updateProductDetails(product);
+    });
+
 
     const addFvrtDiv = productDetails.querySelector('.add-fvrt');
     addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
