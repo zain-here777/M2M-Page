@@ -30,11 +30,14 @@ function addToFavorites(product) {
     `;
 
     Items.appendChild(favoriteItem);
-    localStorage.setItem("fav-btn", JSON.stringify(favoriteItem))
+    localStorage.setItem("favoriteProductIds", JSON.stringify(favoriteProductIds));
+    alert(`Added "${product.title}" to favorites.`);
     favoriteItem.addEventListener("click", () => {
         showProductDetails(product);
     });
 }
+
+
 
 
 function handleAddToFavorites(product) {
@@ -42,7 +45,7 @@ function handleAddToFavorites(product) {
         event.stopPropagation();
         addToFavorites(product);
 
-        const productData = JSON.stringify(product);
+      
 
     };
 }
@@ -282,6 +285,7 @@ function showProductDetails(product) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    
     renderProductCards();
 });
 
