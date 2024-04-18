@@ -165,10 +165,10 @@ function showProductDetails(product) {
       <img src=${product.image} class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src=${product.image}  class="d-block w-100" alt="...">
+      <img src=${product.image1}  class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src=${product.image}  class="d-block w-100" alt="...">
+      <img src=${product.image2}  class="d-block w-100" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
