@@ -29,7 +29,7 @@ function addToFavorites(product) {
             </div>
           
             <div class="remove-fvrt">
-            <a  class="remove-favorite-btn" data-product-id="${product.id}" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
+            <a  class="nav-link remove-favorite-btn" data-product-id="${product.id}" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
 </div>
         </div>
     `;
@@ -64,17 +64,10 @@ function toggleShareButtonVisibility() {
     }
 }
 
-
-
-
-
 function handleAddToFavorites(product) {
     return function (event) {
         event.stopPropagation();
         addToFavorites(product);
-
-      
-
     };
 }
 
@@ -369,3 +362,46 @@ var overlays = {
     "Marker": singleMarker,
 };
 L.control.layers(baseLayers, overlays).addTo(map);
+
+function handleShare(button) {
+    if (navigator.share) {
+        try {
+            navigator.share({
+                title: 'M2M Properties',
+                text: 'M2M Properties',
+                url: 'https://m2msearch.netlify.app/',
+            });
+        } catch (error) {
+            console.error('Error sharing:', error);
+        }
+    } else {
+        console.log('Sharing is not supported in this browser.');
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const loadMoreBtn = document.getElementById('load-btn');
+    const moreFeatures = document.getElementById('more-features');
+
+    loadMoreBtn.addEventListener('click', function () {
+        if (loadMoreBtn.textContent === 'Load More') {
+            moreFeatures.innerHTML = `
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="Garage" name="Garage">
+                <label class="form-check-label" for="Garage">Garage</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="parking" name="parking">
+                <label class="form-check-label" for="parking">Parking</label>
+            </div>
+            <!-- Add more checkboxes here -->
+            `;
+            loadMoreBtn.textContent = 'Load Less';
+            // Set max-height to show hidden features slowly
+            moreFeatures.style.maxHeight = moreFeatures.scrollHeight + "px";
+        } else {
+            moreFeatures.style.maxHeight = "0"; // Hide features slowly
+            loadMoreBtn.textContent = 'Load More';
+        }
+    });
+});
