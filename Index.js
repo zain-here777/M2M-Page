@@ -23,7 +23,7 @@ function addToFavorites(product) {
                     <img src="${product.image}" alt="Product Image">
                 </div>
                 <div class="d-flex align-items-center justify-content-between">
-                    <p style="font-size: 14px; color: orange">€${product.price.toLocaleString('en-US')}</p>
+                    <p style="font-size: 14px; color: orange">€${product.price.toLocaleString('en-DE')}</p>
                     <i class="fa-solid fa-heart" style="font-size: 12px; color: red"></i>
                 </div>
             </div>
@@ -102,7 +102,7 @@ async function renderProductCards() {
     <div class="col-md-8">
       <div class="card-body p-0">
         <h6 class="trim card-title">${product.title}</h6>
-        <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString('en-US')}</p>
+        <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString('en-DE')}</p>
         <p class="card-text d-flex gap-2"><img style="width: 15px" src="./assets/img/location.svg" alt=""><span class="trim">${product.location}</span></p>
       </div>
     </div>
@@ -209,7 +209,7 @@ function showProductDetails(product) {
          <div class="property-detail">
                          <div class="price pt-3">
                          <div class="d-flex justify-content-between align-items-center">
-                         <h1>$${product.price.toLocaleString('en-US')} / Year</h1>
+                         <h1>$${product.price.toLocaleString('en-DE')} / Year</h1>
                          <div class="d-flex align-items-center gap-3">
                          <h5 class="p-ref-no">${product.refNo}</h5>
                          <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
