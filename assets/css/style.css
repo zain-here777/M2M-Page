@@ -402,6 +402,21 @@ input:checked[type = 'checkbox'] {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
+    position: relative;
+}
+.remove-fvrt{
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #c7c7c7cc;
+    border-radius: 50%;
+    font-size: 12px;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    cursor: pointer;
 }
 
 .favorite-detail img {
@@ -477,6 +492,7 @@ input:checked[type = 'checkbox'] {
         width: 25px;
     }
 }
+
 
 @media only screen and (max-width: 1600px ) and (min-width: 992px) {
     .p-card-row {

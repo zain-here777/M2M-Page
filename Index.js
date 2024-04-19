@@ -29,6 +29,9 @@ function addToFavorites(product) {
                     <i class="fa-solid fa-heart" style="font-size: 12px; color: red"></i>
                 </div>
             </div>
+            <div class="remove-fvrt">
+            <a class="nav-link" href=""><i class="fa-solid fa-xmark"></i></a>
+</div>
         </div>
     `;
 
