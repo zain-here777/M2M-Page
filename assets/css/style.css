@@ -351,8 +351,8 @@ input:checked[type = 'checkbox'] {
     border-radius: 2px;
 }
 
-.noUi-target.noUi-connect {
-}
+/* .noUi-target.noUi-connect {
+} */
 
 /* Handles and cursors;
  */

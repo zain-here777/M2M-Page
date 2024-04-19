@@ -18,7 +18,6 @@ function addToFavorites(product) {
     const favoriteItem = document.createElement('div');
     favoriteItem.classList.add('col-lg-1');
     favoriteItem.innerHTML = `
-      
         <div class="favorite-item">
             <div class="favorite-detail">
                 <div class="detail-img">
@@ -29,8 +28,9 @@ function addToFavorites(product) {
                     <i class="fa-solid fa-heart" style="font-size: 12px; color: red"></i>
                 </div>
             </div>
+           
             <div class="remove-fvrt">
-            <a class="nav-link" href=""><i class="fa-solid fa-xmark"></i></a>
+            <a class="remove-favorite-btn" data-product-id="${product.id}" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
 </div>
         </div>
     `;
@@ -42,7 +42,24 @@ function addToFavorites(product) {
     });
     toggleShareButtonVisibility();
 
+    // Attach event listener to remove button
+    const removeBtn = favoriteItem.querySelector('.remove-favorite-btn');
+    removeBtn.addEventListener('click', function() {
+        const productId = product.id;
+        const index = favoriteProductIds.indexOf(productId);
+        if (index !== -1) {
+            favoriteProductIds.splice(index, 1);
+            favoriteItem.remove();
+            localStorage.setItem("favoriteProductIds", JSON.stringify(favoriteProductIds));
+           
+        }
+    });
 }
+
+
+
+
+
 
 function toggleShareButtonVisibility() {
     shareBtn.style.display = 'block'
