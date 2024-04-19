@@ -71,131 +71,159 @@
                     </select>
                     <div>
                         <h6 class="pb-2  pt-3">Transaction Type</h6>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="buy" name="buy">
-                            <label class="form-check-label" for="buy">
-                                Buy
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="rent" name="rent">
-                            <label class="form-check-label" for="rent">
-                                Rent
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="sterm" name="sterm">
-                            <label class="form-check-label" for="sterm">
-                                Short Term
-                            </label>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="form-check col-lg-6">
+                                    <input class="form-check-input" type="checkbox" value="" id="buy" name="buy">
+                                    <label class="form-check-label" for="buy">
+                                        Buy
+                                    </label>
+                                </div>
+                                <div class="form-check col-lg-6">
+                                    <input class="form-check-input" type="checkbox" value="" id="rent" name="rent">
+                                    <label class="form-check-label" for="rent">
+                                        Rent
+                                    </label>
+                                </div>
+                                <div class="form-check col-lg-6">
+                                    <input class="form-check-input" type="checkbox" value="" id="sterm" name="sterm">
+                                    <label class="form-check-label" for="sterm">
+                                        Short Term
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div>
                         <h6 class="pb-2 pt-3">Type of Place</h6>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="allproperty"
-                                   name="allproperty">
-                            <label class="form-check-label" for="allproperty">
-                                All
-                            </label>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="form-check col-lg-6">
+                                    <input class="form-check-input" type="checkbox" value="" id="allproperty"
+                                           name="allproperty">
+                                    <label class="form-check-label" for="allproperty">
+                                        All
+                                    </label>
+                                </div>
+                                <div class="form-check col-lg-6">
+                                    <input class="form-check-input" type="checkbox" value="" id="penthouse"
+                                           name="penthouse">
+                                    <label class="form-check-label" for="penthouse">
+                                        Penthouse
+                                    </label>
+                                </div>
+                                <div class="form-check col-lg-6">
+                                    <input class="form-check-input" type="checkbox" value="" id="townhouse"
+                                           name="townhouse">
+                                    <label class="form-check-label" for="townhouse">
+                                        Townhouse
+                                    </label>
+                                </div>
+                                <div class="form-check col-lg-6">
+                                    <input class="form-check-input" type="checkbox" value="" id="apartment"
+                                           name="apartment">
+                                    <label class="form-check-label" for="apartment">
+                                        Apartment
+                                    </label>
+                                </div>
+                                <div class="form-check col-lg-6">
+                                    <input class="form-check-input" type="checkbox" value="" id="comercial"
+                                           name="comercial">
+                                    <label class="form-check-label" for="comercial">
+                                        Comercial
+                                    </label>
+                                </div>
+                                <div class="form-check col-lg-6">
+                                    <input class="form-check-input" type="checkbox" value="" id="house" name="house">
+                                    <label class="form-check-label" for="house">
+                                        House
+                                    </label>
+                                </div>
+                                <div class="form-check col-lg-6">
+                                    <input class="form-check-input" type="checkbox" value="" id="plot" name="plot">
+                                    <label class="form-check-label" for="plot">
+                                        Plot
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="building" name="building">
-                            <label class="form-check-label" for="building">
-                                Building
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="apartment" name="apartment">
-                            <label class="form-check-label" for="apartment">
-                                Apartment
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="office" name="office">
-                            <label class="form-check-label" for="office">
-                                Office
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="shop" name="shop">
-                            <label class="form-check-label" for="shop">
-                                Shop
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="house" name="house">
-                            <label class="form-check-label" for="house">
-                                House
-                            </label>
-                        </div>
+
                     </div>
                     <div>
                         <h6 class="pb-2 pt-3">Price Range</h6>
-                        <input type="range" class="form-range" id="customRange1">
-                        <div class="d-flex justify-content-between">
-                            <span>$100</span>
-                            <span>$10000</span>
+                        <div class="col-sm-12">
+                            <div id="slider-range"></div>
+                        </div>
+                    </div>
+                    <div class="slider-labels d-flex justify-content-between">
+                        <div class="caption">
+                            <strong>Min:</strong> <span id="slider-range-value1"></span>
+                        </div>
+                        <div class="text-right caption">
+                            <strong>Max:</strong> <span id="slider-range-value2"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form>
+                                <input type="hidden" name="min-value" value="">
+                                <input type="hidden" name="max-value" value="">
+                            </form>
                         </div>
                     </div>
                     <div>
-                        <h6 class="pb-2 pt-3">
-                            Size
-                        </h6>
-                        <input type="text" placeholder="Min" class="form-control">
-                        <input type="text" placeholder="Max" class="form-control mt-2">
 
                     </div>
                     <div>
                         <h6 class="pb-2 pt-3">Features</h6>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="furniture" name="furniture">
-                            <label class="form-check-label" for="furniture">
-                                Furniture
+                            <input class="form-check-input" type="checkbox" value="" id="Bargain" name="bargain">
+                            <label class="form-check-label" for="Bargain">
+                                Bargain
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="terrace" name="terrace">
-                            <label class="form-check-label" for="terrace">
-                                Terrace
+                            <input class="form-check-input" type="checkbox" value="" id="Beachfront" name="beachFront">
+                            <label class="form-check-label" for="Beachfront">
+                                Beachfront
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="Garage" name="Garage">
-                            <label class="form-check-label" for="Garage">
-                                Garage
+                            <input class="form-check-input" type="checkbox" value="" id="Golf" name="golf">
+                            <label class="form-check-label" for="Golf">
+                                Golf View
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="parking" name="parking">
-                            <label class="form-check-label" for="parking">
-                                Parking
+                            <input class="form-check-input" type="checkbox" value="" id="Gym" name="gym">
+                            <label class="form-check-label" for="Gym">
+                                Gym
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="balcony" name="balcony">
-                            <label class="form-check-label" for="balcony">
-                                Balcony
+                            <input class="form-check-input" type="checkbox" value="" id="HeatedPool" name="heatedPool">
+                            <label class="form-check-label" for="HeatedPool">
+                                Heated Pool
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="gym" name="gym">
-                            <label class="form-check-label" for="gym">
-                                Gym & Spa
-                            </label>
+                        <div id="more-features">
+
                         </div>
-                        <a class="load-more btn btn-primary mt-3" href="">Load More</a>
+                        <button class="load-more btn btn-primary mt-3" id="load-btn">Load More</button>
                     </div>
                 </form>
             </div>
         </div>
         <div class="col-lg-10 col-md-9">
-            <div class="row py-3" id="fav-items">
-
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="row py-3 flex-grow-1" id="fav-items"></div>
+                <div>
+                    <button class="btn share-btn" id="share-property">Share Property</button>
+                </div>
             </div>
             <div class="row">
                 <div class="columns-container col-lg-3" id="columnsContainer">
-                    <h4 class="pb-4 text-center">356 Results</h4>
+                    <h5 class="pb-2 text-center text-secondary">356 Results</h5>
                 </div>
                 <div class="col-lg-9">
                     <div id="column"></div>
@@ -247,6 +275,10 @@
 </body>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script type=""  src="Index.js">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="rangeSlider.js"></script>
+<script type="" src="Index.js">
 </script>
 </html>
