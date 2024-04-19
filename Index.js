@@ -1,9 +1,8 @@
 const productDetails = document.getElementById('column');
-
 const favoriteProductIds = [];
 const shareBtn = document.getElementById('share-property');
 
-shareBtn.style.display = 'none'
+shareBtn.style.display = 'none';
 
 function addToFavorites(product) {
     const Items = document.getElementById('fav-items');
@@ -28,9 +27,9 @@ function addToFavorites(product) {
                     <i class="fa-solid fa-heart" style="font-size: 12px; color: red"></i>
                 </div>
             </div>
-           
+          
             <div class="remove-fvrt">
-            <a class="remove-favorite-btn" data-product-id="${product.id}" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
+            <a  class="remove-favorite-btn" data-product-id="${product.id}" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
 </div>
         </div>
     `;
@@ -52,24 +51,29 @@ function addToFavorites(product) {
             favoriteItem.remove();
             localStorage.setItem("favoriteProductIds", JSON.stringify(favoriteProductIds));
            
+            toggleShareButtonVisibility(); 
         }
     });
 }
 
-
-
-
-
-
 function toggleShareButtonVisibility() {
-    shareBtn.style.display = 'block'
+    if (favoriteProductIds.length === 0) {
+        shareBtn.style.display = 'none';
+    } else {
+        shareBtn.style.display = 'block';
+    }
 }
+
+
+
+
 
 function handleAddToFavorites(product) {
     return function (event) {
         event.stopPropagation();
         addToFavorites(product);
 
+      
 
     };
 }
@@ -105,7 +109,7 @@ async function renderProductCards() {
     <div class="col-md-8">
       <div class="card-body p-0">
         <h6 class="trim card-title">${product.title}</h6>
-        <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString('en-DE')}</p>
+        <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString('en-US')}</p>
         <p class="card-text d-flex gap-2"><img style="width: 15px" src="./assets/img/location.svg" alt=""><span class="trim">${product.location}</span></p>
       </div>
     </div>
@@ -125,8 +129,6 @@ async function renderProductCards() {
 }
 
 
-// Text Trim on Small Screen //
-
 function trimText(text, maxLength) {
     if (text.length > maxLength) {
         return text.substring(0, maxLength) + '...';
@@ -134,13 +136,19 @@ function trimText(text, maxLength) {
     return text;
 }
 
+
+
+
+
+
 function updateProductDetails(product) {
     let trimmedTitle;
     if (window.innerWidth <= 576) {
         trimmedTitle = trimText(product.title, 22);
     } else if (window.innerWidth <= 992) {
         trimmedTitle = trimText(product.title, 30);
-    } else if (window.innerWidth <= 768) {
+    }
+     else if (window.innerWidth <= 768) {
         trimmedTitle = trimText(product.title, 30);
     } else {
         trimmedTitle = product.title;
@@ -154,14 +162,16 @@ function updateProductDetails(product) {
     }
 }
 
-// Text Trim on Small Screen End //
+
+
+
 
 function showProductDetails(product) {
     const favoriteBtn = document.createElement('button');
     favoriteBtn.classList.add('favorite-btn');
     favoriteBtn.textContent = 'Add to Comparison';
     favoriteBtn.addEventListener('click', handleAddToFavorites(product));
-
+   
 
     productDetails.innerHTML = `
         <div class="p-header mb-3">
@@ -206,7 +216,7 @@ function showProductDetails(product) {
          <div class="property-detail">
                          <div class="price pt-3">
                          <div class="d-flex justify-content-between align-items-center">
-                         <h1>€${product.price.toLocaleString('en-DE')} / Year</h1>
+                         <h1>$${product.price.toLocaleString('en-US')} / Year</h1>
                          <div class="d-flex align-items-center gap-3">
                          <h5 class="p-ref-no">${product.refNo}</h5>
                          <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
@@ -275,13 +285,13 @@ function showProductDetails(product) {
 <div class="col-lg-4 col-md-6">
 <div class="list-date">
 <img src="./assets/img/clock.svg" alt="">
-<span>Last Update <i> Wed, Mar 27</i></span>
+<span><i>Last Update Wed, Mar 27</i></span>
 </div>
 </div>
 <div class="col-lg-4 col-md-6">
 <div class="list-date">
 <img src="./assets/img/calender.svg" alt="">
-<span>Listed on <i> Wed, Mar 27</i></span>
+<span><i>Listed on Wed, Mar 27</i></span>
 </div>
 </div>
 <div class="col-lg-4 col-md-12">
@@ -293,7 +303,7 @@ function showProductDetails(product) {
 
     updateProductDetails(product);
 
-    window.addEventListener('resize', function () {
+    window.addEventListener('resize', function() {
         updateProductDetails(product);
     });
 
@@ -303,7 +313,7 @@ function showProductDetails(product) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-
+    
     renderProductCards();
 });
 
@@ -349,7 +359,7 @@ googleSat.addTo(map)
 // Controls //
 
 var baseLayers = {
-    "Open Street Map": OpenStreetMap_Mapnik,
+    "openStreetMap": OpenStreetMap_Mapnik,
     "Satellite": googleSat,
     "Google Map": googleStreets,
     "Water Color": Stadia_AlidadeSatellite
@@ -359,48 +369,3 @@ var overlays = {
     "Marker": singleMarker,
 };
 L.control.layers(baseLayers, overlays).addTo(map);
-
-// Load More Features //
-
-document.addEventListener("DOMContentLoaded", function () {
-    const loadMoreBtn = document.getElementById('load-btn')
-    const moreFeatures = document.getElementById('more-features');
-
-    loadMoreBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (loadMoreBtn.textContent === 'Load More') {
-            moreFeatures.innerHTML = `
-            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="newDev" name="newDev">
-                            <label class="form-check-label" for="newDev">
-                                New Development
-                            </label>
-                        </div>
-                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="lift" name="lift">
-                            <label class="form-check-label" for="lift">
-                                Lift
-                            </label>
-                        </div>
-                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="luxury" name="luxury">
-                            <label class="form-check-label" for="luxury">
-                               Luxury
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="seaview" name="seaview">
-                            <label class="form-check-label" for="seaview">
-                               Sea View
-                            </label>
-                        </div>
-                        
-            `;
-            loadMoreBtn.textContent = 'Load Less';
-            moreFeatures.style.maxHeight = moreFeatures.scrollHeight + "px";
-        } else {
-            moreFeatures.style.maxHeight = "0"; // Hide features slowly
-            loadMoreBtn.textContent = 'Load More'
-        }
-    })
-})
