@@ -100,6 +100,7 @@ input:checked[type = 'checkbox'] {
     border: 1px solid #cfcfcf !important;
     display: flex !important;
     justify-content: center;
+    align-items: center;
 
 }
 
@@ -157,6 +158,8 @@ input:checked[type = 'checkbox'] {
 
 #map {
     min-height: 500px;
+    border-radius: 10px;
+    border: 2px solid #b3b3b3;
 }
 
 /* Contact Form */
@@ -404,7 +407,8 @@ input:checked[type = 'checkbox'] {
     border-radius: 10px;
     position: relative;
 }
-.remove-fvrt{
+
+.remove-fvrt {
     width: 20px;
     height: 20px;
     display: flex;
