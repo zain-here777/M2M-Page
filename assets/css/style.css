@@ -12,22 +12,22 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* scroll bar */
 
-
-  
- ::-webkit-scrollbar{
+body::-webkit-scrollbar{
     width: 8px;
+}
+body::-webkit-scrollbar-thumb{
+    background-color:var(--orange);
+    border-radius: 8px;
+}
+
+.columns-container::-webkit-scrollbar{
+    width: 2px;
  }
- ::-webkit-scrollbar-thumb{
-    background-color: #ff9900;
+.columns-container::-webkit-scrollbar-thumb{
+    background-color:#e0e0e0;
     border-radius: 8px;
  }
-  
-  @supports not selector(::-webkit-scrollbar) {
-    body {
-        scrollbar-color: var(--sb-thumb-color)
-                       var(--sb-track-color);
-    }
-  }
+
 /* end */
 body {
     font-family: "Quicksand", sans-serif !important;
