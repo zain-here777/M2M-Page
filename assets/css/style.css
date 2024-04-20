@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 :root {
-    --orange: #f7b200
+    --orange: #ff9900
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -149,6 +149,7 @@ input:checked[type = 'checkbox'] {
     cursor: pointer;
     max-height: 100vh;
     overflow-y: auto;
+   
 }
 
 /*ens  */
