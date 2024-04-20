@@ -22,8 +22,8 @@ function addToFavorites(product) {
                 <div class="detail-img">
                     <img src="${product.image}" alt="Product Image">
                 </div>
-                <div class="d-flex align-items-center justify-content-between">
-                    <p style="font-size: 14px; color: orange">€${product.price.toLocaleString('en-DE')}</p>
+                <div class="d-flex align-items-center justify-content-between mt-2">
+                    <p class="trim" style="font-size: 12px; color: orange">€${product.price.toLocaleString('en-DE')}</p>
                     <i class="fa-solid fa-heart" style="font-size: 12px; color: red"></i>
                 </div>
             </div>
@@ -121,6 +121,7 @@ async function renderProductCards() {
     }
 }
 
+// Trim Property Title on Detail Page //
 
 function trimText(text, maxLength) {
     if (text.length > maxLength) {
@@ -128,11 +129,6 @@ function trimText(text, maxLength) {
     }
     return text;
 }
-
-
-
-
-
 
 function updateProductDetails(product) {
     let trimmedTitle;
@@ -155,9 +151,11 @@ function updateProductDetails(product) {
     }
 }
 
+// Trim Property Title on Detail Page  Ends //
 
+// -------------- //
 
-
+// Property Detail on Click //
 
 function showProductDetails(product) {
     const favoriteBtn = document.createElement('button');
@@ -278,13 +276,13 @@ function showProductDetails(product) {
 <div class="col-lg-4 col-md-6">
 <div class="list-date">
 <img src="./assets/img/clock.svg" alt="">
-<span><i>Last Update Wed, Mar 27</i></span>
+<span>Last Update <i> Wed, Mar 27</i></span>
 </div>
 </div>
 <div class="col-lg-4 col-md-6">
 <div class="list-date">
 <img src="./assets/img/calender.svg" alt="">
-<span><i>Listed on Wed, Mar 27</i></span>
+<span>Listed on <i> Wed, Mar 27</i></span>
 </div>
 </div>
 <div class="col-lg-4 col-md-12">
@@ -305,11 +303,18 @@ function showProductDetails(product) {
     addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
 }
 
+// Property Detail on Click Ends//
+
+// -------------- //
+
 document.addEventListener('DOMContentLoaded', function () {
     
     renderProductCards();
 });
 
+// -------------- //
+
+// Map Start //
 
 // Map Preview //
 
@@ -363,6 +368,12 @@ var overlays = {
 };
 L.control.layers(baseLayers, overlays).addTo(map);
 
+// Map Ends //
+
+// -------------- //
+
+// Share Property API //
+
 function handleShare(button) {
     if (navigator.share) {
         try {
@@ -379,6 +390,12 @@ function handleShare(button) {
     }
 }
 
+// Share Property API Ends //
+
+// -------------- //
+
+// Load More Button logic //
+
 document.addEventListener("DOMContentLoaded", function () {
     const loadMoreBtn = document.getElementById('load-btn');
     const moreFeatures = document.getElementById('more-features');
@@ -394,14 +411,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 <input class="form-check-input" type="checkbox" value="" id="parking" name="parking">
                 <label class="form-check-label" for="parking">Parking</label>
             </div>
-            <!-- Add more checkboxes here -->
+ 
             `;
             loadMoreBtn.textContent = 'Load Less';
-            // Set max-height to show hidden features slowly
             moreFeatures.style.maxHeight = moreFeatures.scrollHeight + "px";
         } else {
-            moreFeatures.style.maxHeight = "0"; // Hide features slowly
+            moreFeatures.style.maxHeight = "0";
             loadMoreBtn.textContent = 'Load More';
         }
     });
 });
+
+// Load More Button logic ends //
