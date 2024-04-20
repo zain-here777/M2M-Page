@@ -209,7 +209,7 @@ function showProductDetails(product) {
          <div class="property-detail">
                          <div class="price pt-3">
                          <div class="d-flex justify-content-between align-items-center">
-                         <h1>$${product.price.toLocaleString('en-DE')} / Year</h1>
+                         <h1>€${product.price.toLocaleString('en-DE')} / Year</h1>
                          <div class="d-flex align-items-center gap-3">
                          <h5 class="p-ref-no">${product.refNo}</h5>
                          <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
