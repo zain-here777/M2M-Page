@@ -448,7 +448,8 @@ input:checked[type = 'checkbox'] {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #c7c7c7cc;
+    background: var(--orange);
+    color: white;
     border-radius: 50%;
     font-size: 12px;
     position: absolute;
