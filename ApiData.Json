@@ -53,6 +53,27 @@
         "features": "4 Beds · 5 Baths · 1425 m²",
         "location": "Terry Lane, Golden CO 0987",
         "refNo" : "#OB-96455"
-    }
+    },
+    {   "id":6,
+    "title": "Ground Floor in costa del sol, puerto banús, málaga",
+    "price":1575000,
+    "image": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/xwarulm5z78f923yla044bb808rz",
+    "image1":  "https://openbroker-aws.s3.eu-west-3.amazonaws.com/yzzs1biteud9921npk6yyks1cdnq",
+    "image2": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/in7zkna5qy341k2b0087qev4phn3",
+    "features": "4 Beds · 5 Baths · 1425 m²",
+    "location": "Terry Lane, Golden CO 0987",
+    "refNo" : "#OB-96455"
+},
+{   "id":7,
+"title": "Ground Floor in costa del sol, puerto banús, málaga",
+"price":1575000,
+"image": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/xwarulm5z78f923yla044bb808rz",
+"image1":  "https://openbroker-aws.s3.eu-west-3.amazonaws.com/yzzs1biteud9921npk6yyks1cdnq",
+"image2": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/in7zkna5qy341k2b0087qev4phn3",
+"features": "4 Beds · 5 Baths · 1425 m²",
+"location": "Terry Lane, Golden CO 0987",
+"refNo" : "#OB-96455"
+}
+
 
 ]
