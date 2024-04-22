@@ -102,14 +102,14 @@ async function renderProductCards() {
         column.innerHTML = `
             <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
   <div class="row align-items-center p-card-row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-6">
       <img class = 'p-card-img' src=${product.image} class="img-fluid rounded-start" alt="...">
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 col-6">
       <div class="card-body p-0">
         <h6 class="trim card-title">${product.title}</h6>
         <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString('en-DE')}</p>
-        <p class="card-text d-flex gap-2"><img style="width: 15px" src="./assets/img/location.svg" alt=""><span class="trim">${product.location}</span></p>
+        <p class="card-text d-flex gap-2"><img style="width: 15px" src="/assets/img/location.svg" alt=""><span class="trim">${product.location}</span></p>
       </div>
     </div>
   </div>
@@ -170,7 +170,7 @@ function showProductDetails(product) {
     favoriteBtn.classList.add('favorite-btn');
     favoriteBtn.textContent = 'Add to Comparison';
     favoriteBtn.addEventListener('click', handleAddToFavorites(product));
-   
+
 
     productDetails.innerHTML = `
         <div class="p-header mb-3">
@@ -221,7 +221,7 @@ function showProductDetails(product) {
                          <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
                           </div>
                           </div>
-                            <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="./assets/img/location.svg" alt="">${product.location}</p>
+                            <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="../img/location.svg" alt="">${product.location}</p>
                         </div>
                     </div>
                     <div class="detail-border">
@@ -232,14 +232,14 @@ function showProductDetails(product) {
 <div class="row">
 <div class="col-lg-3">
 <div class="feature">
-<img src="./assets/img/bed.svg" alt="">
+<img src="/assets/img/bed.svg" alt="">
 <div >
 <p>Bedroom</p>
 <p>4</p>
 </div>
 </div>
 <div class="feature">
-<img src="./assets/img/build.svg" alt="">
+<img src="/assets/img/build.svg" alt="">
 <div >
 <p>Build Year</p>
 <p>2020</p>
@@ -248,14 +248,14 @@ function showProductDetails(product) {
 </div>
 <div class="col-lg-3">
 <div class="feature">
-<img src="./assets/img/home.svg" alt="">
+<img src="/assets/img/home.svg" alt="">
 <div>
 <p>Type</p>
 <p>Home</p>
 </div>
 </div>
 <div class="feature">
-<img src="./assets/img/box.svg" alt="">
+<img src="/assets/img/box.svg" alt="">
 <div>
 <p>Sqft</p>
 <p>2200</p>
@@ -264,14 +264,14 @@ function showProductDetails(product) {
 </div>
 <div class="col-lg-3">
 <div class="feature">
-<img src="./assets/img/bath.svg" alt="">
+<img src="/assets/img/bath.svg" alt="">
 <div >
 <p>Bath</p>
 <p>4</p>
 </div>
 </div>
 <div class="feature">
-<img src="./assets/img/parking.svg" alt="">
+<img src="/assets/img/parking.svg" alt="">
 <div >
 <p>Parking</p>
 <p>Yes</p>
@@ -283,8 +283,8 @@ function showProductDetails(product) {
 <div class="row align-items-center pb-4">
 <div class="col-lg-4 col-md-6">
 <div class="list-date">
-<img src="./assets/img/clock.svg" alt="">
-<span><i>Last Update Wed, Mar 27</i></span>
+<img src="/assets/img/clock.svg" alt="">
+<span>Last Update <i> Wed, Mar 27</i></span>
 </div>
 </div>
 <div class="col-lg-4 col-md-6">
@@ -294,7 +294,7 @@ function showProductDetails(product) {
 </div>
 </div>
 <div class="col-lg-4 col-md-12">
-<button class="export-btn btn"><img style="width: 25px" src="./assets/img/export.svg" alt="">Export Document</button>
+<button class="export-btn btn"><img style="width: 25px" src="../img/export.svg" alt="">Export Document</button>
 </div>
 </div>
 </section>
