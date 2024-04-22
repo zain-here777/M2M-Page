@@ -1,6 +1,9 @@
 const productDetails = document.getElementById('column');
-const favoriteProductIds = [];
+let favoriteProductIds = [];
 const shareBtn = document.getElementById('share-property');
+
+console.log(favoriteProductIds)
+
 
 shareBtn.style.display = 'none';
 
@@ -13,6 +16,8 @@ function addToFavorites(product) {
     }
 
     favoriteProductIds.push(product.id);
+
+   
 
     const favoriteItem = document.createElement('div');
     favoriteItem.classList.add('col-lg-1');
@@ -35,7 +40,7 @@ function addToFavorites(product) {
     `;
 
     Items.appendChild(favoriteItem);
-    localStorage.setItem("favoriteProductIds", JSON.stringify(favoriteProductIds));
+    localStorage.setItem('new fvt items',JSON.stringify(favoriteProductIds))
     favoriteItem.addEventListener("click", () => {
         showProductDetails(product);
     });
@@ -49,7 +54,6 @@ function addToFavorites(product) {
         if (index !== -1) {
             favoriteProductIds.splice(index, 1);
             favoriteItem.remove();
-            localStorage.setItem("favoriteProductIds", JSON.stringify(favoriteProductIds));
            
             toggleShareButtonVisibility(); 
         }
