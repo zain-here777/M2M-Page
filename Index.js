@@ -1,64 +1,70 @@
 const productDetails = document.getElementById('column');
-let favoriteProductIds = [];
 const shareBtn = document.getElementById('share-property');
-
-console.log(favoriteProductIds)
-
-
 shareBtn.style.display = 'none';
 
-function addToFavorites(product) {
+
+let favoriteProductIds = [];
+
+window.addEventListener('load', () => {
+    const storedFavorites = localStorage.getItem('new fvt items');
+    if (storedFavorites) {
+        favoriteProductIds = JSON.parse(storedFavorites);
+        addToFavorites();
+    }
+});
+
+function addToFavorites() {
     const Items = document.getElementById('fav-items');
 
-    if (favoriteProductIds.includes(product.id)) {
-        alert('This item is already in your favorites.');
-        return;
-    }
-
-    favoriteProductIds.push(product.id);
-
-   
-
-    const favoriteItem = document.createElement('div');
-    favoriteItem.classList.add('col-lg-1');
-    favoriteItem.innerHTML = `
-        <div class="favorite-item">
-            <div class="favorite-detail">
-                <div class="detail-img">
-                    <img src="${product.image}" alt="Product Image">
+    favoriteProductIds.forEach(item => {
+        const favoriteItem = document.createElement('div');
+        favoriteItem.classList.add('col-lg-1');
+        favoriteItem.innerHTML = `
+            <div class="favorite-item">
+                <div class="favorite-detail">
+                    <div class="detail-img">
+                        <img src="${item.image}" alt="Product Image">
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p style="font-size: 14px; color: orange">€${item.price.toLocaleString('en-DE')}</p>
+                        <i class="fa-solid fa-heart" style="font-size: 12px; color: red"></i>
+                    </div>
                 </div>
-                <div class="d-flex align-items-center justify-content-between">
-                    <p style="font-size: 14px; color: orange">€${product.price.toLocaleString('en-DE')}</p>
-                    <i class="fa-solid fa-heart" style="font-size: 12px; color: red"></i>
+              
+                <div class="remove-fvrt">
+                    <a class="nav-link remove-favorite-btn" data-product-id="${item.id}" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
                 </div>
             </div>
-          
-            <div class="remove-fvrt">
-            <a  class="nav-link remove-favorite-btn" data-product-id="${product.id}" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
-</div>
-        </div>
-    `;
+        `;
 
-    Items.appendChild(favoriteItem);
-    localStorage.setItem('new fvt items',JSON.stringify(favoriteProductIds))
-    favoriteItem.addEventListener("click", () => {
-        showProductDetails(product);
+        Items.appendChild(favoriteItem);
+
+        localStorage.setItem('new fvt items' ,JSON.stringify(favoriteProductIds))
+
+        favoriteItem.addEventListener('click', () => {
+            showProductDetails(item);
+        });
+
+        // Attach event listener to remove button
+        const removeBtn = favoriteItem.querySelector('.remove-favorite-btn');
+        removeBtn.addEventListener('click', function() {
+            const productId = item.id;
+            const index = favoriteProductIds.findIndex(item => item.id === productId);
+            if (index !== -1) {
+                favoriteProductIds.splice(index, 1);
+                favoriteItem.remove();
+                localStorage.setItem('new fvt items', JSON.stringify(favoriteProductIds));
+                toggleShareButtonVisibility();
+            }
+        });
     });
+
     toggleShareButtonVisibility();
-
-    // Attach event listener to remove button
-    const removeBtn = favoriteItem.querySelector('.remove-favorite-btn');
-    removeBtn.addEventListener('click', function() {
-        const productId = product.id;
-        const index = favoriteProductIds.indexOf(productId);
-        if (index !== -1) {
-            favoriteProductIds.splice(index, 1);
-            favoriteItem.remove();
-           
-            toggleShareButtonVisibility(); 
-        }
-    });
 }
+
+
+
+
 
 function toggleShareButtonVisibility() {
     if (favoriteProductIds.length === 0) {
@@ -67,6 +73,12 @@ function toggleShareButtonVisibility() {
         shareBtn.style.display = 'block';
     }
 }
+
+
+
+
+
+
 
 function handleAddToFavorites(product) {
     return function (event) {
