@@ -283,8 +283,8 @@ function showProductDetails(product) {
 <div class="row align-items-center pb-4">
 <div class="col-lg-4 col-md-6">
 <div class="list-date">
-<img src="/assets/img/clock.svg" alt="">
-<span>Last Update <i> Wed, Mar 27</i></span>
+<img src="./assets/img/clock.svg" alt="">
+<span><i>Last Update Wed, Mar 27</i></span>
 </div>
 </div>
 <div class="col-lg-4 col-md-6">

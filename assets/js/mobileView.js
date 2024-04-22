@@ -1,4 +1,5 @@
 
+
 function isMobileView() {
     return window.innerWidth <= 576;
 }
@@ -69,6 +70,10 @@ function renderMobileView() {
 
             renderProductCards();
         });
+
+
+
+        
         function showProductDetails(product) {
             const favoriteBtn = document.createElement('button');
             favoriteBtn.classList.add('favorite-btn');

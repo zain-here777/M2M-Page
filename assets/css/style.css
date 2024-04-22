@@ -533,6 +533,13 @@ input:checked[type = 'checkbox'] {
 }
 
 
+
+/* offcanvas */
+.offcanvas {
+    height: 70% !important;
+}
+
+
 @media only screen and (max-width: 1600px ) and (min-width: 992px) {
     .p-card-row {
         gap: 10px !important;
@@ -545,8 +552,29 @@ input:checked[type = 'checkbox'] {
     .p-card-img {
         width: 100%;
     }
+    #navbar{
+        display: none;
+    }
+   
 }
 
+@media (max-width:1600px){
+    #offcanvasBottom{
+        display: none;
+    }
+}
+
+@media (max-width:576px){
+   #filter{
+    display: none !important;
+   }
+   #navbar{
+    display: block;
+   }
+   #offcanvasBottom{
+    display: block;
+}
+}
 
 
 
