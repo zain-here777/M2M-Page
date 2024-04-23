@@ -23,7 +23,7 @@ async function renderProductCards() {
         const column = document.createElement('div');
         column.classList.add('column');
         column.innerHTML = `
-            <div class="property-card-container mb-4 p-2" style="max-width: 100%;">
+            <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
                 <div class="row align-items-center p-card-row">
                     <div class="col-md-4 col-6">
                         <img class="p-card-img" src=${product.image} class="img-fluid rounded-start" alt="...">
@@ -50,7 +50,7 @@ async function renderProductCards() {
     });
 
     if (products.length > 0) {
-        if (window.innerWidth >= 576) {
+        if (window.innerWidth > 576) {
             showProductDetails(products[0]);
         }
     }
@@ -64,12 +64,12 @@ function openOffcanvas(product) {
         <div class="offcanvas offcanvas-bottom show" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasBottomLabel">${product.title}</h5>
-                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
                     <div class="row align-items-center p-card-row">
-                        <div class="col-12">
+                        <div class="col-">
                         <div class="detail-img ">
                         <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
               <div class="carousel-indicators">
@@ -100,6 +100,7 @@ function openOffcanvas(product) {
                         </div>
                         <div class="col-md-8 col-9">
                             <div class="card-body p-0">
+                                <h6 class="trim card-title">${product.title}</h6>
                                 <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString('en-DE')}</p>
                                 <p class="card-text d-flex gap-2"><img style="width: 15px" src="../img/location.svg" alt=""><span class="trim">${product.location}</span></p>
                             </div>

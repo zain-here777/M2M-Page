@@ -162,70 +162,290 @@ function updateProductDetails(product) {
 }
 
 
+function isMobileView() {
+    return window.innerWidth <= 576;
+  }
 
+
+   // Handle window resize event to update the view
+   window.addEventListener('resize', function () {
+       showProductDetails({});
+   });
 
 
 function showProductDetails(product) {
-    const favoriteBtn = document.createElement('button');
-    favoriteBtn.classList.add('favorite-btn');
-    favoriteBtn.textContent = 'Add to Comparison';
-    favoriteBtn.addEventListener('click', handleAddToFavorites(product));
+
+    if (isMobileView()) {
+        // Show product details in offcanvas for mobile view
+        const offcanvasBody = document
+          .getElementById("offcanvasBottom")
+          .querySelector(".offcanvas-body");
+        if (offcanvasBody) {
+          offcanvasBody.innerHTML = `
+                <div class="offcanvas-body">
+                <div class="p-header mb-3">
+                <div>
+                    <h2 class="property-title mb-2">${product.title}</h2>
+                </div>
+                <div class="add-fvrt">
+                    <a href="#">
+                        <!-- Place the favorite button here -->
+                    </a>
+                </div>
+            </div>
+            <div class="detail-img ">
+                <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src=${product.image} class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src=${product.image1}  class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src=${product.image2}  class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+            </div>
+            
+             <div class="property-detail">
+                             <div class="price pt-3">
+                             <div class="d-flex justify-content-between align-items-center">
+                             <h1>€${product.price.toLocaleString('en-DE')} / Year</h1>
+                             <div class="d-flex align-items-center gap-3">
+                             <h5 class="p-ref-no">${product.refNo}</h5>
+                             <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
+                              </div>
+                              </div>
+                                <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="../img/location.svg" alt="">${product.location}</p>
+                            </div>
+                        </div>
+                        <div class="detail-border">
+                        
+    </div>
+    <section class="property-overview">
+    <h5 class="py-4">Overview</h5>
+    <div class="row">
+    <div class="col-lg-3">
+    <div class="feature">
+    <img src="/assets/img/bed.svg" alt="">
+    <div >
+    <p>Bedroom</p>
+    <p>4</p>
+    </div>
+    </div>
+    <div class="feature">
+    <img src="/assets/img/build.svg" alt="">
+    <div >
+    <p>Build Year</p>
+    <p>2020</p>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-3">
+    <div class="feature">
+    <img src="/assets/img/home.svg" alt="">
+    <div>
+    <p>Type</p>
+    <p>Home</p>
+    </div>
+    </div>
+    <div class="feature">
+    <img src="/assets/img/box.svg" alt="">
+    <div>
+    <p>Sqft</p>
+    <p>2200</p>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-3">
+    <div class="feature">
+    <img src="/assets/img/bath.svg" alt="">
+    <div >
+    <p>Bath</p>
+    <p>4</p>
+    </div>
+    </div>
+    <div class="feature">
+    <img src="/assets/img/parking.svg" alt="">
+    <div >
+    <p>Parking</p>
+    <p>Yes</p>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-3"></div>
+    </div>
+    <div class="row align-items-center pb-4">
+    <div class="col-lg-4 col-md-6">
+    <div class="list-date">
+    <img src="./assets/img/clock.svg" alt="">
+    <span><i>Last Update Wed, Mar 27</i></span>
+    </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+    <div class="list-date">
+    <img src="./assets/img/calender.svg" alt="">
+    <span><i>Listed on Wed, Mar 27</i></span>
+    </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+    <button class="export-btn btn"><img style="width: 25px" src="../img/export.svg" alt="">Export Document</button>
+    </div>
+    </div>
+    </section>
 
 
-    productDetails.innerHTML = `
-        <div class="p-header mb-3">
-            <div>
-                <h2 class="property-title mb-2">${product.title}</h2>
-            </div>
-            <div class="add-fvrt">
-                <a href="#">
-                    <!-- Place the favorite button here -->
-                </a>
-            </div>
-        </div>
-        <div class="detail-img ">
-            <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src=${product.image} class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src=${product.image1}  class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src=${product.image2}  class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-        </div>
-        
-         <div class="property-detail">
-                         <div class="price pt-3">
-                         <div class="d-flex justify-content-between align-items-center">
-                         <h1>€${product.price.toLocaleString('en-DE')} / Year</h1>
-                         <div class="d-flex align-items-center gap-3">
-                         <h5 class="p-ref-no">${product.refNo}</h5>
-                         <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
-                          </div>
-                          </div>
-                            <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="../img/location.svg" alt="">${product.location}</p>
+            
+                    <div class="col-lg-9">
+                    <div id="column"></div>
+                    <!-- <div id="columnDetailMobile"></div> -->
+                    <div class="row my-5">
+                        <div class="col-lg-6">
+                            <div id="map"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div>
+                                <div class="contact-form-wrapper d-flex justify-content-center">
+                                    <form action="#" class="contact-form" >
+                                        <h3 class="title">Contact us</h3>
+                                        <p class="description">Feel free to contact us if you need any assistance, any
+                                            help or another question.
+                                        </p>
+                                        <div>
+                                            <input type="text" class="form-control rounded border-white mb-3 form-input"
+                                                   id="name" placeholder="Full Name" required>
+                                        </div>
+                                        <div>
+                                            <input type="email"
+                                                   class="form-control rounded border-white mb-3 form-input"
+                                                   placeholder="Email Address" required>
+                                        </div>
+                                        <div>
+                                            <input type="number"
+                                                   class="form-control rounded border-white mb-3 form-input"
+                                                   placeholder="Telephone" required>
+                                        </div>
+                                        <div>
+                                            <textarea id="message"
+                                                      class="form-control rounded border-white mb-3 form-text-area"
+                                                      rows="5" cols="30" placeholder="Message" required></textarea>
+                                        </div>
+                                        <div class="submit-button-wrapper">
+                                            <input type="submit" value="Send">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="detail-border">
-                    
+                </div>
+                `;
+
+            
+           
+                
+    
+          const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
+          offcanvasElement.show();
+    
+
+          
+                
+
+          
+          // Add favorite button to offcanvas only if screen size is 576 or smaller
+          if (window.innerWidth <= 576) {
+            const favoriteBtn = document.createElement("button");
+            favoriteBtn.classList.add("favorite-btn");
+            favoriteBtn.textContent = "Add to Comparison";
+            favoriteBtn.addEventListener("click", handleAddToFavorites(product));
+            
+            const addFvrtDiv = offcanvasBody.querySelector(".add-fvrt");
+            if (addFvrtDiv) {
+              addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
+            } else {
+              console.error("addFvrtDiv not found");
+            }
+          }
+        } else {
+          console.error("offcanvasBody not found");
+        }
+      } else {
+        // Show product details in main view for desktop
+        const favoriteBtn = document.createElement('button');
+        favoriteBtn.classList.add('favorite-btn');
+        favoriteBtn.textContent = 'Add to Comparison';
+        favoriteBtn.addEventListener('click', handleAddToFavorites(product));
+    
+        productDetails.innerHTML = `
+        <div class="p-header mb-3">
+        <div>
+            <h2 class="property-title mb-2">${product.title}</h2>
+        </div>
+        <div class="add-fvrt">
+            <a href="#">
+                <!-- Place the favorite button here -->
+            </a>
+        </div>
+    </div>
+    <div class="detail-img ">
+        <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
+<div class="carousel-indicators">
+<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+</div>
+<div class="carousel-inner">
+<div class="carousel-item active">
+  <img src=${product.image} class="d-block w-100" alt="...">
+</div>
+<div class="carousel-item">
+  <img src=${product.image1}  class="d-block w-100" alt="...">
+</div>
+<div class="carousel-item">
+  <img src=${product.image2}  class="d-block w-100" alt="...">
+</div>
+</div>
+<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+<span class="visually-hidden">Previous</span>
+</button>
+<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+<span class="carousel-control-next-icon" aria-hidden="true"></span>
+<span class="visually-hidden">Next</span>
+</button>
+</div>
+    </div>
+    
+     <div class="property-detail">
+                     <div class="price pt-3">
+                     <div class="d-flex justify-content-between align-items-center">
+                     <h1>€${product.price.toLocaleString('en-DE')} / Year</h1>
+                     <div class="d-flex align-items-center gap-3">
+                     <h5 class="p-ref-no">${product.refNo}</h5>
+                     <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
+                      </div>
+                      </div>
+                        <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="../img/location.svg" alt="">${product.location}</p>
+                    </div>
+                </div>
+                <div class="detail-border">
+                
 </div>
 <section class="property-overview">
 <h5 class="py-4">Overview</h5>
@@ -297,19 +517,28 @@ function showProductDetails(product) {
 <button class="export-btn btn"><img style="width: 25px" src="../img/export.svg" alt="">Export Document</button>
 </div>
 </div>
-</section>
-    `;
+</section>            
+        `;
 
-    updateProductDetails(product);
 
-    window.addEventListener('resize', function() {
+
+
+        
+    
         updateProductDetails(product);
-    });
-
-
-    const addFvrtDiv = productDetails.querySelector('.add-fvrt');
-    addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
+    
+        window.addEventListener('resize', function () {
+            updateProductDetails(product);
+        });
+    
+        const addFvrtDiv = productDetails.querySelector('.add-fvrt');
+        addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
+    }
 }
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     
