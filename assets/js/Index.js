@@ -3,10 +3,6 @@ let favoriteProductIds = [];
 const shareBtn = document.getElementById('share-property');
 
 
-
-
-
-
 shareBtn.style.display = 'none';
 
 function addToFavorites(product) {
@@ -19,7 +15,6 @@ function addToFavorites(product) {
 
     favoriteProductIds.push(product.id);
 
-   
 
     const favoriteItem = document.createElement('div');
     favoriteItem.classList.add('col-lg-1');
@@ -42,7 +37,7 @@ function addToFavorites(product) {
     `;
 
     Items.appendChild(favoriteItem);
-    localStorage.setItem('new fvt items',JSON.stringify(favoriteProductIds))
+    localStorage.setItem('new fvt items', JSON.stringify(favoriteProductIds))
     favoriteItem.addEventListener("click", () => {
         showProductDetails(product);
     });
@@ -50,14 +45,14 @@ function addToFavorites(product) {
 
     // Attach event listener to remove button
     const removeBtn = favoriteItem.querySelector('.remove-favorite-btn');
-    removeBtn.addEventListener('click', function() {
+    removeBtn.addEventListener('click', function () {
         const productId = product.id;
         const index = favoriteProductIds.indexOf(productId);
         if (index !== -1) {
             favoriteProductIds.splice(index, 1);
             favoriteItem.remove();
-           
-            toggleShareButtonVisibility(); 
+
+            toggleShareButtonVisibility();
         }
     });
 }
@@ -102,10 +97,10 @@ async function renderProductCards() {
         column.innerHTML = `
             <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
   <div class="row align-items-center p-card-row">
-    <div class="col-md-4 col-6">
+    <div class="col-sm-2 col-md-2 col-4 col-lg-4">
       <img class = 'p-card-img' src=${product.image} class="img-fluid rounded-start" alt="...">
     </div>
-    <div class="col-md-8 col-6">
+    <div class="col-sm-10 col-md-10 col-8 col-lg-8">
       <div class="card-body p-0">
         <h6 class="trim card-title">${product.title}</h6>
         <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString('en-DE')}</p>
@@ -119,9 +114,13 @@ async function renderProductCards() {
 
         column.addEventListener("click", () => {
             showProductDetails(product);
+            if (window.innerWidth <= 576) {
+                const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
+                offcanvasElement.show();
+            }
         });
     });
-
+// At least show the details of first product //
     if (products.length > 0) {
         showProductDetails(products[0]);
     }
@@ -136,18 +135,13 @@ function trimText(text, maxLength) {
 }
 
 
-
-
-
-
 function updateProductDetails(product) {
     let trimmedTitle;
     if (window.innerWidth <= 576) {
         trimmedTitle = trimText(product.title, 22);
     } else if (window.innerWidth <= 992) {
         trimmedTitle = trimText(product.title, 30);
-    }
-     else if (window.innerWidth <= 768) {
+    } else if (window.innerWidth <= 768) {
         trimmedTitle = trimText(product.title, 30);
     } else {
         trimmedTitle = product.title;
@@ -164,13 +158,13 @@ function updateProductDetails(product) {
 
 function isMobileView() {
     return window.innerWidth <= 576;
-  }
+}
 
 
-   // Handle window resize event to update the view
-   window.addEventListener('resize', function () {
-       showProductDetails({});
-   });
+// Handle window resize event to update the view
+window.addEventListener('resize', function () {
+    showProductDetails({});
+});
 
 
 function showProductDetails(product) {
@@ -178,11 +172,11 @@ function showProductDetails(product) {
     if (isMobileView()) {
         // Show product details in offcanvas for mobile view
         const offcanvasBody = document
-          .getElementById("offcanvasBottom")
-          .querySelector(".offcanvas-body");
+            .getElementById("offcanvasBottom")
+            .querySelector(".offcanvas-body");
         if (offcanvasBody) {
-          offcanvasBody.innerHTML = `
-                <div class="offcanvas-body">
+            offcanvasBody.innerHTML = `
+                <div>
                 <div class="p-header mb-3">
                 <div>
                     <h2 class="property-title mb-2">${product.title}</h2>
@@ -231,7 +225,7 @@ function showProductDetails(product) {
                              <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
                               </div>
                               </div>
-                                <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="../img/location.svg" alt="">${product.location}</p>
+                                <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="/assets/img/location.svg" alt="">${product.location}</p>
                             </div>
                         </div>
                         <div class="detail-border">
@@ -240,7 +234,7 @@ function showProductDetails(product) {
     <section class="property-overview">
     <h5 class="py-4">Overview</h5>
     <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-4">
     <div class="feature">
     <img src="/assets/img/bed.svg" alt="">
     <div >
@@ -256,7 +250,7 @@ function showProductDetails(product) {
     </div>
     </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-4">
     <div class="feature">
     <img src="/assets/img/home.svg" alt="">
     <div>
@@ -272,7 +266,7 @@ function showProductDetails(product) {
     </div>
     </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-4">
     <div class="feature">
     <img src="/assets/img/bath.svg" alt="">
     <div >
@@ -288,23 +282,23 @@ function showProductDetails(product) {
     </div>
     </div>
     </div>
-    <div class="col-lg-3"></div>
+    <div class="col-lg-3 col-4"></div>
     </div>
     <div class="row align-items-center pb-4">
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-4 col-md-6 col-6">
     <div class="list-date">
     <img src="./assets/img/clock.svg" alt="">
     <span><i>Last Update Wed, Mar 27</i></span>
     </div>
     </div>
-    <div class="col-lg-4 col-md-6">
+    <div class="col-lg-4 col-md-6 col-6">
     <div class="list-date">
     <img src="./assets/img/calender.svg" alt="">
     <span><i>Listed on Wed, Mar 27</i></span>
     </div>
     </div>
-    <div class="col-lg-4 col-md-12">
-    <button class="export-btn btn"><img style="width: 25px" src="../img/export.svg" alt="">Export Document</button>
+    <div class="col-lg-4 col-md-12 col-12">
+    <button class="export-btn btn"><img style="width: 25px" src="/assets/img/export.svg" alt="">Export Document</button>
     </div>
     </div>
     </section>
@@ -356,42 +350,32 @@ function showProductDetails(product) {
                 </div>
                 `;
 
-            
-           
-                
-    
-          const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
-          offcanvasElement.show();
-    
 
-          
-                
+            // Add favorite button to offcanvas only if screen size is 576 or smaller
 
-          
-          // Add favorite button to offcanvas only if screen size is 576 or smaller
-          if (window.innerWidth <= 576) {
-            const favoriteBtn = document.createElement("button");
-            favoriteBtn.classList.add("favorite-btn");
-            favoriteBtn.textContent = "Add to Comparison";
-            favoriteBtn.addEventListener("click", handleAddToFavorites(product));
-            
-            const addFvrtDiv = offcanvasBody.querySelector(".add-fvrt");
-            if (addFvrtDiv) {
-              addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
-            } else {
-              console.error("addFvrtDiv not found");
+            if (window.innerWidth <= 576) {
+                const favoriteBtn = document.createElement("button");
+                favoriteBtn.classList.add("favorite-btn");
+                favoriteBtn.textContent = "Add to Comparison";
+                favoriteBtn.addEventListener("click", handleAddToFavorites(product));
+
+                const addFvrtDiv = offcanvasBody.querySelector(".add-fvrt");
+                if (addFvrtDiv) {
+                    addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
+                } else {
+                    console.error("addFvrtDiv not found");
+                }
             }
-          }
         } else {
-          console.error("offcanvasBody not found");
+            console.error("offcanvasBody not found");
         }
-      } else {
+    } else {
         // Show product details in main view for desktop
         const favoriteBtn = document.createElement('button');
         favoriteBtn.classList.add('favorite-btn');
         favoriteBtn.textContent = 'Add to Comparison';
         favoriteBtn.addEventListener('click', handleAddToFavorites(product));
-    
+
         productDetails.innerHTML = `
         <div class="p-header mb-3">
         <div>
@@ -521,27 +505,20 @@ function showProductDetails(product) {
         `;
 
 
-
-
-        
-    
         updateProductDetails(product);
-    
+
         window.addEventListener('resize', function () {
             updateProductDetails(product);
         });
-    
+
         const addFvrtDiv = productDetails.querySelector('.add-fvrt');
         addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
     }
 }
 
 
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
-    
+
     renderProductCards();
 });
 
