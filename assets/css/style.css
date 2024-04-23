@@ -537,6 +537,7 @@ input:checked[type = 'checkbox'] {
 /* offcanvas */
 .offcanvas {
     height: 70% !important;
+    overflow-y: auto;
 }
 
 
@@ -564,6 +565,13 @@ input:checked[type = 'checkbox'] {
     }
 }
 
+@media (max-width:991px){
+    #navbar{
+        display: none;
+    }
+  
+}
+
 @media (max-width:576px){
    #filter{
     display: none !important;
@@ -574,6 +582,27 @@ input:checked[type = 'checkbox'] {
    #offcanvasBottom{
     display: block;
 }
+#column{
+    display: none;
+}
+.offcanvas-title{
+    display: none;
+}
+#contact-form{
+    display: none;
+}
+.map-container{
+    display: none;
+}
+
+ .columns-container{
+    overflow-y: visible;
+    border-radius: 15px !important;
+    cursor: pointer;
+    max-height: 100vh;
+  
+ }
+
 }
 
 
