@@ -663,6 +663,7 @@ input:checked[type = 'checkbox'] {
         width: 45%; 
         /* margin-left: 5px;  */
         margin-right: 5px; 
+        white-space: nowrap;
        
     }
     #mapMobile{
