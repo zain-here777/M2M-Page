@@ -174,15 +174,19 @@ window.addEventListener("resize", function () {
 
 // share whatsapp funcation
 function shareToWhatsApp(product) {
-  var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${
-    product.location
-  }\n\n View more details: https://m2msearch.netlify.app/`;
+  // Construct the message
+  var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${product.location}\n\n View more details: https://m2msearch.netlify.app/`;
 
+  // Encode the message
   var encodedMessage = encodeURIComponent(message);
 
-  var whatsappUrl = "https://wa.me/?text=" + encodedMessage;
-  window.open(whatsappUrl);
+  // Construct the WhatsApp share URL
+  var whatsappUrl = "whatsapp://send?text=" + encodedMessage;
+
+  // Navigate to the WhatsApp app
+  window.location.href = whatsappUrl;
 }
+
 
 function showProductDetails(product) {
   if (isMobileView()) {
