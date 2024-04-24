@@ -178,23 +178,11 @@ function shareToWhatsApp(product) {
     product.location
   }\n\n View more details: https://m2msearch.netlify.app/`;
 
-  if (navigator.share) {
-    navigator.share({
-      title: 'Check out this property',
-      text: message,
-      url: 'https://m2msearch.netlify.app/'
-    }).then(() => {
-      console.log('Successfully shared via navigator.share');
-    }).catch((error) => {
-      console.error('Error sharing via navigator.share:', error);
-    });
-  } else {
-    var encodedMessage = encodeURIComponent(message);
-    var whatsappUrl = "https://wa.me/?text=" + encodedMessage;
-    window.open(whatsappUrl, '_blank');
-  }
-}
+  var encodedMessage = encodeURIComponent(message);
 
+  var whatsappUrl = "https://wa.me/?text=" + encodedMessage;
+  window.open(whatsappUrl);
+}
 
 function showProductDetails(product) {
   if (isMobileView()) {
