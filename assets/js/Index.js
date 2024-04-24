@@ -433,7 +433,7 @@ function showProductDetails(product) {
    mapContainer.style.height = "300px"; 
    offcanvasBody.appendChild(mapContainer);
 
-   // Initialize the map
+   // Initialize the map for mobile screens
    var mapMobile = L.map("mapMobile").setView([51.505, -0.09], 13);
    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
      maxZoom: 19,
