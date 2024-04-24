@@ -660,8 +660,10 @@ input:checked[type = 'checkbox'] {
         display: flex;
         justify-content: space-between; 
         padding: 0 ; 
-        z-index: 5; 
+        z-index: 9999; 
     }
+
+   
 
     #btn-bottom > .share-btn, #btn-bottom > .export-btn {
         max-width: 100%;
@@ -671,13 +673,13 @@ input:checked[type = 'checkbox'] {
         white-space: nowrap;
        
     }
-    #mapMobile{
-        z-index: -2;
-    }
+   
     .p-ref-no{
         white-space: nowrap;
     }
 
+
+    /* offcanvas for small sc */
     .offcanvas.offcanvas-bottom.show{
         display: block;
     }
