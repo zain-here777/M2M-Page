@@ -526,6 +526,7 @@ input:checked[type = 'checkbox'] {
     gap: 10px !important;
 }
 
+
 .list-date {
     img {
         width: 25px;
@@ -541,6 +542,8 @@ input:checked[type = 'checkbox'] {
 .offcanvas {
     height: 70% !important;
     overflow-y: auto;
+    width: 100%;
+    overflow-x: hidden !important;
 }
 
 
