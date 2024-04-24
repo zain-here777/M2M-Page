@@ -564,7 +564,9 @@ input:checked[type = 'checkbox'] {
 }
 
 @media (max-width: 1600px) {
-
+    .offcanvas.offcanvas-bottom.show {
+        display: none;
+    }
 }
 
 @media (max-width: 991px) {
@@ -647,7 +649,29 @@ input:checked[type = 'checkbox'] {
             font-size: 22px;
         }
     }
+    #btn-bottom {
+        width: 100%;
+        position: fixed; 
+        bottom: 0px;
+        display: flex;
+        justify-content: space-between; 
+        /* padding: 0 10px;  */
+        z-index: 5; 
+    }
 
+    #btn-bottom > .share-btn, #btn-bottom > .export-btn {
+        width: 45%; 
+        /* margin-left: 5px;  */
+        margin-right: 5px; 
+       
+    }
+    #mapMobile{
+        z-index: -2;
+    }
+
+    .offcanvas.offcanvas-bottom.show{
+        display: block;
+    }
 }
 
 
