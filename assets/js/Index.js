@@ -435,13 +435,70 @@ function showProductDetails(product) {
 
    // Initialize the map
    var mapMobile = L.map("mapMobile").setView([51.505, -0.09], 13);
-   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-       maxZoom: 19,
-       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+     maxZoom: 19,
+     attribution:
+       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
    }).addTo(mapMobile);
+   
+   var singleMarker = L.marker([51.5, -0.09])
+     .addTo(mapMobile)
+     .bindPopup("A pretty CSS popup.<br> Easily customizable.")
+     .openPopup();
+   singleMarker.addTo(mapMobile);
+   
+   var OpenStreetMap_Mapnik = L.tileLayer(
+     "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+     {
+       maxZoom: 19,
+       attribution:
+         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+     }
+   );
+   OpenStreetMap_Mapnik.addTo(mapMobile);
+   
+   var Stadia_AlidadeSatellite = L.tileLayer(
+     "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}",
+     {
+       minZoom: 0,
+       maxZoom: 20,
+       attribution:
+         '&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+       ext: "jpg",
+     }
+   );
+   Stadia_AlidadeSatellite.addTo(mapMobile);
+   
+   googleStreets = L.tileLayer(
+     "http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+     {
+       maxZoom: 20,
+       subdomains: ["mt0", "mt1", "mt2", "mt3"],
+     }
+   );
+   googleStreets.addTo(mapMobile);
+   googleSat = L.tileLayer("http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
+     maxZoom: 20,
+     subdomains: ["mt0", "mt1", "mt2", "mt3"],
+   });
+   googleSat.addTo(mapMobile);
+   
+   // Controls //
+   
+   var baseLayers = {
+     openStreetMap: OpenStreetMap_Mapnik,
+     Satellite: googleSat,
+     "Google Map": googleStreets,
+     "Water Color": Stadia_AlidadeSatellite,
+   };
+   
+   var overlays = {
+     Marker: singleMarker,
+   };
+   L.control.layers(baseLayers, overlays).addTo(mapMobile);
 
-   var marker = L.marker([51.5, -0.09]).addTo(mapMobile);
-   marker.bindPopup("Product Location").openPopup();
+
+
               
   } else {
     // Show product details in main view for desktop
