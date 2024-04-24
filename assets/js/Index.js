@@ -191,7 +191,7 @@ function shareToWhatsApp(product) {
   } else {
     var encodedMessage = encodeURIComponent(message);
     var whatsappUrl = "https://wa.me/?text=" + encodedMessage;
-    window.open(whatsappUrl, '_blank');
+    // window.open(whatsappUrl, '_blank');
   }
 }
 
