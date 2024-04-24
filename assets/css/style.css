@@ -655,14 +655,14 @@ input:checked[type = 'checkbox'] {
         bottom: 0px;
         display: flex;
         justify-content: space-between; 
-        /* padding: 0 10px;  */
+        padding: 0 ; 
         z-index: 5; 
     }
 
     #btn-bottom > .share-btn, #btn-bottom > .export-btn {
-        width: 40%; 
+        width: 100%; 
         /* margin-left: 5px;  */
-        margin-right: 5px; 
+        margin-right: 3px; 
         white-space: nowrap;
        
     }
