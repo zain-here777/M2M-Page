@@ -174,17 +174,27 @@ window.addEventListener("resize", function () {
 
 // share whatsapp funcation
 function shareToWhatsApp(product) {
-  var message = `Check out this property: ${
-    product.title
-  }\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${
+  var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${
     product.location
   }\n\n View more details: https://m2msearch.netlify.app/`;
 
-  var encodedMessage = encodeURIComponent(message);
-
-  var whatsappUrl = "https://wa.me/?text=" + encodedMessage;
-  window.open(whatsappUrl);
+  if (navigator.share) {
+    navigator.share({
+      title: 'Check out this property',
+      text: message,
+      url: 'https://m2msearch.netlify.app/'
+    }).then(() => {
+      console.log('Successfully shared via navigator.share');
+    }).catch((error) => {
+      console.error('Error sharing via navigator.share:', error);
+    });
+  } else {
+    var encodedMessage = encodeURIComponent(message);
+    var whatsappUrl = "https://wa.me/?text=" + encodedMessage;
+    window.open(whatsappUrl, '_blank');
+  }
 }
+
 
 function showProductDetails(product) {
   if (isMobileView()) {
@@ -422,7 +432,7 @@ function showProductDetails(product) {
       updateProductDetails(product);
     });
 
-
+    // Create map container
     // Create map container
     const mapContainer = document.createElement("div");
     mapContainer.id = "mapMobile";
@@ -494,17 +504,17 @@ function showProductDetails(product) {
     googleSat.addTo(mapMobile);
 
     // Controls initialization
-    var mobileBaseLayers = {
-      "OpenStreetMap": OpenStreetMap_Mapnik,
-      "Satellite": googleSat,
+    var baseLayers = {
+      openStreetMap: OpenStreetMap_Mapnik,
+      Satellite: googleSat,
       "Google Map": googleStreets,
       "Water Color": Stadia_AlidadeSatellite,
     };
-    
-    var mobileOverlays = {
-      "Marker": singleMarker,
+
+    var overlays = {
+      Marker: singleMarker,
     };
-    L.control.layers(mobileBaseLayers, mobileOverlays).addTo(mapMobile);
+    L.control.layers(baseLayers, overlays).addTo(mapMobile);
   } else {
     // Show product details in main view for desktop
     const favoriteBtn = document.createElement("button");
