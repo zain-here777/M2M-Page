@@ -67,6 +67,7 @@ input:checked[type = 'checkbox'] {
 
 .p-ref-no {
     color: var(--orange);
+    
 }
 
 .p-header {
@@ -672,6 +673,9 @@ input:checked[type = 'checkbox'] {
     }
     #mapMobile{
         z-index: -2;
+    }
+    .p-ref-no{
+        white-space: nowrap;
     }
 
     .offcanvas.offcanvas-bottom.show{
