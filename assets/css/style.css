@@ -660,9 +660,9 @@ input:checked[type = 'checkbox'] {
     }
 
     #btn-bottom > .share-btn, #btn-bottom > .export-btn {
-        width: 45%; 
+        width: 40%; 
         /* margin-left: 5px;  */
-        /* margin-right: 5px;  */
+        margin-right: 5px; 
         white-space: nowrap;
        
     }
