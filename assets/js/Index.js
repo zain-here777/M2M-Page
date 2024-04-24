@@ -174,8 +174,11 @@ window.addEventListener("resize", function () {
 
 // share whatsapp funcation
 function shareToWhatsApp(product) {
-  // Construct the message
-  var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${product.location}\n\n View more details: https://m2msearch.netlify.app/`;
+  // Image URL of the clicked property
+  var imageUrl = product.image;
+
+  // Construct the message with image link
+  var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${product.location}\n\n View more details: https://m2msearch.netlify.app/\n\nMedia: ${imageUrl}`;
 
   // Encode the message
   var encodedMessage = encodeURIComponent(message);
@@ -186,6 +189,9 @@ function shareToWhatsApp(product) {
   // Navigate to the WhatsApp app
   window.location.href = whatsappUrl;
 }
+
+
+
 
 
 function showProductDetails(product) {
