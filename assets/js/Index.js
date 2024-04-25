@@ -129,6 +129,9 @@ async function renderProductCards() {
         offcanvasElement.show();
       }
     });
+
+    
+
   });
   // At least show the details of first product //
   if (products.length > 0) {
@@ -146,7 +149,7 @@ function trimText(text, maxLength) {
 function updateProductDetails(product) {
   let trimmedTitle;
   if (window.innerWidth <= 576) {
-    trimmedTitle = trimText(product.title, 22);
+    trimmedTitle = trimText(product.title, 30);
   } else if (window.innerWidth <= 992) {
     trimmedTitle = trimText(product.title, 30);
   } else if (window.innerWidth <= 768) {
@@ -173,8 +176,8 @@ window.addEventListener("resize", function () {
 });
 
 // share whatsapp funcation
-// function shareToWhatsApp(product) {  
-//   var imageData = product.image; 
+// function shareToWhatsApp(product) {
+//   var imageData = product.image;
 
 //   var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${product.location}\n\n View more details: https://m2msearch.netlify.app/\n\n`;
 
@@ -191,59 +194,49 @@ window.addEventListener("resize", function () {
 //   window.location.href = whatsappUrl;
 // }
 
-
-
-function shareToWhatsApp(product) {  
-  console.log(product)
+function shareToWhatsApp(product) {
+  console.log(product);
 
   // Construct the message
-  var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${product.location}\n\n View more details: https://m2msearch.netlify.app/`;
+  var message = `Check out this property: ${
+    product.title
+  }\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${
+    product.location
+  }\n\n View more details: https://m2msearch.netlify.app/`;
 
   // Construct the URL to the image attachment
   var imageUrl = product.image;
 
-  const templateId = '1143267630435153';
+  const templateId = "1143267630435153";
   const data = {
     messaging_product: "whatsapp",
     to: "923206525840", // Replace with the recipient's phone number
     type: "template",
     template: {
-      name:"312811628331147" ,
+      name: "hello_world",
       language: {
-        code: "en_US"
-      }
-    }
+        code: "en_US",
+      },
+      message,
+    },
   };
 
-  console.log(data.template[0])
-  
+  console.log(data.template[0]);
 
-  axios.post('https://graph.facebook.com/v18.0/313348491854924/messages', data, {
-    headers: {
-      'Authorization': `Bearer EAAz4CbyG9ZAcBOwmPmSNiUC7Y3OQe0nZCS6DaafI870donH8AB1zQVgmZCzMccrZCM2CRiVhZAXGvMnT6xi0H7J5wAgOHxF5jbLYtRjT0MoiqbrtDGTUJOGe7DE0HkQZCxeZCrhZCjhSPKypGZBn6LAviSVwF91Tu4qBZB56Xxk9UzHucWmbfbXgWGcnt4UrIYWVSehASIEaeGGFUNJdwoZA5IZD'`, // Replace with your access token
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => {
-    console.log('Message sent successfully:', response.data);
-  })
-  .catch(error => {
-    console.error('Error sending message:', error.response.data);
-  });
+  axios
+    .post("https://graph.facebook.com/v18.0/313348491854924/messages", data, {
+      headers: {
+        Authorization: `Bearer EAAz4CbyG9ZAcBOwmPmSNiUC7Y3OQe0nZCS6DaafI870donH8AB1zQVgmZCzMccrZCM2CRiVhZAXGvMnT6xi0H7J5wAgOHxF5jbLYtRjT0MoiqbrtDGTUJOGe7DE0HkQZCxeZCrhZCjhSPKypGZBn6LAviSVwF91Tu4qBZB56Xxk9UzHucWmbfbXgWGcnt4UrIYWVSehASIEaeGGFUNJdwoZA5IZD'`, // Replace with your access token
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      console.log("Message sent successfully:", response.data);
+    })
+    .catch((error) => {
+      console.error("Error sending message:", error.response.data);
+    });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function showProductDetails(product) {
   if (isMobileView()) {
@@ -425,7 +418,7 @@ function showProductDetails(product) {
                 </div>
 
                 <div class=" col-3" id="btn-bottom">
-                <button class="export-btn btn"><img src="/assets/img/export.svg" alt="" style="width: 25px">Export</button>
+                <button class="export-btn btn" onClick={exportPropertyDetails()}><img src="/assets/img/export.svg" alt="" style="width: 25px">Export</button>
                 <button class="btn share-btn" id="share-property" onclick="handleShare()">
                 <img src="/assets/img/whatsapp.svg" alt=""  style="width: 25px">
                 Share </button>
@@ -433,14 +426,47 @@ function showProductDetails(product) {
 
                 `;
 
-                // heart button favorite
-                const heart_btn = document.querySelector(".heart-btn")
+// export btn 
 
-                
-                heart_btn.addEventListener("click",()=>{
-                  addToFavorites(product)
-                })
-                
+function exportPropertyDetails(product) {
+  const data = `
+    Property Title: ${product.title}
+    Price: €${product.price.toLocaleString("en-DE")} / Year
+    Location: ${product.location}
+    // Add more details as needed
+  `;
+  const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+
+  const a = document.createElement("a");
+  a.href = window.URL.createObjectURL(blob);
+  a.download = "property_details.txt"; 
+
+  document.body.appendChild(a);
+  a.click();
+
+  // Clean up
+  document.body.removeChild(a);
+}
+const exportBtn = document.querySelector(".export-btn");
+exportBtn.addEventListener("click", () => {
+  exportPropertyDetails(product);
+});
+
+
+// heart button favorite
+const heart_btn = document.querySelector(".heart-btn");
+
+heart_btn.addEventListener("click", () => {
+  addToFavorites(product);
+  const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
+  offcanvasElement.hide()
+});
+
+
+
+
+
+
 
       // whatsapp
       const whatsappBtn = document.createElement("button");
@@ -449,7 +475,7 @@ function showProductDetails(product) {
       const img = document.createElement("img");
       img.src = "/assets/img/whatsapp.svg";
       img.alt = "WhatsApp Icon";
-      img.style ="width:25px"
+      img.style = "width:25px";
 
       whatsappBtn.appendChild(img);
 
@@ -467,19 +493,7 @@ function showProductDetails(product) {
         console.error("btnBottomDiv not found");
       }
 
-      if (window.innerWidth <= 576) {
-        const favoriteBtn = document.createElement("button");
-        favoriteBtn.classList.add("favorite-btn");
-        favoriteBtn.textContent = "Add to Comparison";
-        favoriteBtn.addEventListener("click", handleAddToFavorites(product));
-
-        const addFvrtDiv = offcanvasBody.querySelector(".add-fvrt");
-        if (addFvrtDiv) {
-          addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
-        } else {
-          console.error("addFvrtDiv not found");
-        }
-      }
+      
     } else {
       console.error("offcanvasBody not found");
     }

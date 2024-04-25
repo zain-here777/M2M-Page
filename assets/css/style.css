@@ -681,9 +681,7 @@ input:checked[type = 'checkbox'] {
     .favorite-btn{
         display: none;
     }
-    .active{
-        background-color: red !important;
-    }
+   
     /* offcanvas for small sc */
     .offcanvas.offcanvas-bottom.show{
         display: block;
