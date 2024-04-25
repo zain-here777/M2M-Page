@@ -173,22 +173,73 @@ window.addEventListener("resize", function () {
 });
 
 // share whatsapp funcation
-function shareToWhatsApp(product) {
-  // Image URL of the clicked property
+// function shareToWhatsApp(product) {  
+//   var imageData = product.image; 
+
+//   var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${product.location}\n\n View more details: https://m2msearch.netlify.app/\n\n`;
+
+//   // Append the image as a data URI
+//   message += `<img src="data:image/jpeg;base64,${imageData}" alt="Property Image">`;
+
+//   // Encode the message
+//   var encodedMessage = encodeURIComponent(message);
+
+//   // Construct the WhatsApp share URL
+//   var whatsappUrl = "whatsapp://send?text=" + encodedMessage;
+
+//   // Navigate to the WhatsApp app
+//   window.location.href = whatsappUrl;
+// }
+
+
+
+function shareToWhatsApp(product) {  
+  console.log(product)
+
+  // Construct the message
+  var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${product.location}\n\n View more details: https://m2msearch.netlify.app/`;
+
+  // Construct the URL to the image attachment
   var imageUrl = product.image;
 
-  // Construct the message with image link
-  var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${product.location}\n\n View more details: https://m2msearch.netlify.app/\n\nMedia: ${imageUrl}`;
+  const templateId = '1143267630435153';
+  const data = {
+    messaging_product: "whatsapp",
+    to: "923206525840", // Replace with the recipient's phone number
+    type: "template",
+    template: {
+      name:"312811628331147" ,
+      language: {
+        code: "en_US"
+      }
+    }
+  };
 
-  // Encode the message
-  var encodedMessage = encodeURIComponent(message);
+  console.log(data.template[0])
+  
 
-  // Construct the WhatsApp share URL
-  var whatsappUrl = "whatsapp://send?text=" + encodedMessage;
-
-  // Navigate to the WhatsApp app
-  window.location.href = whatsappUrl;
+  axios.post('https://graph.facebook.com/v18.0/313348491854924/messages', data, {
+    headers: {
+      'Authorization': `Bearer EAAz4CbyG9ZAcBOwmPmSNiUC7Y3OQe0nZCS6DaafI870donH8AB1zQVgmZCzMccrZCM2CRiVhZAXGvMnT6xi0H7J5wAgOHxF5jbLYtRjT0MoiqbrtDGTUJOGe7DE0HkQZCxeZCrhZCjhSPKypGZBn6LAviSVwF91Tu4qBZB56Xxk9UzHucWmbfbXgWGcnt4UrIYWVSehASIEaeGGFUNJdwoZA5IZD'`, // Replace with your access token
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    console.log('Message sent successfully:', response.data);
+  })
+  .catch(error => {
+    console.error('Error sending message:', error.response.data);
+  });
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -250,7 +301,7 @@ function showProductDetails(product) {
                              )} / Year</h1>
                              <div class="d-flex align-items-center gap-3">
                              <h5 class="p-ref-no">${product.refNo}</h5>
-                             <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
+                             <button class="btn heart-btn" > <i class="fa-solid fa-heart"></i></div>
                               </div>
                               </div>
                                 <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="/assets/img/location.svg" alt="">${
@@ -381,6 +432,15 @@ function showProductDetails(product) {
                 </div>
 
                 `;
+
+                // heart button favorite
+                const heart_btn = document.querySelector(".heart-btn")
+
+                
+                heart_btn.addEventListener("click",()=>{
+                  addToFavorites(product)
+                })
+                
 
       // whatsapp
       const whatsappBtn = document.createElement("button");

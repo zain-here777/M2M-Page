@@ -677,8 +677,13 @@ input:checked[type = 'checkbox'] {
     .p-ref-no{
         white-space: nowrap;
     }
-
-
+    /* add to comparision btn disable */
+    .favorite-btn{
+        display: none;
+    }
+    .active{
+        background-color: red !important;
+    }
     /* offcanvas for small sc */
     .offcanvas.offcanvas-bottom.show{
         display: block;
