@@ -672,9 +672,10 @@ input:checked[type = 'checkbox'] {
         position: fixed; 
         bottom: 0px;
         display: flex;
-        justify-content: space-between; 
-        padding: 0 ; 
-        z-index: 9999; 
+        justify-content: space-between;
+        z-index: 9999;
+        background: white;
+        padding: 7px
     }
 
   
