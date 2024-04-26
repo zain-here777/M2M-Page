@@ -45,7 +45,14 @@
                 </li>
             </ul>
         </div>
+        <button class="btn fs-4"  id="filterBtn">
+            <i class="fa-solid fa-filter"></i>   
+        </button>
+        <input type="text" id="searchInput " class="form-control" placeholder="Search products..." />
+
+
     </div>
+    
 </nav>
 <div class="container-fluid">
     <div class="row">
@@ -301,7 +308,6 @@
 
 </div>
 
-<!-- offcanvas -->
 
 <!-- Offcanvas element -->
 <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
@@ -314,6 +320,23 @@
     </div>
   </div>
 
+
+<!-- filter offcanvas -->
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h6 class="offcanvas-title" id="filterOffcanvasLabel">Filters</h6>
+      <button type="button" class="btn close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-angle-down"></i>
+      </button>
+    </div>
+    <div class="offcanvas-body">
+      <!-- Content for filter options -->
+      <!-- Add your filter options here -->
+    </div>
+  </div>
+  
+
+
 </body>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -321,9 +344,8 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="assets/js/rangeSlider.js"></script>
-<script type="" src="assets/js/Index.js">
-</script>
+<script type="" src="assets/js/Index.js"></script>
+<script src="assets/js/FilterDetails.js"></script>
 <!-- <script src="assets/js/mobileView.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </html>
