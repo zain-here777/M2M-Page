@@ -191,49 +191,62 @@ window.addEventListener("resize", function () {
 //   window.location.href = whatsappUrl;
 // }
 
-function shareToWhatsApp(product) {
-  console.log(product);
+// function shareToWhatsApp(product) {
+// const data = {
+//     messaging_product: "whatsapp",
+//     to: "923206525840", // Replace with the recipient's phone number
+//     type: "template",
+//     template: {
+//       name: "hello_world",
+//       language: {
+//         code: "en_US",
+//       },
+//       message,
+//     },
+//   };
 
-  // Construct the message
-  var message = `Check out this property: ${
-    product.title
-  }\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${
-    product.location
-  }\n\n View more details: https://m2msearch.netlify.app/`;
+//   console.log(data.template[0]);
 
-  // Construct the URL to the image attachment
-  var imageUrl = product.image;
+//   axios
+//     .post("https://graph.facebook.com/v18.0/313348491854924/messages", data, {
+//       headers: {
+//         Authorization: `Bearer EAAz4CbyG9ZAcBOwmPmSNiUC7Y3OQe0nZCS6DaafI870donH8AB1zQVgmZCzMccrZCM2CRiVhZAXGvMnT6xi0H7J5wAgOHxF5jbLYtRjT0MoiqbrtDGTUJOGe7DE0HkQZCxeZCrhZCjhSPKypGZBn6LAviSVwF91Tu4qBZB56Xxk9UzHucWmbfbXgWGcnt4UrIYWVSehASIEaeGGFUNJdwoZA5IZD'`, // Replace with your access token
+//         "Content-Type": "application/json",
+//       },
+//     })
+//     .then((response) => {
+//       console.log("Message sent successfully:", response.data);
+//     })
+//     .catch((error) => {
+//       console.error("Error sending message:", error.response.data);
+//     });
+// }
 
-  const templateId = "1143267630435153";
-  const data = {
-    messaging_product: "whatsapp",
-    to: "923206525840", // Replace with the recipient's phone number
-    type: "template",
-    template: {
-      name: "hello_world",
-      language: {
-        code: "en_US",
-      },
-      message,
-    },
-  };
 
-  console.log(data.template[0]);
+function shareToWhatsApp (product){
+   // Property details
+   const title = "Villa by the Sea";
+   const description = "Luxury villa with stunning ocean views";
+   const price = "€1,200,000";
 
-  axios
-    .post("https://graph.facebook.com/v18.0/313348491854924/messages", data, {
-      headers: {
-        Authorization: `Bearer EAAz4CbyG9ZAcBOwmPmSNiUC7Y3OQe0nZCS6DaafI870donH8AB1zQVgmZCzMccrZCM2CRiVhZAXGvMnT6xi0H7J5wAgOHxF5jbLYtRjT0MoiqbrtDGTUJOGe7DE0HkQZCxeZCrhZCjhSPKypGZBn6LAviSVwF91Tu4qBZB56Xxk9UzHucWmbfbXgWGcnt4UrIYWVSehASIEaeGGFUNJdwoZA5IZD'`, // Replace with your access token
-        "Content-Type": "application/json",
-      },
-    })
-    .then((response) => {
-      console.log("Message sent successfully:", response.data);
-    })
-    .catch((error) => {
-      console.error("Error sending message:", error.response.data);
-    });
+   // Combine property details into a message
+   const message = `Property Details:
+Title: ${title}
+Description: ${description}
+Price: ${price}`;
+
+   // Encode message for URL
+   const encodedMessage = encodeURIComponent(message);
+
+   // Construct the WhatsApp URL with the pre-filled message
+   const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+
+   // Open WhatsApp in a new tab
+   window.open(whatsappUrl, "_blank");
 }
+
+
+
 
 function showProductDetails(product) {
   if (isMobileView()) {
@@ -866,3 +879,42 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+
+
+// search properties
+const searchBtn = document.getElementById("searchBtn");
+const searchInput = document.getElementById("searchInput");
+
+// Function to perform search
+function performSearch(query,product) {
+  const filteredProducts = product.filter((product) => {
+    console.log(filteredProducts)
+    return (
+      product.title.toLowerCase().includes(query.toLowerCase()) ||
+      product.location.toLowerCase().includes(query.toLowerCase())
+    );
+  });
+
+  // Clear existing product cards
+  columnsContainer.innerHTML = "";
+
+  // Render filtered product cards
+  filteredProducts.forEach((product) => {
+    const column = document.createElement("div");
+    column.classList.add("column");
+    // Render product card content here
+    columnsContainer.appendChild(column);
+  });
+}
+
+// Event listener for search button click
+searchBtn.addEventListener("click", () => {
+  const query = searchInput.value.trim();
+  if (query) {
+    performSearch(query,product);
+  } else {
+    // If search input is empty, render all products
+    renderProductCards();
+  }
+});  
