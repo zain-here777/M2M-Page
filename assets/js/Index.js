@@ -134,6 +134,8 @@ async function renderProductCards() {
   if (products.length > 0) {
     showProductDetails(products[0]);
   }
+
+  
 }
 
 function trimText(text, maxLength) {
@@ -883,38 +885,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // search properties
-const searchBtn = document.getElementById("searchBtn");
-const searchInput = document.getElementById("searchInput");
+document.addEventListener('DOMContentLoaded', () => {
+  const searchIcon = document.getElementById('search-icon');
+  const searchInput = document.getElementById('searchInput');
 
-// Function to perform search
-function performSearch(query,product) {
-  const filteredProducts = product.filter((product) => {
-    console.log(filteredProducts)
-    return (
-      product.title.toLowerCase().includes(query.toLowerCase()) ||
-      product.location.toLowerCase().includes(query.toLowerCase())
-    );
-  });
-
-  // Clear existing product cards
-  columnsContainer.innerHTML = "";
-
-  // Render filtered product cards
-  filteredProducts.forEach((product) => {
-    const column = document.createElement("div");
-    column.classList.add("column");
-    // Render product card content here
-    columnsContainer.appendChild(column);
-  });
-}
-
-// Event listener for search button click
-searchBtn.addEventListener("click", () => {
-  const query = searchInput.value.trim();
-  if (query) {
-    performSearch(query,product);
+  if (searchIcon && searchInput) {
+      searchIcon.addEventListener('click', () => {
+        
+          if (searchInput.style.display === 'none') {
+              searchInput.style.display = 'block';
+              searchInput.focus(); 
+          } else {
+              searchInput.style.display = 'none';
+              searchInput.value = ''; 
+          }
+      });
   } else {
-    // If search input is empty, render all products
-    renderProductCards();
+      console.error('Search icon or input field not found.');
   }
-});  
+});
+
+const searchInput = document.getElementById('searchInput');
+console.log(products)
+
+
+
+

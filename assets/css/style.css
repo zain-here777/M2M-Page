@@ -540,6 +540,7 @@ input:checked[type = 'checkbox'] {
 
 #navbar{
     display: none;
+    
 }
 
 .navbar-toggler:focus,
@@ -560,6 +561,9 @@ input:checked[type = 'checkbox'] {
     width: 100%;
     overflow-x: hidden !important;
 }
+
+
+
 
 
 @media only screen and (max-width: 1600px ) and (min-width: 992px) {
@@ -606,6 +610,8 @@ input:checked[type = 'checkbox'] {
 
     #navbar {
         display: block;
+       background-color: #ffffff !important;
+       box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
 
 
@@ -678,7 +684,7 @@ input:checked[type = 'checkbox'] {
         padding: 7px
     }
 
-  
+   
 
     #btn-bottom > .share-btn, #btn-bottom > .export-btn {
         max-width: 100%;
