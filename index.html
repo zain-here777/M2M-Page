@@ -22,12 +22,14 @@
 
 </head>
 <body>
-<nav class="navbar  navbar-expand-md bg-light" id="navbar">
+<nav class="navbar  navbar-expand-md bg-light" id="navbar" style="background: navy !important;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+       
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            
+            <i class="fas fa-bars  bars" style="color: #000000;font-size: 30px;border:none"
+                                        id="menuIcon"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
@@ -45,9 +47,14 @@
                 </li>
             </ul>
         </div>
+        <div class="menu-icons">
         <button class="btn fs-4"  id="filterBtn">
             <i class="fa-solid fa-filter"></i>   
         </button>
+        <button class="btn fs-4"  id="filterBtn">
+            <i class="fa-solid fa-filter"></i>   
+        </button>
+    </div>
         <input type="text" id="searchInput " class="form-control" placeholder="Search products..." />
 
 

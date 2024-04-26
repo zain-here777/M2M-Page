@@ -538,6 +538,20 @@ input:checked[type = 'checkbox'] {
     display: none;
 }
 
+#navbar{
+    display: none;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+.navbar-toggler{
+    border: none !important;
+    font-family: 'Times New Roman', Times, serif;
+}
 
 /* offcanvas */
 .offcanvas {
@@ -674,6 +688,7 @@ input:checked[type = 'checkbox'] {
        
     }
    
+    
     .p-ref-no{
         white-space: nowrap;
     }
@@ -681,7 +696,7 @@ input:checked[type = 'checkbox'] {
     .favorite-btn{
         display: none;
     }
-   
+  
     /* offcanvas for small sc */
     .offcanvas.offcanvas-bottom.show{
         display: block;
