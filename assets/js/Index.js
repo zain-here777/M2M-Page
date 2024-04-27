@@ -597,7 +597,6 @@ Location: ${product.location}
       openStreetMap: OpenStreetMap_Mapnik,
       Satellite: googleSat,
       "Google Map": googleStreets,
-      "Water Color": Stadia_AlidadeSatellite,
     };
 
     var overlays = {
@@ -813,7 +812,6 @@ var baseLayers = {
   openStreetMap: OpenStreetMap_Mapnik,
   Satellite: googleSat,
   "Google Map": googleStreets,
-  "Water Color": Stadia_AlidadeSatellite,
 };
 
 var overlays = {
