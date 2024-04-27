@@ -734,8 +734,14 @@ input:checked[type = 'checkbox'] {
    .submit-button-wrapper>button:hover {
         background-color: #e6a601;
     }
-
-  
+    .menu-icons{
+        display: flex;
+    }
+    .search-wrapper {
+        display: flex;
+        align-items: center;
+        max-width: 250px; 
+    }
     /* offcanvas for small sc */
     .offcanvas.offcanvas-bottom.show{
         display: block;
