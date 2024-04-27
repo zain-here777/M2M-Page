@@ -735,11 +735,7 @@ input:checked[type = 'checkbox'] {
         background-color: #e6a601;
     }
 
-    .search-wrapper {
-        display: flex;
-        align-items: center;
-        max-width: 250px; 
-    }
+  
     /* offcanvas for small sc */
     .offcanvas.offcanvas-bottom.show{
         display: block;

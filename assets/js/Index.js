@@ -364,7 +364,7 @@ function showProductDetails(product) {
     <div class="col-lg-3 col-4"></div>
     </div>
     <div class="row align-items-center pb-4">
-    <div class="col-lg-4 col-md-6 col-6">
+    <div class="col-lg-4 col-md-6 col-12">
     <div class="list-date">
     <img src="./assets/img/clock.svg" alt="">
     <span><i>Last Update Wed, Mar 27</i></span>
@@ -396,7 +396,7 @@ function showProductDetails(product) {
 
                 <div class=" col-3" id="btn-bottom">
                 <button class="export-btn btn"><img src="/assets/img/export.svg" alt="" style="width: 20px">Export</button>
-                <button class="btn share-btn" id="share-property" onclick="handleShare()">
+                <button class="btn share-btn export-btn" id="share-property" onclick="handleShare()">
                
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -734,7 +734,7 @@ Location: ${product.location}
 </div>
 </div>
 <div class="col-lg-4 col-md-12">
-<button class="export-btn btn"><img style="width: 25px" src="../img/export.svg" alt="">Export Document</button>
+<button class="export-btn btn"><img style="width: 25px" src="assest/img/export.svg" alt="">Export Document</button>
 </div>
 </div>
 </section>            
