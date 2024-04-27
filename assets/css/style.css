@@ -570,6 +570,9 @@ input:checked[type = 'checkbox'] {
     box-shadow: none !important;
     border-color: #cfcfcf !important;
 }
+.comparison-container{
+    display: flex;
+}
 
 @media only screen and (max-width: 1600px ) and (min-width: 992px) {
     .p-card-row {
@@ -745,6 +748,13 @@ input:checked[type = 'checkbox'] {
     /* offcanvas for small sc */
     .offcanvas.offcanvas-bottom.show{
         display: block;
+    }
+    .comparison-container{
+        display: block;
+    }
+    .share-btn{
+        width: 100%;
+        margin-bottom: 20px;
     }
 }
 

@@ -16,6 +16,7 @@ function addToFavorites(product) {
 
   const favoriteItem = document.createElement("div");
   favoriteItem.classList.add("col-lg-1");
+  favoriteItem.classList.add("col-4");
   favoriteItem.innerHTML = `
         <div class="favorite-item">
             <div class="favorite-detail">
