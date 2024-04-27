@@ -16,6 +16,7 @@ function addToFavorites(product) {
 
   const favoriteItem = document.createElement("div");
   favoriteItem.classList.add("col-lg-1");
+  favoriteItem.classList.add("col-4");
   favoriteItem.innerHTML = `
         <div class="favorite-item">
             <div class="favorite-detail">
@@ -464,7 +465,7 @@ Location: ${product.location}
 
       // whatsapp
       const whatsappBtn = document.createElement("button");
-      whatsappBtn.classList.add("btn", "share-btn");
+      whatsappBtn.classList.add("btn", "share-btn" , "export-btn");
 
       // Create and append the SVG icon
       const svgIcon = document.createElementNS(
