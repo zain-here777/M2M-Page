@@ -465,7 +465,7 @@ Location: ${product.location}
 
       // whatsapp
       const whatsappBtn = document.createElement("button");
-      whatsappBtn.classList.add("btn", "share-btn");
+      whatsappBtn.classList.add("btn", "share-btn" , "export-btn");
 
       // Create and append the SVG icon
       const svgIcon = document.createElementNS(
