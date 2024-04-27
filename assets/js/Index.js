@@ -880,7 +880,7 @@ async function performSearch(query) {
     const filteredProducts = products.filter((product) =>
       product.title.toLowerCase().includes(query.toLowerCase())
     );
-
+    
    let y =  renderProductCards(filteredProducts);
   } else {
     console.warn("Products data not available");
