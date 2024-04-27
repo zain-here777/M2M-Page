@@ -134,8 +134,6 @@ async function renderProductCards() {
   if (products.length > 0) {
     showProductDetails(products[0]);
   }
-
-  
 }
 
 function trimText(text, maxLength) {
@@ -225,26 +223,23 @@ window.addEventListener("resize", function () {
 // }
 
 
-function shareToWhatsApp (product){
-   // Property details
-   const title = "Villa by the Sea";
-   const description = "Luxury villa with stunning ocean views";
-   const price = "€1,200,000";
+// share whatsapp funcation
+function shareToWhatsApp(product) {  
+  var imageData = product.image; 
 
-   // Combine property details into a message
-   const message = `Property Details:
-Title: ${title}
-Description: ${description}
-Price: ${price}`;
+  var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${product.location}\n\n View more details: https://m2msearch.netlify.app/\n\n`;
 
-   // Encode message for URL
-   const encodedMessage = encodeURIComponent(message);
+  
+  message += `<img src="data:image/jpeg;base64,${imageData}" alt="Property Image">`;
 
-   // Construct the WhatsApp URL with the pre-filled message
-   const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+  // Encode the message
+  var encodedMessage = encodeURIComponent(message);
 
-   // Open WhatsApp in a new tab
-   window.open(whatsappUrl, "_blank");
+
+  var whatsappUrl = "whatsapp://send?text=" + encodedMessage;
+
+  // Navigate to the WhatsApp app
+  window.location.href = whatsappUrl;
 }
 
 
@@ -393,36 +388,8 @@ function showProductDetails(product) {
                     <!-- <div id="columnDetailMobile"></div> -->
                     <div class="row my-5">
                         <div class="col-lg-6">
-                            <div>
-                                <div class="contact-form-wrapper d-flex justify-content-center">
-                                    <form action="#" class="contact-form" >
-                                        <h3 class="title">Contact us</h3>
-                                        <p class="description">Feel free to contact us if you need any assistance, any
-                                            help or another question.
-                                        </p>
-                                        <div>
-                                            <input type="text" class="form-control rounded border-white mb-3 form-input"
-                                                   id="name" placeholder="Full Name" required>
-                                        </div>
-                                        <div>
-                                            <input type="email"
-                                                   class="form-control rounded border-white mb-3 form-input"
-                                                   placeholder="Email Address" required>
-                                        </div>
-                                        <div>
-                                            <input type="number"
-                                                   class="form-control rounded border-white mb-3 form-input"
-                                                   placeholder="Telephone" required>
-                                        </div>
-                                        <div>
-                                            <textarea id="message"
-                                                      class="form-control rounded border-white mb-3 form-text-area"
-                                                      rows="5" cols="30" placeholder="Message" required></textarea>
-                                        </div>
-                                        <div class="submit-button-wrapper">
-                                            <input type="submit" value="Send">
-                                        </div>
-                                    </form>
+                            <div  class="submit-button-wrapper">
+                                <button id="contct-us-whatsapp">Contact Us</button>
                                 </div>
                             </div>
                         </div>
@@ -458,58 +425,82 @@ function showProductDetails(product) {
 
                 `;
 
+      // contact us btn
+      const contactUsWhatsApp = document.getElementById('contct-us-whatsapp');
 
-    // export btn
+      contactUsWhatsApp.addEventListener('click', () => {
+          
+          
+              const phoneNumber = '923206525840';
+              const message = encodeURIComponent('Hello! I would like to inquire about...');
+              const whatsappUrl = `whatsapp://send?phone=${phoneNumber}&text=${message}`;
+              
+              // Navigate to the WhatsApp app
+        window.location.href = whatsappUrl;
+         
+      });
+      
+      
 
-    function exportPropertyDetails(product) {
-      const data = `
+      
+
+
+      // export btn
+
+      function exportPropertyDetails(product) {
+        const data = `
 Property Title: ${product.title}
 Price: €${product.price.toLocaleString("en-DE")} / Year
 Location: ${product.location}
 `;
-      const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+        const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
 
-      const a = document.createElement("a");
-      a.href = window.URL.createObjectURL(blob);
-      a.download = "property_details.txt";
+        const a = document.createElement("a");
+        a.href = window.URL.createObjectURL(blob);
+        a.download = "property_details.txt";
 
-      document.body.appendChild(a);
-      a.click();
+        document.body.appendChild(a);
+        a.click();
 
-      // Clean up
-      document.body.removeChild(a);
-    }
-    const exportBtn = document.querySelector(".export-btn");
-    exportBtn.addEventListener("click", () => {
-      exportPropertyDetails(product);
-    });
-
-
-
+        // Clean up
+        document.body.removeChild(a);
+      }
+      const exportBtn = document.querySelector(".export-btn");
+      exportBtn.addEventListener("click", () => {
+        exportPropertyDetails(product);
+      });
 
       // whatsapp
       const whatsappBtn = document.createElement("button");
       whatsappBtn.classList.add("btn", "share-btn");
-      
+
       // Create and append the SVG icon
-      const svgIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      const svgIcon = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg"
+      );
       svgIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
       svgIcon.setAttribute("viewBox", "0 0 448 512");
       svgIcon.setAttribute("style", "width: 20px");
-      
-      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      path.setAttribute("d", "M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z");
+
+      const path = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+      );
+      path.setAttribute(
+        "d",
+        "M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+      );
       path.setAttribute("fill", "white");
       svgIcon.appendChild(path);
       whatsappBtn.appendChild(svgIcon);
-      
+
       const buttonText = document.createTextNode("WhatsApp");
       whatsappBtn.appendChild(buttonText);
-      
+
       whatsappBtn.addEventListener("click", function () {
         shareToWhatsApp(product);
       });
-      
 
       const btnBottomDiv = document.getElementById("btn-bottom");
       if (btnBottomDiv) {
@@ -526,7 +517,6 @@ Location: ${product.location}
     window.addEventListener("resize", function () {
       updateProductDetails(product);
     });
-
 
     // heart button favorite
     const heart_btn = document.querySelector(".heart-btn");
@@ -882,32 +872,47 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
-
 // search properties
-document.addEventListener('DOMContentLoaded', () => {
-  const searchIcon = document.getElementById('search-icon');
-  const searchInput = document.getElementById('searchInput');
+document.addEventListener("DOMContentLoaded", () => {
+  const searchIcon = document.getElementById("search-icon");
+  const searchInput = document.getElementById("searchInput");
 
   if (searchIcon && searchInput) {
-      searchIcon.addEventListener('click', () => {
-        
-          if (searchInput.style.display === 'none') {
-              searchInput.style.display = 'block';
-              searchInput.focus(); 
-          } else {
-              searchInput.style.display = 'none';
-              searchInput.value = ''; 
-          }
-      });
+    searchIcon.addEventListener("click", () => {
+      if (searchInput.style.display === "none") {
+        searchInput.style.display = "block";
+        searchInput.focus();
+      } else {
+        searchInput.style.display = "none";
+        searchInput.value = "";
+      }
+    });
   } else {
-      console.error('Search icon or input field not found.');
+    console.error("Search icon or input field not found.");
   }
 });
 
-const searchInput = document.getElementById('searchInput');
-console.log(products)
+const searchInput = document.getElementById("searchInput");
 
+async function performSearch(query) {
+  const products = await fetchData();
 
+  if (products && products.length > 0) {
+    const filteredProducts = products.filter((product) =>
+      product.title.toLowerCase().includes(query.toLowerCase())
+    );
+    console.log("Search results:", filteredProducts);
+  } else {
+    console.warn("Products data not available");
+  }
+}
 
-
+searchInput.addEventListener("keyup", () => {
+  const query = searchInput.value.trim();
+  if (query) {
+    performSearch(query);
+  } else {
+    console.log("Empty search query");
+  }
+  renderProductCards(query);
+});

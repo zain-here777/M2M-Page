@@ -703,6 +703,28 @@ input:checked[type = 'checkbox'] {
     .favorite-btn{
         display: none;
     }
+
+
+  .submit-button-wrapper {
+        text-align: center;
+    }
+    
+  .submit-button-wrapper>button {
+        border: none;
+        border-radius: 4px;
+        background-color: var(--orange);
+        color: white;
+        text-transform: uppercase;
+        padding: 10px 60px;
+        font-weight: 500;
+        letter-spacing: 2px;
+    }
+    
+   .submit-button-wrapper>button:hover {
+        background-color: #e6a601;
+    }
+
+
   
     /* offcanvas for small sc */
     .offcanvas.offcanvas-bottom.show{
