@@ -222,28 +222,26 @@ window.addEventListener("resize", function () {
 //     });
 // }
 
-
 // share whatsapp funcation
-function shareToWhatsApp(product) {  
-  var imageData = product.image; 
+function shareToWhatsApp(product) {
+  var imageData = product.image;
 
-  var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${product.location}\n\n View more details: https://m2msearch.netlify.app/\n\n`;
+  var message = `Check out this property: ${
+    product.title
+  }\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${
+    product.location
+  }\n\n View more details: https://m2msearch.netlify.app/\n\n`;
 
-  
   message += `<img src="data:image/jpeg;base64,${imageData}" alt="Property Image">`;
 
   // Encode the message
   var encodedMessage = encodeURIComponent(message);
-
 
   var whatsappUrl = "whatsapp://send?text=" + encodedMessage;
 
   // Navigate to the WhatsApp app
   window.location.href = whatsappUrl;
 }
-
-
-
 
 function showProductDetails(product) {
   if (isMobileView()) {
@@ -426,24 +424,18 @@ function showProductDetails(product) {
                 `;
 
       // contact us btn
-      const contactUsWhatsApp = document.getElementById('contct-us-whatsapp');
+      const contactUsWhatsApp = document.getElementById("contct-us-whatsapp");
 
-      contactUsWhatsApp.addEventListener('click', () => {
-          
-          
-              const phoneNumber = '923206525840';
-              const message = encodeURIComponent('Hello! I would like to inquire about...');
-              const whatsappUrl = `whatsapp://send?phone=${phoneNumber}&text=${message}`;
-              
-              // Navigate to the WhatsApp app
+      contactUsWhatsApp.addEventListener("click", () => {
+        const phoneNumber = "923206525840";
+        const message = encodeURIComponent(
+          "Hello! I would like to inquire about..."
+        );
+        const whatsappUrl = `whatsapp://send?phone=${phoneNumber}&text=${message}`;
+
+        // Navigate to the WhatsApp app
         window.location.href = whatsappUrl;
-         
       });
-      
-      
-
-      
-
 
       // export btn
 
@@ -863,10 +855,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <!-- Add more checkboxes here -->
             `;
       loadMoreBtn.textContent = "Load Less";
-      // Set max-height to show hidden features slowly
       moreFeatures.style.maxHeight = moreFeatures.scrollHeight + "px";
     } else {
-      moreFeatures.style.maxHeight = "0"; // Hide features slowly
+      moreFeatures.style.maxHeight = "0"; 
       loadMoreBtn.textContent = "Load More";
     }
   });
@@ -877,19 +868,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchIcon = document.getElementById("search-icon");
   const searchInput = document.getElementById("searchInput");
 
-  if (searchIcon && searchInput) {
-    searchIcon.addEventListener("click", () => {
-      if (searchInput.style.display === "none") {
-        searchInput.style.display = "block";
-        searchInput.focus();
-      } else {
-        searchInput.style.display = "none";
-        searchInput.value = "";
-      }
-    });
-  } else {
-    console.error("Search icon or input field not found.");
-  }
+  
 });
 
 const searchInput = document.getElementById("searchInput");
@@ -901,7 +880,8 @@ async function performSearch(query) {
     const filteredProducts = products.filter((product) =>
       product.title.toLowerCase().includes(query.toLowerCase())
     );
-    console.log("Search results:", filteredProducts);
+
+   let y =  renderProductCards(filteredProducts);
   } else {
     console.warn("Products data not available");
   }
@@ -913,6 +893,7 @@ searchInput.addEventListener("keyup", () => {
     performSearch(query);
   } else {
     console.log("Empty search query");
+    let x =renderProductCards([]);
+    console.log(x) 
   }
-  renderProductCards(query);
 });
