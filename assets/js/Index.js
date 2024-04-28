@@ -34,7 +34,8 @@ const renderFavoriteItems = () => {
 };
 
 function createFavoriteItem(productId) {
-  console.log(productId ,"property")
+  
+
   const favoriteItem = document.createElement("div");
   favoriteItem.classList.add("col-lg-1");
   favoriteItem.classList.add("col-4");
@@ -79,7 +80,11 @@ function createFavoriteItem(productId) {
 
 
 function addToFavorites(product) {
-  if (favoriteProductIds.includes(product.id)) {
+  const isProductInFavorites = favoriteProductIds.some(item => item.id === product.id);
+
+  console.log(isProductInFavorites)
+
+  if (isProductInFavorites) {
     alert("This item is already in your favorites.");
     return;
   }
@@ -919,7 +924,7 @@ searchInput.addEventListener("keyup", () => {
   } else {
     console.log("Empty search query");
   renderProductCards([]);
-    console.log(x) 
+    
   }
 });
 
