@@ -743,22 +743,26 @@ input:checked[type = 'checkbox'] {
     .search-wrapper {
         display: flex;
         align-items: center;
-        max-width: 250px;
+        max-width: 250px !important;
     }
 
     /* offcanvas for small sc */
     .offcanvas.offcanvas-bottom.show {
         display: block;
     }
-
+    .navbar>.container-fluid{
+        flex-wrap: nowrap !important;
+    }
     .comparison-container {
         display: block;
     }
 
-    /*.share-btn{*/
-    /*    width: 100%;*/
-    /*    margin-bottom: 20px;*/
-    /*}*/
+    
+
+    #mapMobile{
+        height: 200px;
+        margin-bottom: 60px !important;
+    }
 }
 
 
