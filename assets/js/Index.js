@@ -1,64 +1,98 @@
 const productDetails = document.getElementById("column");
-let favoriteProductIds = [];
 const shareBtn = document.getElementById("share-property");
 
 shareBtn.style.display = "none";
 
-function addToFavorites(product) {
+
+
+let favoriteProductIds = [];
+
+function initializePage() {
+  const storeData = localStorage.getItem('new_fvt_items');
+
+  if (storeData) {
+    favoriteProductIds = JSON.parse(storeData);
+  }
+
+  console.log('Retrieved favorite product IDs:', favoriteProductIds);
+  renderFavoriteItems();
+}
+
+window.onload = initializePage;
+
+const renderFavoriteItems = () => {
   const Items = document.getElementById("fav-items");
 
+  Items.innerHTML = '';
+
+  favoriteProductIds.forEach(productId => {
+    const favoriteItem = createFavoriteItem(productId);
+    Items.appendChild(favoriteItem);
+  });
+
+  toggleShareButtonVisibility();
+};
+
+function createFavoriteItem(productId) {
+  console.log(productId ,"property")
+  const favoriteItem = document.createElement("div");
+  favoriteItem.classList.add("col-lg-1");
+  favoriteItem.classList.add("col-4");
+  favoriteItem.innerHTML = ` <div class="favorite-item">
+  <div class="favorite-detail">
+      <div class="detail-img">
+          <img src="${productId.image}" alt="Product Image">
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+          <p style="font-size: 14px; color: orange">€${productId.price.toLocaleString(
+            "en-DE"
+          )}</p>
+          <i class="fa-solid fa-heart" style="font-size: 12px; color: red"></i>
+      </div>
+  </div>
+  <div class="remove-fvrt">
+  <a  class="nav-link remove-favorite-btn" data-product-id="${
+    productId.id
+  }" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
+</div>
+</div>
+  `;
+
+ 
+  // Attach event listener to remove button
+  const removeBtn = favoriteItem.querySelector(".remove-favorite-btn");
+  removeBtn.addEventListener("click", function () {
+    const productIds = productId.id;
+    const index = favoriteProductIds.indexOf(productId);
+    if (index !== -1) {
+      favoriteProductIds.splice(index, 1);
+      localStorage.setItem("new_fvt_items", JSON.stringify(favoriteProductIds));
+      renderFavoriteItems(); 
+
+      toggleShareButtonVisibility();
+    }
+  });
+
+ return favoriteItem; 
+}
+
+
+
+function addToFavorites(product) {
   if (favoriteProductIds.includes(product.id)) {
     alert("This item is already in your favorites.");
     return;
   }
 
-  favoriteProductIds.push(product.id);
+  favoriteProductIds.push({id:product.id,price:product.price,image:product.image});
+  localStorage.setItem("new_fvt_items", JSON.stringify(favoriteProductIds));
+  renderFavoriteItems();
 
-  const favoriteItem = document.createElement("div");
-  favoriteItem.classList.add("col-lg-1");
-  favoriteItem.classList.add("col-4");
-  favoriteItem.innerHTML = `
-        <div class="favorite-item">
-            <div class="favorite-detail">
-                <div class="detail-img">
-                    <img src="${product.image}" alt="Product Image">
-                </div>
-                <div class="d-flex align-items-center justify-content-between">
-                    <p style="font-size: 14px; color: orange">€${product.price.toLocaleString(
-                      "en-DE"
-                    )}</p>
-                    <i class="fa-solid fa-heart" style="font-size: 12px; color: red"></i>
-                </div>
-            </div>
-          
-            <div class="remove-fvrt">
-            <a  class="nav-link remove-favorite-btn" data-product-id="${
-              product.id
-            }" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
-</div>
-        </div>
-    `;
-
-  Items.appendChild(favoriteItem);
-  localStorage.setItem("new fvt items", JSON.stringify(favoriteProductIds));
-  favoriteItem.addEventListener("click", () => {
-    showProductDetails(product);
-  });
   toggleShareButtonVisibility();
-
-  // Attach event listener to remove button
-  const removeBtn = favoriteItem.querySelector(".remove-favorite-btn");
-  removeBtn.addEventListener("click", function () {
-    const productId = product.id;
-    const index = favoriteProductIds.indexOf(productId);
-    if (index !== -1) {
-      favoriteProductIds.splice(index, 1);
-      favoriteItem.remove();
-
-      toggleShareButtonVisibility();
-    }
-  });
 }
+
+
+
 
 function toggleShareButtonVisibility() {
   if (favoriteProductIds.length === 0) {
@@ -68,12 +102,23 @@ function toggleShareButtonVisibility() {
   }
 }
 
+
+
+
+
+
+
 function handleAddToFavorites(product) {
   return function (event) {
     event.stopPropagation();
     addToFavorites(product);
   };
 }
+
+
+
+
+
 
 async function fetchData() {
   try {
@@ -135,6 +180,14 @@ async function renderProductCards() {
   if (products.length > 0) {
     showProductDetails(products[0]);
   }
+
+
+
+
+
+
+
+
 }
 
 function trimText(text, maxLength) {
@@ -173,55 +226,11 @@ window.addEventListener("resize", function () {
   showProductDetails({});
 });
 
-// share whatsapp funcation
-// function shareToWhatsApp(product) {
-//   var imageData = product.image;
 
-//   var message = `Check out this property: ${product.title}\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${product.location}\n\n View more details: https://m2msearch.netlify.app/\n\n`;
 
-//   // Append the image as a data URI
-//   message += `<img src="data:image/jpeg;base64,${imageData}" alt="Property Image">`;
 
-//   // Encode the message
-//   var encodedMessage = encodeURIComponent(message);
 
-//   // Construct the WhatsApp share URL
-//   var whatsappUrl = "whatsapp://send?text=" + encodedMessage;
 
-//   // Navigate to the WhatsApp app
-//   window.location.href = whatsappUrl;
-// }
-
-// function shareToWhatsApp(product) {
-// const data = {
-//     messaging_product: "whatsapp",
-//     to: "923206525840", // Replace with the recipient's phone number
-//     type: "template",
-//     template: {
-//       name: "hello_world",
-//       language: {
-//         code: "en_US",
-//       },
-//       message,
-//     },
-//   };
-
-//   console.log(data.template[0]);
-
-//   axios
-//     .post("https://graph.facebook.com/v18.0/313348491854924/messages", data, {
-//       headers: {
-//         Authorization: `Bearer EAAz4CbyG9ZAcBOwmPmSNiUC7Y3OQe0nZCS6DaafI870donH8AB1zQVgmZCzMccrZCM2CRiVhZAXGvMnT6xi0H7J5wAgOHxF5jbLYtRjT0MoiqbrtDGTUJOGe7DE0HkQZCxeZCrhZCjhSPKypGZBn6LAviSVwF91Tu4qBZB56Xxk9UzHucWmbfbXgWGcnt4UrIYWVSehASIEaeGGFUNJdwoZA5IZD'`, // Replace with your access token
-//         "Content-Type": "application/json",
-//       },
-//     })
-//     .then((response) => {
-//       console.log("Message sent successfully:", response.data);
-//     })
-//     .catch((error) => {
-//       console.error("Error sending message:", error.response.data);
-//     });
-// }
 
 // share whatsapp funcation
 function shareToWhatsApp(product) {
@@ -300,7 +309,7 @@ function showProductDetails(product) {
                              )} / Year</h1>
                              <div class="d-flex align-items-center gap-3">
                              <h5 class="p-ref-no">${product.refNo}</h5>
-                             <button class="btn heart-btn" > <i class="fa-solid fa-heart"></i></div>
+                             <button class="btn heart-btn" > <i class="fa-regular fa-heart"></i></div>
                               </div>
                               </div>
                                 <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="/assets/img/location.svg" alt="">${
@@ -396,7 +405,7 @@ function showProductDetails(product) {
                 </div>
 
                 <div class=" col-3" id="btn-bottom">
-                <button class="export-btn btn"><img src="/assets/img/export.svg" alt="" style="width: 20px">Export</button>
+                <button class="export-btn btn"><img src="./assets/img/export.svg" alt="" style="width: 20px">Export</button>
                 <button class="btn share-btn export-btn" id="share-property" onclick="handleShare()">
                
                 <svg
@@ -516,11 +525,27 @@ Location: ${product.location}
 
     heart_btn.addEventListener("click", () => {
       addToFavorites(product);
+      heart_btn.style.color="red"
+
+      localStorage.setItem("fvt",JSON.stringify(heart_btn))
+     
+
       const offcanvasElement = new bootstrap.Offcanvas(
         document.getElementById("offcanvasBottom")
       );
       offcanvasElement.hide();
+      
     });
+
+    window.addEventListener('DOMContentLoaded',()=>{
+      const storeData = localStorage.getItem('fvt')
+      if(storeData){
+        return JSON.parse(heart_btn)
+      }else{
+        return []
+      }
+    })
+
 
     // Create map container
     const mapContainer = document.createElement("div");
@@ -879,8 +904,9 @@ async function performSearch(query) {
     const filteredProducts = products.filter((product) =>
       product.title.toLowerCase().includes(query.toLowerCase())
     );
-    
-   let y =  renderProductCards(filteredProducts);
+
+    console.log(filteredProducts)
+  renderProductCards(filteredProducts);
   } else {
     console.warn("Products data not available");
   }
@@ -892,7 +918,12 @@ searchInput.addEventListener("keyup", () => {
     performSearch(query);
   } else {
     console.log("Empty search query");
-    let x =renderProductCards([]);
+  renderProductCards([]);
     console.log(x) 
   }
 });
+
+
+
+
+
