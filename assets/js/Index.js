@@ -25,8 +25,8 @@ const renderFavoriteItems = () => {
 
   Items.innerHTML = '';
 
-  favoriteProductIds.forEach(productId => {
-    const favoriteItem = createFavoriteItem(productId);
+  favoriteProductIds.forEach(product => {
+    const favoriteItem = createFavoriteItem(product);
     Items.appendChild(favoriteItem);
   });
 
@@ -41,6 +41,8 @@ function createFavoriteItem(productId) {
   favoriteItem.classList.add("col-4");
   favoriteItem.innerHTML = ` <div class="favorite-item">
   <div class="favorite-detail">
+ 
+  
       <div class="detail-img">
           <img src="${productId.image}" alt="Product Image">
       </div>
@@ -59,7 +61,9 @@ function createFavoriteItem(productId) {
 </div>
   `;
 
- 
+  favoriteItem.addEventListener('click',()=>{
+    showProductDetails(productId)
+  })
   // Attach event listener to remove button
   const removeBtn = favoriteItem.querySelector(".remove-favorite-btn");
   removeBtn.addEventListener("click", function () {
@@ -72,9 +76,16 @@ function createFavoriteItem(productId) {
 
       toggleShareButtonVisibility();
     }
+
+
+
   });
 
  return favoriteItem; 
+
+
+
+
 }
 
 
@@ -84,12 +95,22 @@ function addToFavorites(product) {
 
   console.log(isProductInFavorites)
 
+ 
+  
   if (isProductInFavorites) {
     alert("This item is already in your favorites.");
     return;
   }
 
-  favoriteProductIds.push({id:product.id,price:product.price,image:product.image});
+  favoriteProductIds.push({
+    id:product.id,
+    price:product.price,
+    image:product.image,
+    refNo:product.refNo,
+    title:product.title,
+    feature:product.feature,
+    location:product.location
+  });
   localStorage.setItem("new_fvt_items", JSON.stringify(favoriteProductIds));
   renderFavoriteItems();
 
@@ -161,7 +182,7 @@ async function renderProductCards() {
         <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString(
           "en-DE"
         )}</p>
-        <p class="card-text d-flex gap-2"><img style="width: 15px" src="/assets/img/location.svg" alt=""><span class="trim">${
+        <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${
           product.location
         }</span></p>
       </div>
@@ -202,18 +223,18 @@ function trimText(text, maxLength) {
   return text;
 }
 
-function updateProductDetails(product) {
+function updateProductDetails(productId) {
   let trimmedTitle;
   if (window.innerWidth <= 576) {
-    trimmedTitle = trimText(product.title, 30);
+    trimmedTitle =  trimText(productId.title, 30); 
   } else if (window.innerWidth <= 992) {
-    trimmedTitle = trimText(product.title, 30);
+      trimmedTitle =  trimText(productId.title, 30); 
   } else if (window.innerWidth <= 768) {
-    trimmedTitle = trimText(product.title, 30);
+      trimmedTitle =  trimText(productId.title, 30); 
   } else {
-    trimmedTitle = product.title;
+    trimmedTitle = productId.title;
   }
-  console.log("Original Title:", product.title);
+  console.log("Original Title:", productId.title);
   console.log("Trimmed Title:", trimmedTitle);
 
   const titleElement = document.querySelector(".property-title");
@@ -317,7 +338,7 @@ function showProductDetails(product) {
                              <button class="btn heart-btn" > <i class="fa-regular fa-heart"></i></div>
                               </div>
                               </div>
-                                <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="/assets/img/location.svg" alt="">${
+                                <p class="card-text d-flex gap-2 pt-2"><i class="fas fa-map-marker-alt" style="width:15px"></i>${
                                   product.location
                                 }</p>
                             </div>
@@ -689,7 +710,7 @@ Location: ${product.location}
                      <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
                       </div>
                       </div>
-                        <p class="card-text d-flex gap-2 pt-2"><img style="width: 15px" src="../img/location.svg" alt="">${
+                        <p class="card-text d-flex gap-2 pt-2"><i class="fas fa-map-marker-alt" style="width:15px"></i>${
                           product.location
                         }</p>
                     </div>
@@ -764,7 +785,7 @@ Location: ${product.location}
 </div>
 </div>
 <div class="col-lg-4 col-md-12">
-<button class="export-btn btn"><img style="width: 25px" src="assest/img/export.svg" alt="">Export Document</button>
+<button class="export-btn btn"><img style="width: 25px" src="./assets/img/export.svg" alt="">Export Document</button>
 </div>
 </div>
 </section>            
@@ -893,14 +914,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // search properties
-document.addEventListener("DOMContentLoaded", () => {
-  const searchIcon = document.getElementById("search-icon");
-  const searchInput = document.getElementById("searchInput");
 
-  
-});
 
 const searchInput = document.getElementById("searchInput");
+const columnsContainer = document.getElementById("columnsContainer");
+let allProducts = [];
+
 
 async function performSearch(query) {
   const products = await fetchData();
@@ -910,8 +929,36 @@ async function performSearch(query) {
       product.title.toLowerCase().includes(query.toLowerCase())
     );
 
-    console.log(filteredProducts)
-  renderProductCards(filteredProducts);
+    columnsContainer.innerHTML = '';
+
+    if (filteredProducts.length > 0) {
+      filteredProducts.forEach((product) => {
+        const productElement = document.createElement('div');
+        productElement.innerHTML = `
+        <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
+        <div class="row align-items-center p-card-row">
+          <div class="col-sm-2 col-md-2 col-4 col-lg-4">
+            <img class = 'p-card-img' src=${
+              product.image
+            } class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-sm-10 col-md-10 col-8 col-lg-8">
+            <div class="card-body p-0">
+              <h6 class="trim card-title">${product.title}</h6>
+              <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
+              <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${
+                product.location
+              }</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+        `;
+        columnsContainer.appendChild(productElement);
+      });
+    } else {
+      columnsContainer.textContent = 'No matching products found.';
+    }
   } else {
     console.warn("Products data not available");
   }
@@ -922,9 +969,8 @@ searchInput.addEventListener("keyup", () => {
   if (query) {
     performSearch(query);
   } else {
-    console.log("Empty search query");
-  renderProductCards([]);
-    
+    let x=query;
+    console.log(x)
   }
 });
 
