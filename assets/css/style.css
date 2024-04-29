@@ -759,10 +759,28 @@ input:checked[type = 'checkbox'] {
 
     
 
+    /* load more */
+    #more-feature {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+  
+    }
+    .load-more:focus{
+        border: none;
+        box-shadow: none !important;
+    }
+    
+
     #mapMobile{
         height: 200px;
         margin-bottom: 60px !important;
     }
+
+
+ 
+
+
 }
 
 
