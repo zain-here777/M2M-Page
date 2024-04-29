@@ -64,6 +64,10 @@ function createFavoriteItem(productId) {
 
   favoriteItem.addEventListener('click',()=>{
     showProductDetails(productId)
+    if (window.innerWidth <= 576) {
+      const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
+      offcanvasElement.show();
+    }
   })
   // Attach event listener to remove button
   const removeBtn = favoriteItem.querySelector(".remove-favorite-btn");
@@ -176,12 +180,16 @@ async function renderProductCards(query = '') {
     product.location.toLowerCase().includes(query.toLowerCase())
   );
 
-  columnsContainer.innerHTML = ''; 
+  columnsContainer.innerHTML = `
+  <h2 class="search-result-heading">Search Results</h2>
+    <h5 class="pb-2 text-center text-secondary">356 Results</h5>
+  `; 
 
   filteredProducts.forEach((product) => {
     const column = document.createElement("div");
     column.classList.add("column");
     column.innerHTML = `
+    
       <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
         <div class="row align-items-center p-card-row">
           <div class="col-sm-2 col-md-2 col-4 col-lg-4">
