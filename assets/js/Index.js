@@ -162,60 +162,62 @@ async function fetchData() {
   }
 }
 
-async function renderProductCards() {
+
+
+
+
+async function renderProductCards(query = '') {
   const columnsContainer = document.getElementById("columnsContainer");
   const products = await fetchData();
 
-  products.forEach((product) => {
+  // Filter products based on search query
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(query.toLowerCase()) ||
+    product.location.toLowerCase().includes(query.toLowerCase())
+  );
+
+  columnsContainer.innerHTML = ''; 
+
+  filteredProducts.forEach((product) => {
     const column = document.createElement("div");
     column.classList.add("column");
     column.innerHTML = `
-            <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
-  <div class="row align-items-center p-card-row">
-    <div class="col-sm-2 col-md-2 col-4 col-lg-4">
-      <img class = 'p-card-img' src=${
-        product.image
-      } class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-sm-10 col-md-10 col-8 col-lg-8">
-      <div class="card-body p-0">
-        <h6 class="trim card-title">${product.title}</h6>
-        <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString(
-          "en-DE"
-        )}</p>
-        <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${
-          product.location
-        }</span></p>
+      <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
+        <div class="row align-items-center p-card-row">
+          <div class="col-sm-2 col-md-2 col-4 col-lg-4">
+            <img class='p-card-img' src="${product.image}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-sm-10 col-md-10 col-8 col-lg-8">
+            <div class="card-body p-0">
+              <h6 class="trim card-title">${product.title}</h6>
+              <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
+              <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${product.location}</span></p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-        `;
+    `;
+
     columnsContainer.appendChild(column);
 
     column.addEventListener("click", () => {
       showProductDetails(product);
+
+      // Optional: Show offcanvas element on small screens
       if (window.innerWidth <= 576) {
-        const offcanvasElement = new bootstrap.Offcanvas(
-          document.getElementById("offcanvasBottom")
-        );
+        const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
         offcanvasElement.show();
       }
     });
   });
-  // At least show the details of first product //
-  if (products.length > 0) {
-    showProductDetails(products[0]);
+
+  // Show details of the first product if available
+  if (filteredProducts.length > 0) {
+    showProductDetails(filteredProducts[0]);
   }
-
-
-
-
-
-
-
-
 }
+
+
 
 function trimText(text, maxLength) {
   if (text.length > maxLength) {
@@ -931,61 +933,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 const searchInput = document.getElementById("searchInput");
-const columnsContainer = document.getElementById("columnsContainer");
-let allProducts = [];
-
-
-async function performSearch(query) {
-  const products = await fetchData();
-
-  if (products && products.length > 0) {
-    const filteredProducts = products.filter((product) =>
-      product.title.toLowerCase().includes(query.toLowerCase())
-    );
-
-    columnsContainer.innerHTML = '';
-
-    if (filteredProducts.length > 0) {
-      filteredProducts.forEach((product) => {
-        const productElement = document.createElement('div');
-        productElement.innerHTML = `
-        <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
-        <div class="row align-items-center p-card-row">
-          <div class="col-sm-2 col-md-2 col-4 col-lg-4">
-            <img class = 'p-card-img' src=${
-              product.image
-            } class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-sm-10 col-md-10 col-8 col-lg-8">
-            <div class="card-body p-0">
-              <h6 class="trim card-title">${product.title}</h6>
-              <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
-              <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${
-                product.location
-              }</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-        `;
-        columnsContainer.appendChild(productElement);
-      });
-    } else {
-      columnsContainer.textContent = 'No matching products found.';
-    }
-  } else {
-    console.warn("Products data not available");
-  }
-}
 
 searchInput.addEventListener("keyup", () => {
   const query = searchInput.value.trim();
-  if (query) {
-    performSearch(query);
-  } else {
-    columnsContainer.innerHTML =query
-  }
+  if(query){
+  renderProductCards(query);
+}
 });
+
 
 
 
