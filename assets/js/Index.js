@@ -25,8 +25,8 @@ const renderFavoriteItems = () => {
 
   Items.innerHTML = '';
 
-  favoriteProductIds.forEach(product => {
-    const favoriteItem = createFavoriteItem(product);
+  favoriteProductIds.forEach(productId => {
+    const favoriteItem = createFavoriteItem(productId);
     Items.appendChild(favoriteItem);
   });
 
@@ -35,6 +35,7 @@ const renderFavoriteItems = () => {
 
 function createFavoriteItem(productId) {
   
+  console.log(productId)
 
   const favoriteItem = document.createElement("div");
   favoriteItem.classList.add("col-lg-1");
@@ -250,6 +251,13 @@ function isMobileView() {
 // Handle window resize event to update the view
 window.addEventListener("resize", function () {
   showProductDetails({});
+
+    if (window.innerWidth <= 576) {
+        const offcanvasElement = new bootstrap.Offcanvas(
+          document.getElementById("offcanvasBottom")
+        );
+        offcanvasElement.show();
+      } 
 });
 
 
@@ -704,7 +712,7 @@ Location: ${product.location}
      <div class="property-detail">
                      <div class="price pt-3">
                      <div class="d-flex justify-content-between align-items-center">
-                     <h1>€${product.price.toLocaleString("en-DE")} / Year</h1>
+                     <h1> €${product.price.toLocaleString("en-DE")} / Year</h1>
                      <div class="d-flex align-items-center gap-3">
                      <h5 class="p-ref-no">${product.refNo}</h5>
                      <button class="btn heart-btn"> <i class="fa-solid fa-heart"></i></div>
@@ -801,6 +809,12 @@ Location: ${product.location}
     addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
   }
 }
+
+
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
   renderProductCards();
