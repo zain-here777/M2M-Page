@@ -66,19 +66,22 @@ function createFavoriteItem(productId) {
     showProductDetails(productId)
     if (window.innerWidth <= 576) {
       const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
-      offcanvasElement.show();
+     offcanvasElement.show();
     }
   })
   // Attach event listener to remove button
   const removeBtn = favoriteItem.querySelector(".remove-favorite-btn");
-  removeBtn.addEventListener("click", function () {
+  removeBtn.addEventListener("click", function (event) {
     const productIds = productId.id;
+    event.stopPropagation();
     const index = favoriteProductIds.indexOf(productId);
     if (index !== -1) {
       favoriteProductIds.splice(index, 1);
       localStorage.setItem("new_fvt_items", JSON.stringify(favoriteProductIds));
       renderFavoriteItems(); 
 
+      const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
+    offcanvasElement.hide();
       toggleShareButtonVisibility();
     }
 
