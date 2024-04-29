@@ -969,8 +969,7 @@ searchInput.addEventListener("keyup", () => {
   if (query) {
     performSearch(query);
   } else {
-    let x=query;
-    console.log(x)
+    columnsContainer.innerHTML =query
   }
 });
 
