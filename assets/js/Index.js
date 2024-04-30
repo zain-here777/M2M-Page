@@ -173,26 +173,36 @@ async function fetchData() {
 
 
 
+
+
 async function renderProductCards(query = '') {
   const columnsContainer = document.getElementById("columnsContainer");
   const products = await fetchData();
 
-  // Filter products based on search query
+  // Filter products based on search query (title or location)
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(query.toLowerCase()) ||
     product.location.toLowerCase().includes(query.toLowerCase())
   );
 
+  // Update columnsContainer innerHTML to display search results header
   columnsContainer.innerHTML = `
-  <h2 class="search-result-heading">Search Results</h2>
-    <h5 class="pb-2 text-center text-secondary">356 Results</h5>
-  `; 
+    <h2 class="search-result-heading">Search Results</h2>
+    <h5 class="pb-2 text-center text-secondary">${filteredProducts.length} Results</h5>
+  `;
+
+  // Clear existing content in columnsContainer before rendering new products
+  columnsContainer.innerHTML = '';
+
+  // Render filtered products as product cards
+  if(filteredProducts.length === 0){
+    columnsContainer.innerHTML = `no property are matched`
+  }else{
 
   filteredProducts.forEach((product) => {
     const column = document.createElement("div");
     column.classList.add("column");
     column.innerHTML = `
-    
       <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
         <div class="row align-items-center p-card-row">
           <div class="col-sm-2 col-md-2 col-4 col-lg-4">
@@ -211,6 +221,7 @@ async function renderProductCards(query = '') {
 
     columnsContainer.appendChild(column);
 
+    // Add click event listener to show product details
     column.addEventListener("click", () => {
       showProductDetails(product);
 
@@ -221,12 +232,17 @@ async function renderProductCards(query = '') {
       }
     });
   });
+}
 
   // Show details of the first product if available
   if (filteredProducts.length > 0) {
     showProductDetails(filteredProducts[0]);
   }
 }
+
+
+
+
 
 
 
@@ -946,25 +962,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-
-
-
-// search properties
-
-
+// Event listener for search input
 const searchInput = document.getElementById("searchInput");
-
 searchInput.addEventListener("keyup", () => {
   const query = searchInput.value.trim();
-  if(query){
   renderProductCards(query);
-}
 });
-
-
 
 
 

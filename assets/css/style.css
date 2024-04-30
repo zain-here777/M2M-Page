@@ -236,6 +236,7 @@ input:checked[type = 'checkbox'] {
 .contact-form .form-control::-ms-input-placeholder {
     color: #aeb4b9;
     font-weight: 500;
+    
 }
 
 .contact-form .form-control:focus {
@@ -571,6 +572,8 @@ input:checked[type = 'checkbox'] {
 .form-control {
     box-shadow: none !important;
     border-color: #cfcfcf !important;
+    box-shadow: inset 0px 5px 10px 0px rgb(9 9 9 / 33%)
+    !important;
 }
 
 .comparison-container {
@@ -612,7 +615,7 @@ input:checked[type = 'checkbox'] {
 @media (max-width: 576px) {
     #share-property{
         width: 100%;
-        margin-top: 10px;
+        margin-bottom: 10px;
     }
     #fav-items{
         overflow-x:scroll;
