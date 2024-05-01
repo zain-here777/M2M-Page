@@ -613,9 +613,9 @@ input:checked[type = 'checkbox'] {
 }
 
 @media (max-width: 576px) {
-    #share-property{
+    .share-btn-fvrt{
         width: 100%;
-        margin-bottom: 10px;
+        margin: 10px 0px;
     }
     #fav-items{
         overflow-x:scroll;
