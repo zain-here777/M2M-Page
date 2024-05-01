@@ -305,12 +305,12 @@ function shareToWhatsApp(product) {
     product.location
   }\n\n View more details: https://m2msearch.netlify.app/\n\n`;
 
-  message += `<img src="data:image/jpeg;base64,${imageData}" alt="Property Image">`;
+
 
   // Encode the message
   var encodedMessage = encodeURIComponent(message);
 
-  var whatsappUrl = "whatsapp://send?text=" + encodedMessage;
+  var whatsappUrl = `whatsapp://send?text= +${encodedMessage}&amp;image=${imageData}`;
 
   // Navigate to the WhatsApp app
   window.location.href = whatsappUrl;
