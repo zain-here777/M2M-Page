@@ -329,6 +329,9 @@ function showProductDetails(product) {
                 <div>
                     <h2 class="property-title mb-2">${product.title}</h2>
                 </div>
+                <div>
+                <h5 class="p-ref-no">Ref No :${product.refNo}</h5>
+                </div>
                 <div class="add-fvrt">
                     <a href="#">
                         <!-- Place the favorite button here -->
@@ -371,7 +374,6 @@ function showProductDetails(product) {
                                "en-DE"
                              )} / Year</h1>
                              <div class="d-flex align-items-center gap-3">
-                             <h5 class="p-ref-no">${product.refNo}</h5>
                              <button class="btn heart-btn" > <i class="fa-regular fa-heart"></i></div>
                               </div>
                               </div>
