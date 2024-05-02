@@ -3,8 +3,6 @@ const shareBtn = document.getElementById("share-property");
 
 shareBtn.style.display = "none";
 
-
-
 let favoriteProductIds = [];
 
 function initializePage() {
@@ -295,26 +293,27 @@ window.addEventListener("resize", function () {
 
 
 
-// share whatsapp funcation
+// // share whatsapp funcation
 function shareToWhatsApp(product) {
+  console.log(product)
   var imageData = product.image;
+  var message = `🏡 *${product.title}*\n💰 Price: ${product.price}\n📍 Location: ${product.location}\n\n🔗 Details: 
+  ${product.features}\n\nView more details: https://m2msearch.netlify.app/\n`;
 
-  var message = `Check out this property: ${
-    product.title
-  }\nPrice: €${product.price.toLocaleString("en-DE")} / Year\nLocation: ${
-    product.location
-  }\n\n View more details: https://m2msearch.netlify.app/\n\n`;
-
-
-
-  // Encode the message
+  // Encode the message and image URL
   var encodedMessage = encodeURIComponent(message);
+  var encodedImageUrl = encodeURIComponent(imageData);
 
-  var whatsappUrl = `whatsapp://send?text= +${encodedMessage}&amp;image=${imageData}`;
+  // Construct the WhatsApp share URL
+  var whatsappUrl = `whatsapp://send?text=${encodedMessage}&image=${encodedImageUrl}`;
 
-  // Navigate to the WhatsApp app
+  // Open the WhatsApp app with the pre-filled message and image
   window.location.href = whatsappUrl;
 }
+
+
+
+
 
 function showProductDetails(product) {
   if (isMobileView()) {
