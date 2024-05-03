@@ -293,24 +293,61 @@ window.addEventListener("resize", function () {
 
 
 
-// // share whatsapp funcation
+// share whatsapp funcation
+// function shareToWhatsApp(product) {
+//   console.log(product)
+//   var imageData = product.image;
+//   var message = `🏡 *${product.title}*\n💰 Price: ${product.price}\n📍 Location: ${product.location}\n\n🔗 Details: 
+//   ${product.features}\n\nView more details: https://m2msearch.netlify.app/\n`;
+
+//   console.log(imageData)
+
+//   // Encode the message and image URL
+//   var encodedMessage = encodeURIComponent(message);
+
+//   // Construct the WhatsApp share URL
+//   var whatsappUrl = `whatsapp://send?text=${encodedMessage}&media=${encodeURIComponent(imageData)}`;
+
+//   // Open the WhatsApp app with the pre-filled message and image
+//   window.location.href = whatsappUrl;
+// }
+
+
+
+
+
+// share whatsapp funcation
+
 function shareToWhatsApp(product) {
-  console.log(product)
-  var imageData = product.image;
-  var message = `🏡 *${product.title}*\n💰 Price: ${product.price}\n📍 Location: ${product.location}\n\n🔗 Details: 
-  ${product.features}\n\nView more details: https://m2msearch.netlify.app/\n`;
+  // Extract product details
+  const { title, price, location, features, image } = product;
 
-  console.log(imageData)
+  // Construct the message
+  const message = `🏡 *${title}*\n💰 Price: €${price.toLocaleString("en-DE")} / Year\n📍 Location: ${location}\n\n🔗 Details: ${features}\n\nView more details: https://m2msearch.netlify.app/`;
 
-  // Encode the message and image URL
-  var encodedMessage = encodeURIComponent(message);
+  // Encode the message
+  const encodedMessage = encodeURIComponent(message);
 
-  // Construct the WhatsApp share URL
-  var whatsappUrl = `whatsapp://send?text=${encodedMessage}&media=${encodeURIComponent(imageData)}`;
+  // Construct the WhatsApp URL with text and image
+  const whatsappUrl = `whatsapp://send?text=${encodedMessage}&media=${image}`;
 
   // Open the WhatsApp app with the pre-filled message and image
   window.location.href = whatsappUrl;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
