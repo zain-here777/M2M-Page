@@ -300,17 +300,17 @@ function shareToWhatsApp(product) {
   var message = `🏡 *${product.title}*\n💰 Price: ${product.price}\n📍 Location: ${product.location}\n\n🔗 Details: 
   ${product.features}\n\nView more details: https://m2msearch.netlify.app/\n`;
 
+  console.log(imageData)
+
   // Encode the message and image URL
   var encodedMessage = encodeURIComponent(message);
-  var encodedImageUrl = encodeURIComponent(imageData);
 
   // Construct the WhatsApp share URL
-  var whatsappUrl = `whatsapp://send?text=${encodedMessage}&image=${encodedImageUrl}`;
+  var whatsappUrl = `whatsapp://send?text=${encodedMessage}&media=${encodeURIComponent(imageData)}`;
 
   // Open the WhatsApp app with the pre-filled message and image
   window.location.href = whatsappUrl;
 }
-
 
 
 
