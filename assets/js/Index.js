@@ -323,6 +323,9 @@ function shareToWhatsApp(product) {
 }
 
 function showProductDetails(product) {
+  const message = document.getElementById('message')
+  message.placeholder = `Title: ${product.title}\nRefNo: ${product.refNo}`;
+ 
   if (isMobileView()) {
     // Show product details in offcanvas for mobile view
     const offcanvasBody = document
@@ -830,6 +833,12 @@ Location: ${product.location}
 <button class="export-btn btn"><img style="width: 25px" src="./assets/img/export.svg" alt="">Export Document</button>
 </div>
 </div>
+
+
+
+
+
+
 </section>
             
         `;
@@ -956,15 +965,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// contact us from
-let products = "hlo";
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Get the textarea element by its id
-  const messageTextarea = document.getElementById("message");
-
-  messageTextarea.placeholder = products;
-});
 
 // Event listener for search input
 const searchInput = document.getElementById("searchInput");
@@ -972,3 +973,10 @@ searchInput.addEventListener("keyup", () => {
   const query = searchInput.value.trim();
   renderProductCards(query);
 });
+
+
+
+
+
+
+

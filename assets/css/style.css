@@ -437,7 +437,10 @@ input:checked[type = 'checkbox'] {
 }
 
 /* fav button data */
-
+#fav-items{
+    flex: 0.7 !important;
+    /* background-color: red; */
+}
 .favorite-item {
     border: 1px solid #ececec;
     padding: 10px;
@@ -445,6 +448,7 @@ input:checked[type = 'checkbox'] {
     border-radius: 10px;
     position: relative;
     max-width: 100px;
+    
   
 }
 
@@ -869,6 +873,9 @@ input:checked[type = 'checkbox'] {
 
 
 }
+
+
+
 
 
 
