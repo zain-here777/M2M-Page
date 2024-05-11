@@ -669,16 +669,26 @@ input:checked[type = 'checkbox'] {
     #navbar {
         display: none;
     }
-  
+    .fixed-container{
+        height: 60vh;
+    }
+    .columns-container {
+        height: 30vh;
+    }
 
 
 }
 
-@media (max-width: 768px) {
-   
+@media (max-width:767px){
+    body{
+        overflow: auto;
+    }
 }
 
 @media (max-width: 576px) {
+    body{
+        overflow: auto;
+    }
     .share-btn-fvrt{
         width: 100%;
         margin: 10px 0px;
