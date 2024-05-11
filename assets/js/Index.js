@@ -6,13 +6,13 @@ shareBtn.style.display = "none";
 let favoriteProductIds = [];
 
 function initializePage() {
-  const storeData = localStorage.getItem('new_fvt_items');
+  const storeData = localStorage.getItem("new_fvt_items");
 
   if (storeData) {
     favoriteProductIds = JSON.parse(storeData);
   }
 
-  console.log('Retrieved favorite product IDs:', favoriteProductIds);
+  console.log("Retrieved favorite product IDs:", favoriteProductIds);
   renderFavoriteItems();
 }
 
@@ -21,9 +21,9 @@ window.onload = initializePage;
 const renderFavoriteItems = () => {
   const Items = document.getElementById("fav-items");
 
-  Items.innerHTML = '';
+  Items.innerHTML = "";
 
-  favoriteProductIds.forEach(productId => {
+  favoriteProductIds.forEach((productId) => {
     const favoriteItem = createFavoriteItem(productId);
     Items.appendChild(favoriteItem);
   });
@@ -45,77 +45,76 @@ function createFavoriteItem(productId) {
           </div>
           <div class="d-flex align-items-center justify-content-between">
               <p style="font-size: 14px; color: orange">€${productId.price.toLocaleString(
-                  "en-DE"
+                "en-DE"
               )}</p>
           </div>
       </div>
       <div class="remove-fvrt">
           <a  class="nav-link remove-favorite-btn" data-product-id="${
-              productId.id
+            productId.id
           }" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
       </div>
   </div>
   `;
 
-  favoriteItem.addEventListener('click', () => {
-      showProductDetails(productId);
-      if (window.innerWidth <= 576) {
-          const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
-          offcanvasElement.show();
-      }
+  favoriteItem.addEventListener("click", () => {
+    showProductDetails(productId);
+    if (window.innerWidth <= 576) {
+      const offcanvasElement = new bootstrap.Offcanvas(
+        document.getElementById("offcanvasBottom")
+      );
+      offcanvasElement.show();
+    }
   });
 
   // Attach event listener to remove button
   const removeBtn = favoriteItem.querySelector(".remove-favorite-btn");
   removeBtn.addEventListener("click", function (event) {
-      const productIds = productId.id;
-      event.stopPropagation();
-      const index = favoriteProductIds.indexOf(productId);
-      if (index !== -1) {
-          favoriteProductIds.splice(index, 1);
-          localStorage.setItem("new_fvt_items", JSON.stringify(favoriteProductIds));
-          renderFavoriteItems();
+    const productIds = productId.id;
+    event.stopPropagation();
+    const index = favoriteProductIds.indexOf(productId);
+    if (index !== -1) {
+      favoriteProductIds.splice(index, 1);
+      localStorage.setItem("new_fvt_items", JSON.stringify(favoriteProductIds));
+      renderFavoriteItems();
 
-          const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
-          offcanvasElement.hide();
-          toggleShareButtonVisibility();
-      }
+      const offcanvasElement = new bootstrap.Offcanvas(
+        document.getElementById("offcanvasBottom")
+      );
+      offcanvasElement.hide();
+      toggleShareButtonVisibility();
+    }
   });
 
   return favoriteItem;
 }
 
-
-
 function addToFavorites(product) {
-  const isProductInFavorites = favoriteProductIds.some(item => item.id === product.id);
+  const isProductInFavorites = favoriteProductIds.some(
+    (item) => item.id === product.id
+  );
 
-  console.log(isProductInFavorites)
+  console.log(isProductInFavorites);
 
- 
-  
   if (isProductInFavorites) {
     alert("This item is already in your favorites.");
     return;
   }
 
   favoriteProductIds.push({
-    id:product.id,
-    price:product.price,
-    image:product.image,
-    refNo:product.refNo,
-    title:product.title,
-    feature:product.feature,
-    location:product.location
+    id: product.id,
+    price: product.price,
+    image: product.image,
+    refNo: product.refNo,
+    title: product.title,
+    feature: product.feature,
+    location: product.location,
   });
   localStorage.setItem("new_fvt_items", JSON.stringify(favoriteProductIds));
   renderFavoriteItems();
 
   toggleShareButtonVisibility();
 }
-
-
-
 
 function toggleShareButtonVisibility() {
   if (favoriteProductIds.length === 0) {
@@ -125,23 +124,12 @@ function toggleShareButtonVisibility() {
   }
 }
 
-
-
-
-
-
-
 function handleAddToFavorites(product) {
   return function (event) {
     event.stopPropagation();
     addToFavorites(product);
   };
 }
-
-
-
-
-
 
 async function fetchData() {
   try {
@@ -158,24 +146,19 @@ async function fetchData() {
   }
 }
 
-
-
-
-
-
-
-async function renderProductCards(query = '') {
+async function renderProductCards(query = "") {
   const columnsContainer = document.getElementById("columnsContainer");
   const products = await fetchData();
 
   // Filter products based on search query (title or location)
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(query.toLowerCase()) ||
-    product.location.toLowerCase().includes(query.toLowerCase())
+  const filteredProducts = products.filter(
+    (product) =>
+      product.title.toLowerCase().includes(query.toLowerCase()) ||
+      product.location.toLowerCase().includes(query.toLowerCase())
   );
 
   // Clear existing content in columnsContainer before rendering new products
-  columnsContainer.innerHTML = '';
+  columnsContainer.innerHTML = "";
 
   // Append initial content
   columnsContainer.innerHTML = `
@@ -184,9 +167,9 @@ async function renderProductCards(query = '') {
   `;
 
   // Render filtered products as product cards
-  if(filteredProducts.length === 0){
-    columnsContainer.innerHTML += `no property are matched`
-  }else{
+  if (filteredProducts.length === 0) {
+    columnsContainer.innerHTML += `no property are matched`;
+  } else {
     filteredProducts.forEach((product) => {
       const column = document.createElement("div");
       column.classList.add("column");
@@ -195,13 +178,19 @@ async function renderProductCards(query = '') {
         <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
           <div class="row align-items-center p-card-row">
             <div class="col-sm-2 col-md-2 col-4 col-lg-4">
-              <img class='p-card-img' src="${product.image}" class="img-fluid rounded-start" alt="...">
+              <img class='p-card-img' src="${
+                product.image
+              }" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-sm-10 col-md-10 col-8 col-lg-8">
               <div class="card-body p-0 p-md-none">
                 <h6 class="trim card-title">${product.title}</h6>
-                <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
-                <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${product.location}</span></p>
+                <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString(
+                  "en-DE"
+                )}</p>
+                <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${
+                  product.location
+                }</span></p>
               </div>
             </div>
           </div>
@@ -216,7 +205,9 @@ async function renderProductCards(query = '') {
 
         // Optional: Show offcanvas element on small screens
         if (window.innerWidth <= 576) {
-          const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
+          const offcanvasElement = new bootstrap.Offcanvas(
+            document.getElementById("offcanvasBottom")
+          );
           offcanvasElement.show();
         }
       });
@@ -229,12 +220,6 @@ async function renderProductCards(query = '') {
   }
 }
 
-
-
-
-
-
-
 function trimText(text, maxLength) {
   if (text.length > maxLength) {
     return text.substring(0, maxLength) + "...";
@@ -245,19 +230,16 @@ function trimText(text, maxLength) {
 function updateProductDetails(productId) {
   let trimmedTitle;
   if (window.innerWidth <= 576) {
-    trimmedTitle =  trimText(productId.title, 30); 
+    trimmedTitle = trimText(productId.title, 30);
   } else if (window.innerWidth <= 992) {
-      trimmedTitle =  trimText(productId.title, 30); 
-  }else if (window.innerWidth <= 1024) {
-    trimmedTitle =  trimText(productId.title, 30); 
-}
-   else if (window.innerWidth <= 768) {
-      trimmedTitle =  trimText(productId.title, 30); 
-  }
-  else if (window.innerWidth <= 1400) {
-    trimmedTitle =  trimText(productId.title, 35); 
-}
-   else {
+    trimmedTitle = trimText(productId.title, 30);
+  } else if (window.innerWidth <= 1024) {
+    trimmedTitle = trimText(productId.title, 30);
+  } else if (window.innerWidth <= 768) {
+    trimmedTitle = trimText(productId.title, 30);
+  } else if (window.innerWidth <= 1400) {
+    trimmedTitle = trimText(productId.title, 35);
+  } else {
     trimmedTitle = productId.title;
   }
   console.log("Original Title:", productId.title);
@@ -277,25 +259,19 @@ function isMobileView() {
 window.addEventListener("resize", function () {
   showProductDetails({});
 
-    if (window.innerWidth <= 576) {
-        const offcanvasElement = new bootstrap.Offcanvas(
-          document.getElementById("offcanvasBottom")
-        );
-        offcanvasElement.show();
-      } 
+  if (window.innerWidth <= 576) {
+    const offcanvasElement = new bootstrap.Offcanvas(
+      document.getElementById("offcanvasBottom")
+    );
+    offcanvasElement.show();
+  }
 });
-
-
-
-
-
-
 
 // share whatsapp funcation
 // function shareToWhatsApp(product) {
 //   console.log(product)
 //   var imageData = product.image;
-//   var message = `🏡 *${product.title}*\n💰 Price: ${product.price}\n📍 Location: ${product.location}\n\n🔗 Details: 
+//   var message = `🏡 *${product.title}*\n💰 Price: ${product.price}\n📍 Location: ${product.location}\n\n🔗 Details:
 //   ${product.features}\n\nView more details: https://m2msearch.netlify.app/\n`;
 
 //   console.log(imageData)
@@ -310,33 +286,35 @@ window.addEventListener("resize", function () {
 //   window.location.href = whatsappUrl;
 // }
 
-
-
-
-
 // share whatsapp funcation
 
 function shareToWhatsApp(product) {
   const { title, price, location, features, image } = product;
 
-  const message = `🏡 *${title}*\n💰 Price: €${price.toLocaleString("en-DE")} / Year\n📍 Location: ${location}\n\n🔗 Details: ${features}\n\nView more details: https://m2msearch.netlify.app/`;
+  const message = `🏡 *${title}*\n💰 Price: €${price.toLocaleString(
+    "en-DE"
+  )} / Year\n📍 Location: ${location}\n\n🔗 Details: ${features}\n\nView more details: https://m2msearch.netlify.app/`;
   const encodedMessage = encodeURIComponent(message);
   const encodedImage = encodeURIComponent(image);
 
   const whatsappUrl = `whatsapp://send?text=${encodedMessage}&media=${encodedImage}`;
 
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  ) {
     window.location.href = whatsappUrl;
   } else {
-    console.log('Please use a mobile device with WhatsApp installed to share this content.');
+    console.log(
+      "Please use a mobile device with WhatsApp installed to share this content."
+    );
   }
 }
 
-
-
 function showProductDetails(product) {
   if (isMobileView()) {
-      // Show product details in offcanvas for mobile view
+    // Show product details in offcanvas for mobile view
     const offcanvasBody = document
       .getElementById("offcanvasBottom")
       .querySelector(".offcanvas-body");
@@ -557,7 +535,7 @@ Location: ${product.location}
 
       // whatsapp
       const whatsappBtn = document.createElement("button");
-      whatsappBtn.classList.add("btn", "share-btn" , "export-btn");
+      whatsappBtn.classList.add("btn", "share-btn", "export-btn");
 
       // Create and append the SVG icon
       const svgIcon = document.createElementNS(
@@ -608,27 +586,24 @@ Location: ${product.location}
 
     heart_btn.addEventListener("click", () => {
       addToFavorites(product);
-      heart_btn.style.color="red"
+      heart_btn.style.color = "red";
 
-      localStorage.setItem("fvt",JSON.stringify(heart_btn))
-     
+      localStorage.setItem("fvt", JSON.stringify(heart_btn));
 
       const offcanvasElement = new bootstrap.Offcanvas(
         document.getElementById("offcanvasBottom")
       );
       offcanvasElement.hide();
-      
     });
 
-    window.addEventListener('DOMContentLoaded',()=>{
-      const storeData = localStorage.getItem('fvt')
-      if(storeData){
-        return JSON.parse(heart_btn)
-      }else{
-        return []
+    window.addEventListener("DOMContentLoaded", () => {
+      const storeData = localStorage.getItem("fvt");
+      if (storeData) {
+        return JSON.parse(heart_btn);
+      } else {
+        return [];
       }
-    })
-
+    });
 
     // Create map container
     const mapContainer = document.createElement("div");
@@ -845,7 +820,8 @@ Location: ${product.location}
 <button class="export-btn btn"><img style="width: 25px" src="./assets/img/export.svg" alt="">Export Document</button>
 </div>
 </div>
-</section>            
+</section>
+            
         `;
 
     updateProductDetails(product);
@@ -858,12 +834,6 @@ Location: ${product.location}
     addFvrtDiv.insertBefore(favoriteBtn, addFvrtDiv.firstChild);
   }
 }
-
-
-
-
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
   renderProductCards();
@@ -957,30 +927,37 @@ document.addEventListener("DOMContentLoaded", function () {
   loadMoreBtn.addEventListener("click", function () {
     if (loadMoreBtn.textContent === "Load More") {
       moreFeatures.innerHTML = `
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="Garage" name="Garage">
-                <label class="form-check-label" for="Garage">Garage</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="parking" name="parking">
-                <label class="form-check-label" for="parking">Parking</label>
-            </div>
+      <div class="form-check col-lg-6">
+      <input class="form-check-input" type="checkbox" value="" id="Garage" name="Garage">
+      <label class="form-check-label" for="Garage">Garage</label>
+  </div>
+  <div class="form-check col-lg-6">
+      <input class="form-check-input" type="checkbox" value="" id="parking" name="parking">
+      <label class="form-check-label" for="parking">Parking</label>
+  </div>
             <!-- Add more checkboxes here -->
             `;
       loadMoreBtn.textContent = "Load Less";
       moreFeatures.style.maxHeight = moreFeatures.scrollHeight + "px";
+
+
+      
     } else {
-      moreFeatures.style.maxHeight = "0"; 
+      moreFeatures.style.maxHeight = "0";
       loadMoreBtn.textContent = "Load More";
     }
   });
 });
 
+// contact us from
+let products = "hlo";
 
+document.addEventListener("DOMContentLoaded", function () {
+  // Get the textarea element by its id
+  const messageTextarea = document.getElementById("message");
 
-
-
-
+  messageTextarea.placeholder = products;
+});
 
 // Event listener for search input
 const searchInput = document.getElementById("searchInput");
@@ -988,7 +965,3 @@ searchInput.addEventListener("keyup", () => {
   const query = searchInput.value.trim();
   renderProductCards(query);
 });
-
-
-
-

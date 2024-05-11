@@ -41,13 +41,13 @@
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class=" col-lg-2 col-md-3" id="filter">
+        <div class=" col-lg-2 col-md-3 " id="filter">
             <h3 class="pt-3">Welcome, Amanda</h3>
             <p class="pt-2">Tue, 01 April 2024</p>
             <div class="filter-container pt-4" id="filter-container">
                 <h5 class="pb-4">Filter</h5>
                 <form action="">
-                    <select class="form-select" id="locationsidd" name="locations" style="max-width: 200px;"
+                    <select class="form-select" id="locationsidd" name="locations" style="min-width: 200px;"
                             class="elementor-field-textual">
                         <option value="">Locations</option>
                         <option value="Marbella East">Marbella East</option>
@@ -110,57 +110,60 @@
                             </div>
                         </div>
                     </div>
-                    <div >
+                    <div>
                         <h6 class="pb-2 pt-3">Type of Place</h6>
                         <div class="container-fluid">
                             <div class="row ">
-                                <div class="form-check col-lg-12">
+                                <div class="form-check col-lg-6 ">
                                     <input class="form-check-input" type="checkbox" value="" id="allproperty"
                                            name="allproperty">
-                                    <label class="form-check-label" for="allproperty">
+                                    <label class="form-check-label px-1" for="allproperty" >
                                         All
                                     </label>
                                 </div>
-                                <div class="form-check col-lg-12">
-                                    <input class="form-check-input" type="checkbox" value="" id="penthouse"
-                                           name="penthouse">
-                                    <label class="form-check-label" for="penthouse">
-                                        Penthouse
-                                    </label>
-                                </div>
-                                <div class="form-check col-lg-12">
-                                    <input class="form-check-input" type="checkbox" value="" id="townhouse"
-                                           name="townhouse">
-                                    <label class="form-check-label" for="townhouse">
-                                        Townhouse
-                                    </label>
-                                </div>
-                                <div class="form-check col-lg-12">
-                                    <input class="form-check-input" type="checkbox" value="" id="apartment"
-                                           name="apartment">
-                                    <label class="form-check-label" for="apartment">
-                                        Apartment
-                                    </label>
-                                </div>
-                                <div class="form-check col-lg-12">
+                                <div class="form-check col-lg-6 ">
                                     <input class="form-check-input" type="checkbox" value="" id="comercial"
                                            name="comercial">
                                     <label class="form-check-label" for="comercial">
                                         Comercial
                                     </label>
                                 </div>
-                                <div class="form-check col-lg-12">
+                                <div class="form-check col-lg-6 ">
                                     <input class="form-check-input" type="checkbox" value="" id="house" name="house">
                                     <label class="form-check-label" for="house">
                                         House
                                     </label>
                                 </div>
-                                <div class="form-check col-lg-12">
+                                <div class="form-check col-lg-6 ">
+                                    <input class="form-check-input" type="checkbox" value="" id="penthouse"
+                                           name="penthouse">
+                                    <label class="form-check-label " for="penthouse">
+                                        Penthouse
+                                    </label>
+                                </div>
+                                <div class="form-check col-lg-6 ">
                                     <input class="form-check-input" type="checkbox" value="" id="plot" name="plot">
                                     <label class="form-check-label" for="plot">
                                         Plot
                                     </label>
                                 </div>
+                                <div class="form-check col-lg-6 ">
+                                    <input class="form-check-input" type="checkbox" value="" id="townhouse"
+                                           name="townhouse">
+                                    <label class="form-check-label" for="townhouse">
+                                        Townhouse
+                                    </label>
+                                </div>
+                                <div class="form-check col-lg-6 ">
+                                    <input class="form-check-input" type="checkbox" value="" id="apartment"
+                                           name="apartment">
+                                    <label class="form-check-label" for="apartment">
+                                        Apartment
+                                    </label>
+                                </div>
+                               
+                               
+                               
                             </div>
                         </div>
 
@@ -190,39 +193,39 @@
                     <div>
 
                     </div>
-                    <div>
+                    <div class="row">
                         <h6 class="pb-2 pt-3">Features</h6>
-                        <div class="form-check">
+                        <div class="form-check col-lg-6">
                             <input class="form-check-input" type="checkbox" value="" id="Bargain" name="bargain">
                             <label class="form-check-label" for="Bargain">
                                 Bargain
                             </label>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check col-lg-6">
                             <input class="form-check-input" type="checkbox" value="" id="Beachfront" name="beachFront">
                             <label class="form-check-label" for="Beachfront">
                                 Beachfront
                             </label>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check col-lg-6">
                             <input class="form-check-input" type="checkbox" value="" id="Golf" name="golf">
                             <label class="form-check-label" for="Golf">
                                 Golf View
                             </label>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check col-lg-6">
                             <input class="form-check-input" type="checkbox" value="" id="Gym" name="gym">
                             <label class="form-check-label" for="Gym">
                                 Gym
                             </label>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check col-lg-12">
                             <input class="form-check-input" type="checkbox" value="" id="HeatedPool" name="heatedPool">
                             <label class="form-check-label" for="HeatedPool">
                                 Heated Pool
                             </label>
                         </div>
-                        <div id="more-features">
+                        <div id="more-features" class="row">
 
                         </div>
                         <button class="load-more btn btn-primary mt-3" id="load-btn">Load More</button>
@@ -238,7 +241,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="columns-container col-lg-3 mb-5" id="columnsContainer">
+                <div class="columns-container col-lg-3" id="columnsContainer">
                     <h2 class="search-result-heading">Search Results</h2>
                     <h5 class="pb-2 text-center text-secondary">356 Results</h5>
                 </div>
@@ -516,4 +519,5 @@
 <script src="assets/js/FilterDetails.js"></script>
 <!-- <script src="assets/js/mobileView.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" ></script>
+
 </html>
