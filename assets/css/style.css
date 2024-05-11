@@ -517,7 +517,7 @@ input:checked[type = 'checkbox'] {
     overflow-y: auto;
     height: 100%;
     overflow-x: hidden;
-    /* padding-bottom: 120px; */
+    padding-bottom: 120px;
 }
 
 .fixed-container::-webkit-scrollbar {
