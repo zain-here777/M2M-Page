@@ -1,523 +1,749 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Cards</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-            crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-
-
-</head>
-<body>
-<nav class="navbar  navbar-expand-md bg-light" id="navbar" >
-    <div class="container-fluid">
-       <h2>Logo</h2>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md bg-light" id="navbar">
+      <div class="container-fluid">
+        <h2>Logo</h2>
         <div class="menu-icons">
-            <div class="search-wrapper">
-            <button class="btn fs-4"  id="search-icon">
-                <input type="text" id="searchInput"  class="form-control" placeholder="Search products..."  />
-
+          <div class="search-wrapper">
+            <button class="btn fs-4" id="search-icon">
+              <input
+                type="text"
+                id="searchInput"
+                class="form-control"
+                placeholder="Search products..."
+              />
             </button>
-            </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-        <button class="btn fs-4" id="filterBtn">
-            <i class="fa-solid fa-filter"></i>   
-        </button>
+          </div>
+          <button class="btn fs-4" id="filterBtn">
+            <i class="fa-solid fa-filter"></i>
+          </button>
+        </div>
       </div>
-</div>
-    
-</nav>
-<div class="container-fluid">
-    <div class="row">
-        <div class=" col-lg-2 col-md-3 " id="filter">
-            <h3 class="pt-3">Welcome, Amanda</h3>
-            <p class="pt-2">Tue, 01 April 2024</p>
-            <div class="filter-container pt-4" id="filter-container">
-                <h5 class="pb-4">Filter</h5>
-                <form action="">
-                    <select class="form-select" id="locationsidd" name="locations" style="min-width: 200px;"
-                            class="elementor-field-textual">
-                        <option value="">Locations</option>
-                        <option value="Marbella East">Marbella East</option>
-                        <option value="Altos de los Monteros">- Altos de los Monteros</option>
-                        <option value="Bahía de Marbella">- Bahía de Marbella</option>
-                        <option value="Cabopino">- Cabopino</option>
-                        <option value="El Rosario">- El Rosario</option>
-                        <option value="Elviria">- Elviria</option>
-                        <option value="La Mairena">- La Mairena</option>
-                        <option value="Las Chapas">- Las Chapas</option>
-                        <option value="Río Real">- Río Real</option>
-                        <option value="Santa Clara">- Santa Clara</option>
-                        <option value="Marbella Center">Marbella Center</option>
-                        <option value="Nagüeles">- Nagüeles</option>
-                        <option value="Sierra Blanca">- Sierra Blanca</option>
-                        <option value="The Golden Mile">- The Golden Mile</option>
-                        <option value="Marbella West">Marbella West</option>
-                        <option value="Aloha">- Aloha</option>
-                        <option value="Nueva Andalucía">- Nueva Andalucía</option>
-                        <option value="Puerto Banús">- Puerto Banús</option>
-                        <option value="San Pedro de Alcántara">- San Pedro de Alcántara</option>
-                        <option value="Estepona">Estepona</option>
-                        <option value="Atalaya">- Atalaya</option>
-                        <option value="Costalita">- Costalita</option>
-                        <option value="New Golden Mile">- New Golden Mile</option>
-                        <option value="Selwo">- Selwo</option>
-                        <option value="Benahavís">Benahavís</option>
-                        <option value="La Quinta">- La Quinta</option>
-                        <option value="La Zagaleta">- La Zagaleta</option>
-                        <option value="Los Flamingos">- Los Flamingos</option>
-                        <option value="Benalmadena">Benalmadena</option>
-                        <option value="Fuengirola">Fuengirola</option>
-                        <option value="Mijas">Mijas</option>
-                        <option value="Calahonda">- Calahonda</option>
-                        <option value="Calanova Golf">- Calanova Golf</option>
-                        <option value="Riviera del Sol">- Riviera del Sol</option>
-                    </select>
-                    <div >
-                        <h6 class="pb-2  pt-3">Transaction Type</h6>
-                        <div class="container-fluid">
-                            <div class="row ">
-                                <div class="form-check col-lg-6">
-                                    <input class="form-check-input" type="checkbox" value="" id="buy" name="buy">
-                                    <label class="form-check-label" for="buy">
-                                        Buy
-                                    </label>
-                                </div>
-                                <div class="form-check col-lg-6">
-                                    <input class="form-check-input" type="checkbox" value="" id="rent" name="rent">
-                                    <label class="form-check-label" for="rent">
-                                        Rent
-                                    </label>
-                                </div>
-                                <div class="form-check col-lg-12">
-                                    <input class="form-check-input" type="checkbox" value="" id="sterm" name="sterm">
-                                    <label class="form-check-label" for="sterm">
-                                        Short Term
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h6 class="pb-2 pt-3">Type of Place</h6>
-                        <div class="container-fluid">
-                            <div class="row ">
-                                <div class="form-check col-lg-6 ">
-                                    <input class="form-check-input" type="checkbox" value="" id="allproperty"
-                                           name="allproperty">
-                                    <label class="form-check-label px-1" for="allproperty" >
-                                        All
-                                    </label>
-                                </div>
-                                <div class="form-check col-lg-6 ">
-                                    <input class="form-check-input" type="checkbox" value="" id="comercial"
-                                           name="comercial">
-                                    <label class="form-check-label" for="comercial">
-                                        Comercial
-                                    </label>
-                                </div>
-                                <div class="form-check col-lg-6 ">
-                                    <input class="form-check-input" type="checkbox" value="" id="house" name="house">
-                                    <label class="form-check-label" for="house">
-                                        House
-                                    </label>
-                                </div>
-                                <div class="form-check col-lg-6 ">
-                                    <input class="form-check-input" type="checkbox" value="" id="penthouse"
-                                           name="penthouse">
-                                    <label class="form-check-label " for="penthouse">
-                                        Penthouse
-                                    </label>
-                                </div>
-                                <div class="form-check col-lg-6 ">
-                                    <input class="form-check-input" type="checkbox" value="" id="plot" name="plot">
-                                    <label class="form-check-label" for="plot">
-                                        Plot
-                                    </label>
-                                </div>
-                                <div class="form-check col-lg-6 ">
-                                    <input class="form-check-input" type="checkbox" value="" id="townhouse"
-                                           name="townhouse">
-                                    <label class="form-check-label" for="townhouse">
-                                        Townhouse
-                                    </label>
-                                </div>
-                                <div class="form-check col-lg-6 ">
-                                    <input class="form-check-input" type="checkbox" value="" id="apartment"
-                                           name="apartment">
-                                    <label class="form-check-label" for="apartment">
-                                        Apartment
-                                    </label>
-                                </div>
-                               
-                               
-                               
-                            </div>
-                        </div>
-
-                    </div>
-                    <div>
-                        <h6 class="pb-2 pt-3">Price Range</h6>
-                        <div class="col-sm-12">
-                            <div id="slider-range"></div>
-                        </div>
-                    </div>
-                    <div class="slider-labels d-flex justify-content-between">
-                        <div class="caption">
-                            <strong>Min:</strong> <span id="slider-range-value1"></span>
-                        </div>
-                        <div class="text-right caption">
-                            <strong>Max:</strong> <span id="slider-range-value2"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <form>
-                                <input type="hidden" name="min-value" value="">
-                                <input type="hidden" name="max-value" value="">
-                            </form>
-                        </div>
-                    </div>
-                    <div>
-
-                    </div>
-                    <div class="row">
-                        <h6 class="pb-2 pt-3">Features</h6>
-                        <div class="form-check col-lg-6">
-                            <input class="form-check-input" type="checkbox" value="" id="Bargain" name="bargain">
-                            <label class="form-check-label" for="Bargain">
-                                Bargain
-                            </label>
-                        </div>
-                        <div class="form-check col-lg-6">
-                            <input class="form-check-input" type="checkbox" value="" id="Beachfront" name="beachFront">
-                            <label class="form-check-label" for="Beachfront">
-                                Beachfront
-                            </label>
-                        </div>
-                        <div class="form-check col-lg-6">
-                            <input class="form-check-input" type="checkbox" value="" id="Golf" name="golf">
-                            <label class="form-check-label" for="Golf">
-                                Golf View
-                            </label>
-                        </div>
-                        <div class="form-check col-lg-6">
-                            <input class="form-check-input" type="checkbox" value="" id="Gym" name="gym">
-                            <label class="form-check-label" for="Gym">
-                                Gym
-                            </label>
-                        </div>
-                        <div class="form-check col-lg-12">
-                            <input class="form-check-input" type="checkbox" value="" id="HeatedPool" name="heatedPool">
-                            <label class="form-check-label" for="HeatedPool">
-                                Heated Pool
-                            </label>
-                        </div>
-                        <div id="more-features" class="row">
-
-                        </div>
-                        <button class="load-more btn btn-primary mt-3" id="load-btn">Load More</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="col-lg-10 col-md-9">
-            <div class="align-items-center justify-content-between comparison-container">
-                <div class="row py-3 flex-grow-1" id="fav-items"></div>
-                <div>
-                    <button class="btn share-btn-fvrt share-btn" id="share-property" onclick="handleShare()">Share Property</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="columns-container col-lg-3" id="columnsContainer">
-                    <h2 class="search-result-heading">Search Results</h2>
-                    <h5 class="pb-2 text-center text-secondary">356 Results</h5>
-                </div>
-                
-                <div class="col-lg-9 ">
-                    <div class=" fixed-container">
-                    <div id="column"></div>
-                    <!-- <div id="columnDetailMobile"></div> -->
-                    <div class="row my-5">
-                        <div class="col-lg-6">
-                            <div id="map"class="map-container"></div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div>
-                                <div class="contact-form-wrapper d-flex justify-content-center">
-                                    <form action="#" class="contact-form" id="contact-form">
-                                        <h3 class="title">Contact us</h3>
-                                        <p class="description">Feel free to contact us if you need any assistance, any
-                                            help or another question.
-                                        </p>
-                                        <div>
-                                            <input type="text" class="form-control rounded border-white mb-3 form-input"
-                                                   id="name" placeholder="Full Name" required>
-                                        </div>
-                                        <div>
-                                            <input type="email"
-                                                   class="form-control rounded border-white mb-3 form-input"
-                                                   placeholder="Email Address" required>
-                                        </div>
-                                        <div>
-                                            <input type="number"
-                                                   class="form-control rounded border-white mb-3 form-input"
-                                                   placeholder="Telephone" required>
-                                        </div>
-                                        <div>
-                                            <textarea id="message"
-                                                      class="form-control rounded border-white mb-3 form-text-area"
-                                                      rows="5" cols="30" placeholder="Message" required></textarea>
-                                        </div>
-                                        <div class="submit-button-wrapper">
-                                            <input type="submit" value="Send">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
-<!-- Offcanvas element -->
-<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-    <div class="offcanvas-header">
-      <h6 class="offcanvas-title" id="offcanvasBottomLabel">Product Details</h6>
-      <button type="button" class="btn close-btn" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fa-solid fa-angle-down"></i></button>
-    </div>
-    <div class="offcanvas-body">
-      <!-- Content for the offcanvas body -->
-    </div>
-  </div>
-
-
-<!-- filter offcanvas -->
-<div class="offcanvas offcanvas-bottom" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
-    <div class="offcanvas-header">
-        <h6 class="offcanvas-title">Filters</h6>
-        <button type="button" class="btn close-btn" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fa-solid fa-angle-down"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="filter-container pt-4" id="filter-container">
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-2 col-md-3" id="filter">
+          <h3 class="pt-3">Welcome, Amanda</h3>
+          <p class="pt-2">Tue, 01 April 2024</p>
+          <div class="filter-container pt-4" id="filter-container">
             <h5 class="pb-4">Filter</h5>
             <form action="">
-                <select class="form-select" id="locationsidd" name="locations" style="min-width: 200px;"
-                        class="elementor-field-textual">
-                    <option value="">Locations</option>
-                    <option value="Marbella East">Marbella East</option>
-                    <option value="Altos de los Monteros">- Altos de los Monteros</option>
-                    <option value="Bahía de Marbella">- Bahía de Marbella</option>
-                    <option value="Cabopino">- Cabopino</option>
-                    <option value="El Rosario">- El Rosario</option>
-                    <option value="Elviria">- Elviria</option>
-                    <option value="La Mairena">- La Mairena</option>
-                    <option value="Las Chapas">- Las Chapas</option>
-                    <option value="Río Real">- Río Real</option>
-                    <option value="Santa Clara">- Santa Clara</option>
-                    <option value="Marbella Center">Marbella Center</option>
-                    <option value="Nagüeles">- Nagüeles</option>
-                    <option value="Sierra Blanca">- Sierra Blanca</option>
-                    <option value="The Golden Mile">- The Golden Mile</option>
-                    <option value="Marbella West">Marbella West</option>
-                    <option value="Aloha">- Aloha</option>
-                    <option value="Nueva Andalucía">- Nueva Andalucía</option>
-                    <option value="Puerto Banús">- Puerto Banús</option>
-                    <option value="San Pedro de Alcántara">- San Pedro de Alcántara</option>
-                    <option value="Estepona">Estepona</option>
-                    <option value="Atalaya">- Atalaya</option>
-                    <option value="Costalita">- Costalita</option>
-                    <option value="New Golden Mile">- New Golden Mile</option>
-                    <option value="Selwo">- Selwo</option>
-                    <option value="Benahavís">Benahavís</option>
-                    <option value="La Quinta">- La Quinta</option>
-                    <option value="La Zagaleta">- La Zagaleta</option>
-                    <option value="Los Flamingos">- Los Flamingos</option>
-                    <option value="Benalmadena">Benalmadena</option>
-                    <option value="Fuengirola">Fuengirola</option>
-                    <option value="Mijas">Mijas</option>
-                    <option value="Calahonda">- Calahonda</option>
-                    <option value="Calanova Golf">- Calanova Golf</option>
-                    <option value="Riviera del Sol">- Riviera del Sol</option>
-                </select>
-                <div>
-                    <h6 class="pb-2  pt-3">Transaction Type</h6>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="form-check col-lg-6">
-                                <input class="form-check-input" type="checkbox" value="" id="buy" name="buy">
-                                <label class="form-check-label" for="buy">
-                                    Buy
-                                </label>
-                            </div>
-                            <div class="form-check col-lg-6">
-                                <input class="form-check-input" type="checkbox" value="" id="rent" name="rent">
-                                <label class="form-check-label" for="rent">
-                                    Rent
-                                </label>
-                            </div>
-                            <div class="form-check col-lg-12">
-                                <input class="form-check-input" type="checkbox" value="" id="sterm" name="sterm">
-                                <label class="form-check-label" for="sterm">
-                                    Short Term
-                                </label>
-                            </div>
-                        </div>
+              <select
+                class="form-select"
+                id="locationsidd"
+                name="locations"
+                style="min-width: 200px"
+                class="elementor-field-textual"
+              >
+                <option value="">Locations</option>
+                <option value="Marbella East">Marbella East</option>
+                <option value="Altos de los Monteros">
+                  - Altos de los Monteros
+                </option>
+                <option value="Bahía de Marbella">- Bahía de Marbella</option>
+                <option value="Cabopino">- Cabopino</option>
+                <option value="El Rosario">- El Rosario</option>
+                <option value="Elviria">- Elviria</option>
+                <option value="La Mairena">- La Mairena</option>
+                <option value="Las Chapas">- Las Chapas</option>
+                <option value="Río Real">- Río Real</option>
+                <option value="Santa Clara">- Santa Clara</option>
+                <option value="Marbella Center">Marbella Center</option>
+                <option value="Nagüeles">- Nagüeles</option>
+                <option value="Sierra Blanca">- Sierra Blanca</option>
+                <option value="The Golden Mile">- The Golden Mile</option>
+                <option value="Marbella West">Marbella West</option>
+                <option value="Aloha">- Aloha</option>
+                <option value="Nueva Andalucía">- Nueva Andalucía</option>
+                <option value="Puerto Banús">- Puerto Banús</option>
+                <option value="San Pedro de Alcántara">
+                  - San Pedro de Alcántara
+                </option>
+                <option value="Estepona">Estepona</option>
+                <option value="Atalaya">- Atalaya</option>
+                <option value="Costalita">- Costalita</option>
+                <option value="New Golden Mile">- New Golden Mile</option>
+                <option value="Selwo">- Selwo</option>
+                <option value="Benahavís">Benahavís</option>
+                <option value="La Quinta">- La Quinta</option>
+                <option value="La Zagaleta">- La Zagaleta</option>
+                <option value="Los Flamingos">- Los Flamingos</option>
+                <option value="Benalmadena">Benalmadena</option>
+                <option value="Fuengirola">Fuengirola</option>
+                <option value="Mijas">Mijas</option>
+                <option value="Calahonda">- Calahonda</option>
+                <option value="Calanova Golf">- Calanova Golf</option>
+                <option value="Riviera del Sol">- Riviera del Sol</option>
+              </select>
+              <div>
+                <h6 class="pb-2 pt-3">Transaction Type</h6>
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="form-check col-lg-6">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="buy"
+                        name="buy"
+                      />
+                      <label class="form-check-label" for="buy"> Buy </label>
                     </div>
+                    <div class="form-check col-lg-6">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="rent"
+                        name="rent"
+                      />
+                      <label class="form-check-label" for="rent"> Rent </label>
+                    </div>
+                    <div class="form-check col-lg-12">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="sterm"
+                        name="sterm"
+                      />
+                      <label class="form-check-label" for="sterm">
+                        Short Term
+                      </label>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                    <h6 class="pb-2 pt-3">Type of Place</h6>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="form-check col-lg-6">
-                                <input class="form-check-input" type="checkbox" value="" id="allproperty"
-                                       name="allproperty">
-                                <label class="form-check-label" for="allproperty">
-                                    All
-                                </label>
-                            </div>
-                            <div class="form-check col-lg-6">
-                                <input class="form-check-input" type="checkbox" value="" id="penthouse"
-                                       name="penthouse">
-                                <label class="form-check-label" for="penthouse">
-                                    Penthouse
-                                </label>
-                            </div>
-                            <div class="form-check col-lg-6">
-                                <input class="form-check-input" type="checkbox" value="" id="townhouse"
-                                       name="townhouse">
-                                <label class="form-check-label" for="townhouse">
-                                    Townhouse
-                                </label>
-                            </div>
-                            <div class="form-check col-lg-6">
-                                <input class="form-check-input" type="checkbox" value="" id="apartment"
-                                       name="apartment">
-                                <label class="form-check-label" for="apartment">
-                                    Apartment
-                                </label>
-                            </div>
-                            <div class="form-check col-lg-6">
-                                <input class="form-check-input" type="checkbox" value="" id="comercial"
-                                       name="comercial">
-                                <label class="form-check-label" for="comercial">
-                                    Comercial
-                                </label>
-                            </div>
-                            <div class="form-check col-lg-6">
-                                <input class="form-check-input" type="checkbox" value="" id="house" name="house">
-                                <label class="form-check-label" for="house">
-                                    House
-                                </label>
-                            </div>
-                            <div class="form-check col-lg-6">
-                                <input class="form-check-input" type="checkbox" value="" id="plot" name="plot">
-                                <label class="form-check-label" for="plot">
-                                    Plot
-                                </label>
-                            </div>
-                        </div>
+              </div>
+              <div class="row px-3">
+                <h6 class="pb-2 pt-3 px-0">Type of Place</h6>
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="form-check col-lg-6">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="allproperty"
+                        name="allproperty"
+                      />
+                      <label class="form-check-label px-1" for="allproperty">
+                        All
+                      </label>
                     </div>
-
+                    <div class="form-check col-lg-6">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="comercial"
+                        name="comercial"
+                      />
+                      <label class="form-check-label" for="comercial">
+                        Comercial
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-6">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="house"
+                        name="house"
+                      />
+                      <label class="form-check-label" for="house">
+                        House
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-6">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="penthouse"
+                        name="penthouse"
+                      />
+                      <label class="form-check-label" for="penthouse">
+                        Penthouse
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-6">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="plot"
+                        name="plot"
+                      />
+                      <label class="form-check-label" for="plot"> Plot </label>
+                    </div>
+                    <div class="form-check col-lg-6">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="townhouse"
+                        name="townhouse"
+                      />
+                      <label class="form-check-label" for="townhouse">
+                        Townhouse
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-6">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="apartment"
+                        name="apartment"
+                      />
+                      <label class="form-check-label" for="apartment">
+                        Apartment
+                      </label>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                    <h6 class="pb-2 pt-3">Price Range</h6>
-                    <div class="col-sm-12">
-                        <div id="slider-ranges"></div>
-                    </div>
+              </div>
+              <div>
+                <h6 class="pb-2 pt-3">Price Range</h6>
+                <div class="col-sm-12">
+                  <div id="slider-range"></div>
                 </div>
-                <div class="slider-labels d-flex justify-content-between">
-                    <div class="caption">
-                        <strong>Min:</strong> <span id="sliders-range-value1"></span>
-                    </div>
-                    <div class="text-right caption">
-                        <strong>Max:</strong> <span id="sliders-range-value2"></span>
-                    </div>
+              </div>
+              <div class="slider-labels d-flex justify-content-between">
+                <div class="caption">
+                  <strong>Min:</strong> <span id="slider-range-value1"></span>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <form>
-                            <input type="hidden" name="min-value" value="">
-                            <input type="hidden" name="max-value" value="">
-                        </form>
-                    </div>
+                <div class="text-right caption">
+                  <strong>Max:</strong> <span id="slider-range-value2"></span>
                 </div>
-                <div>
-
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <form>
+                    <input type="hidden" name="min-value" value="" />
+                    <input type="hidden" name="max-value" value="" />
+                  </form>
                 </div>
-                <div>
-                    <h6 class="pb-2 pt-3">Features</h6>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="Bargain" name="bargain">
-                        <label class="form-check-label" for="Bargain">
-                            Bargain
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="Beachfront" name="beachFront">
-                        <label class="form-check-label" for="Beachfront">
-                            Beachfront
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="Golf" name="golf">
-                        <label class="form-check-label" for="Golf">
-                            Golf View
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="Gym" name="gym">
-                        <label class="form-check-label" for="Gym">
-                            Gym
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="HeatedPool" name="heatedPool">
-                        <label class="form-check-label" for="HeatedPool">
-                            Heated Pool
-                        </label>
-                    </div>
-                    <div id="more-feature">
-
-                    </div>
-                    <button class="load-more btn btn-primary mt-3 mb-5" id="load-btns">Load More</button>
+              </div>
+              <div></div>
+              <div class="row px-3">
+                <h6 class="pb-2 pt-3 px-0">Features</h6>
+                <div class="form-check col-lg-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Bargain"
+                    name="bargain"
+                  />
+                  <label class="form-check-label" for="Bargain">
+                    Bargain
+                  </label>
                 </div>
+                <div class="form-check col-lg-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Beachfront"
+                    name="beachFront"
+                  />
+                  <label class="form-check-label" for="Beachfront">
+                    Beachfront
+                  </label>
+                </div>
+                <div class="form-check col-lg-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Golf"
+                    name="golf"
+                  />
+                  <label class="form-check-label" for="Golf"> Golf View </label>
+                </div>
+                <div class="form-check col-lg-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="Gym"
+                    name="gym"
+                  />
+                  <label class="form-check-label" for="Gym"> Gym </label>
+                </div>
+                <div class="form-check col-lg-6">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="HeatedPool"
+                    name="heatedPool"
+                  />
+                  <label class="form-check-label" for="HeatedPool">
+                    Heated Pool
+                  </label>
+                </div>
+                <div id="more-features" class="row"></div>
+                <button class="load-more btn btn-primary mt-3" id="load-btn">
+                  Load More
+                </button>
+              </div>
             </form>
+          </div>
         </div>
-      
+        <div class="col-lg-10 col-md-9">
+          <div
+            class="align-items-center justify-content-between comparison-container"
+          >
+            <div class="row py-3 flex-grow-1" id="fav-items"></div>
+            <div>
+              <button
+                class="btn share-btn-fvrt share-btn"
+                id="share-property"
+                onclick="handleShare()"
+              >
+                Share Property
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="columns-container col-lg-3" id="columnsContainer">
+              <h2 class="search-result-heading">Search Results</h2>
+              <h5 class="pb-2 text-center text-secondary">356 Results</h5>
+            </div>
+
+            <div class="col-lg-9">
+              <div class="fixed-container">
+                <div id="column"></div>
+                <!-- <div id="columnDetailMobile"></div> -->
+                <div class="row my-5">
+                  <div class="col-lg-6">
+                    <div id="map" class="map-container"></div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div>
+                      <div
+                        class="contact-form-wrapper d-flex justify-content-center"
+                      >
+                        <form action="#" class="contact-form" id="contact-form">
+                          <h3 class="title">Contact us</h3>
+                          <p class="description">
+                            Feel free to contact us if you need any assistance,
+                            any help or another question.
+                          </p>
+                          <div>
+                            <input
+                              type="text"
+                              class="form-control rounded border-white mb-3 form-input"
+                              id="name"
+                              placeholder="Full Name"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <input
+                              type="email"
+                              class="form-control rounded border-white mb-3 form-input"
+                              placeholder="Email Address"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <input
+                              type="number"
+                              class="form-control rounded border-white mb-3 form-input"
+                              placeholder="Telephone"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <textarea
+                              id="message"
+                              class="form-control rounded border-white mb-3 form-text-area"
+                              rows="5"
+                              cols="30"
+                              placeholder="Message"
+                              required
+                            ></textarea>
+                          </div>
+                          <div class="submit-button-wrapper">
+                            <input type="submit" value="Send" />
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-  
 
+    <!-- Offcanvas element -->
+    <div
+      class="offcanvas offcanvas-bottom"
+      tabindex="-1"
+      id="offcanvasBottom"
+      aria-labelledby="offcanvasBottomLabel"
+    >
+      <div class="offcanvas-header">
+        <h6 class="offcanvas-title" id="offcanvasBottomLabel">
+          Product Details
+        </h6>
+        <button
+          type="button"
+          class="btn close-btn"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        >
+          <i class="fa-solid fa-angle-down"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body">
+        <!-- Content for the offcanvas body -->
+      </div>
+    </div>
 
-</body>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="assets/js/rangeSlider.js"></script>
-<script type="" src="assets/js/Index.js"></script>
-<script src="assets/js/FilterDetails.js"></script>
-<!-- <script src="assets/js/mobileView.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" ></script>
-
+    <!-- filter offcanvas -->
+    <div
+      class="offcanvas offcanvas-bottom"
+      tabindex="-1"
+      id="filterOffcanvas"
+      aria-labelledby="filterOffcanvasLabel"
+    >
+      <div class="offcanvas-header">
+        <h6 class="offcanvas-title">Filters</h6>
+        <button
+          type="button"
+          class="btn close-btn"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        >
+          <i class="fa-solid fa-angle-down"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="filter-container pt-4" id="filter-container">
+          <h5 class="pb-4">Filter</h5>
+          <form action="">
+            <select
+              class="form-select"
+              id="locationsidd"
+              name="locations"
+              style="min-width: 200px"
+              class="elementor-field-textual"
+            >
+              <option value="">Locations</option>
+              <option value="Marbella East">Marbella East</option>
+              <option value="Altos de los Monteros">
+                - Altos de los Monteros
+              </option>
+              <option value="Bahía de Marbella">- Bahía de Marbella</option>
+              <option value="Cabopino">- Cabopino</option>
+              <option value="El Rosario">- El Rosario</option>
+              <option value="Elviria">- Elviria</option>
+              <option value="La Mairena">- La Mairena</option>
+              <option value="Las Chapas">- Las Chapas</option>
+              <option value="Río Real">- Río Real</option>
+              <option value="Santa Clara">- Santa Clara</option>
+              <option value="Marbella Center">Marbella Center</option>
+              <option value="Nagüeles">- Nagüeles</option>
+              <option value="Sierra Blanca">- Sierra Blanca</option>
+              <option value="The Golden Mile">- The Golden Mile</option>
+              <option value="Marbella West">Marbella West</option>
+              <option value="Aloha">- Aloha</option>
+              <option value="Nueva Andalucía">- Nueva Andalucía</option>
+              <option value="Puerto Banús">- Puerto Banús</option>
+              <option value="San Pedro de Alcántara">
+                - San Pedro de Alcántara
+              </option>
+              <option value="Estepona">Estepona</option>
+              <option value="Atalaya">- Atalaya</option>
+              <option value="Costalita">- Costalita</option>
+              <option value="New Golden Mile">- New Golden Mile</option>
+              <option value="Selwo">- Selwo</option>
+              <option value="Benahavís">Benahavís</option>
+              <option value="La Quinta">- La Quinta</option>
+              <option value="La Zagaleta">- La Zagaleta</option>
+              <option value="Los Flamingos">- Los Flamingos</option>
+              <option value="Benalmadena">Benalmadena</option>
+              <option value="Fuengirola">Fuengirola</option>
+              <option value="Mijas">Mijas</option>
+              <option value="Calahonda">- Calahonda</option>
+              <option value="Calanova Golf">- Calanova Golf</option>
+              <option value="Riviera del Sol">- Riviera del Sol</option>
+            </select>
+            <div>
+              <h6 class="pb-2 pt-3">Transaction Type</h6>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="form-check col-lg-6">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="buy"
+                      name="buy"
+                    />
+                    <label class="form-check-label" for="buy"> Buy </label>
+                  </div>
+                  <div class="form-check col-lg-6">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="rent"
+                      name="rent"
+                    />
+                    <label class="form-check-label" for="rent"> Rent </label>
+                  </div>
+                  <div class="form-check col-lg-12">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="sterm"
+                      name="sterm"
+                    />
+                    <label class="form-check-label" for="sterm">
+                      Short Term
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h6 class="pb-2 pt-3">Type of Place</h6>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="form-check col-lg-6">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="allproperty"
+                      name="allproperty"
+                    />
+                    <label class="form-check-label" for="allproperty">
+                      All
+                    </label>
+                  </div>
+                  <div class="form-check col-lg-6">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="penthouse"
+                      name="penthouse"
+                    />
+                    <label class="form-check-label" for="penthouse">
+                      Penthouse
+                    </label>
+                  </div>
+                  <div class="form-check col-lg-6">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="townhouse"
+                      name="townhouse"
+                    />
+                    <label class="form-check-label" for="townhouse">
+                      Townhouse
+                    </label>
+                  </div>
+                  <div class="form-check col-lg-6">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="apartment"
+                      name="apartment"
+                    />
+                    <label class="form-check-label" for="apartment">
+                      Apartment
+                    </label>
+                  </div>
+                  <div class="form-check col-lg-6">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="comercial"
+                      name="comercial"
+                    />
+                    <label class="form-check-label" for="comercial">
+                      Comercial
+                    </label>
+                  </div>
+                  <div class="form-check col-lg-6">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="house"
+                      name="house"
+                    />
+                    <label class="form-check-label" for="house"> House </label>
+                  </div>
+                  <div class="form-check col-lg-6">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="plot"
+                      name="plot"
+                    />
+                    <label class="form-check-label" for="plot"> Plot </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h6 class="pb-2 pt-3">Price Range</h6>
+              <div class="col-sm-12">
+                <div id="slider-ranges"></div>
+              </div>
+            </div>
+            <div class="slider-labels d-flex justify-content-between">
+              <div class="caption">
+                <strong>Min:</strong> <span id="sliders-range-value1"></span>
+              </div>
+              <div class="text-right caption">
+                <strong>Max:</strong> <span id="sliders-range-value2"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <form>
+                  <input type="hidden" name="min-value" value="" />
+                  <input type="hidden" name="max-value" value="" />
+                </form>
+              </div>
+            </div>
+            <div></div>
+            <div>
+              <h6 class="pb-2 pt-3">Features</h6>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="Bargain"
+                  name="bargain"
+                />
+                <label class="form-check-label" for="Bargain"> Bargain </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="Beachfront"
+                  name="beachFront"
+                />
+                <label class="form-check-label" for="Beachfront">
+                  Beachfront
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="Golf"
+                  name="golf"
+                />
+                <label class="form-check-label" for="Golf"> Golf View </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="Gym"
+                  name="gym"
+                />
+                <label class="form-check-label" for="Gym"> Gym </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="HeatedPool"
+                  name="heatedPool"
+                />
+                <label class="form-check-label" for="HeatedPool">
+                  Heated Pool
+                </label>
+              </div>
+              <div id="more-feature"></div>
+              <button
+                class="load-more btn btn-primary mt-3 mb-5"
+                id="load-btns"
+              >
+                Load More
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="assets/js/rangeSlider.js"></script>
+  <script type="" src="assets/js/Index.js"></script>
+  <script src="assets/js/FilterDetails.js"></script>
+  <!-- <script src="assets/js/mobileView.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"></script>
 </html>
