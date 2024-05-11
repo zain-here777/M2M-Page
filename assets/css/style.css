@@ -8,6 +8,11 @@ h1, h2, h3, h4, h5, h6, p {
     margin: 0 !important;
 }
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 /* scroll bar */
 
@@ -21,7 +26,8 @@ body {
 }
 
 .columns-container::-webkit-scrollbar-thumb {
-    background-color: #e0e0e0;
+    /* background-color: #e0e0e0; */
+    background-color: #ffffff;
     border-radius: 8px;
 }
 
@@ -146,9 +152,12 @@ input:checked[type = 'checkbox'] {
     max-height: 100vh;
     height: 100%;
     overflow-y: auto;
-    padding-bottom: 120px;
-
+    width: 100%;
 }
+#columnsContainer{
+    padding-bottom: 50px;
+}
+
 
 /*ens  */
 
@@ -191,7 +200,8 @@ input:checked[type = 'checkbox'] {
 #map {
     min-height: 500px;
     border-radius: 10px;
-    border: 2px solid #b3b3b3;
+    /* border: 2px solid #b3b3b3; */
+   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 /* Contact Form */
@@ -433,12 +443,14 @@ input:checked[type = 'checkbox'] {
 
 /* fav button data */
 
+
 .favorite-item {
     border: 1px solid #ececec;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 10px; 
     border-radius: 10px;
     position: relative;
+
 }
 
 .remove-fvrt {
@@ -459,13 +471,13 @@ input:checked[type = 'checkbox'] {
 }
 
 .favorite-detail img {
-    width: 100%;
+    width: 100% !important;
     height: 50px;
     border-radius: 10px;
 }
 
 .favorite-detail h3 {
-    font-size: 16px;
+    font-size: 10px;
     margin: 0;
 }
 
@@ -506,7 +518,8 @@ input:checked[type = 'checkbox'] {
 }
 
 #filter::-webkit-scrollbar-thumb {
-    background-color: #e0e0e0;
+    /* background-color: #e0e0e0; */
+      background-color: #ffffff;
     border-radius: 8px;
     margin-right: 10px;
 }
@@ -525,7 +538,8 @@ input:checked[type = 'checkbox'] {
 }
 
 .fixed-container::-webkit-scrollbar-thumb {
-    background-color: #e0e0e0;
+    /* background-color: #e0e0e0; */
+    background-color: #ffffff;
     border-radius: 8px;
     margin-right: 10px;
 }
@@ -660,9 +674,11 @@ input:checked[type = 'checkbox'] {
     #navbar {
         display: none;
     }
-    #filter{
-        
+    body{
+        overflow: auto;
     }
+
+   
 
 
 }

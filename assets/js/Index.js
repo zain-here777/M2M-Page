@@ -32,65 +32,57 @@ const renderFavoriteItems = () => {
 };
 
 function createFavoriteItem(productId) {
-  
-  console.log(productId)
+  console.log(productId);
 
   const favoriteItem = document.createElement("div");
   favoriteItem.classList.add("col-lg-1");
   favoriteItem.classList.add("col-4");
-  favoriteItem.innerHTML = ` <div class="favorite-item">
-  <div class="favorite-detail">
- 
-  
-      <div class="detail-img">
-          <img src="${productId.image}" alt="Product Image" class="w-100">
+  favoriteItem.innerHTML = ` 
+  <div class="favorite-item">
+      <div class="favorite-detail">
+          <div class="detail-img">
+              <img src="${productId.image}" alt="Product Image" >
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+              <p style="font-size: 14px; color: orange">€${productId.price.toLocaleString(
+                  "en-DE"
+              )}</p>
+          </div>
       </div>
-      <div class="d-flex align-items-center justify-content-between">
-          <p style="font-size: 14px; color: orange">€${productId.price.toLocaleString(
-            "en-DE"
-          )}</p>
+      <div class="remove-fvrt">
+          <a  class="nav-link remove-favorite-btn" data-product-id="${
+              productId.id
+          }" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
       </div>
   </div>
-  <div class="remove-fvrt">
-  <a  class="nav-link remove-favorite-btn" data-product-id="${
-    productId.id
-  }" href="javascript:void(0)"><i class="fa-solid fa-xmark"></i></a>
-</div>
-</div>
   `;
 
-  favoriteItem.addEventListener('click',()=>{
-    showProductDetails(productId)
-    if (window.innerWidth <= 576) {
-      const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
-     offcanvasElement.show();
-    }
-  })
+  favoriteItem.addEventListener('click', () => {
+      showProductDetails(productId);
+      if (window.innerWidth <= 576) {
+          const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
+          offcanvasElement.show();
+      }
+  });
+
   // Attach event listener to remove button
   const removeBtn = favoriteItem.querySelector(".remove-favorite-btn");
   removeBtn.addEventListener("click", function (event) {
-    const productIds = productId.id;
-    event.stopPropagation();
-    const index = favoriteProductIds.indexOf(productId);
-    if (index !== -1) {
-      favoriteProductIds.splice(index, 1);
-      localStorage.setItem("new_fvt_items", JSON.stringify(favoriteProductIds));
-      renderFavoriteItems(); 
+      const productIds = productId.id;
+      event.stopPropagation();
+      const index = favoriteProductIds.indexOf(productId);
+      if (index !== -1) {
+          favoriteProductIds.splice(index, 1);
+          localStorage.setItem("new_fvt_items", JSON.stringify(favoriteProductIds));
+          renderFavoriteItems();
 
-      const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
-    offcanvasElement.hide();
-      toggleShareButtonVisibility();
-    }
-
-
-
+          const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
+          offcanvasElement.hide();
+          toggleShareButtonVisibility();
+      }
   });
 
- return favoriteItem; 
-
-
-
-
+  return favoriteItem;
 }
 
 
@@ -182,54 +174,54 @@ async function renderProductCards(query = '') {
     product.location.toLowerCase().includes(query.toLowerCase())
   );
 
-  // Update columnsContainer innerHTML to display search results header
-  columnsContainer.innerHTML = `
-    <h2 class="search-result-heading">Search Results</h2>
-    <h5 class="pb-2 text-center text-secondary">${filteredProducts.length} Results</h5>
-  `;
-
   // Clear existing content in columnsContainer before rendering new products
   columnsContainer.innerHTML = '';
 
+  // Append initial content
+  columnsContainer.innerHTML = `
+      <h2 class="search-result-heading">Search Results</h2>
+      <h5 class="pb-2 text-center text-secondary">356 Results</h5>
+  `;
+
   // Render filtered products as product cards
   if(filteredProducts.length === 0){
-    columnsContainer.innerHTML = `no property are matched`
+    columnsContainer.innerHTML += `no property are matched`
   }else{
+    filteredProducts.forEach((product) => {
+      const column = document.createElement("div");
+      column.classList.add("column");
+      column.innerHTML = `
 
-  filteredProducts.forEach((product) => {
-    const column = document.createElement("div");
-    column.classList.add("column");
-    column.innerHTML = `
-      <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
-        <div class="row align-items-center p-card-row">
-          <div class="col-sm-2 col-md-2 col-4 col-lg-4">
-            <img class='p-card-img' src="${product.image}" class="img-fluid rounded-start" alt="...">
-          </div>
-          <div class="col-sm-10 col-md-10 col-8 col-lg-8">
-            <div class="card-body p-0">
-              <h6 class="trim card-title">${product.title}</h6>
-              <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
-              <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${product.location}</span></p>
+        <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
+          <div class="row align-items-center p-card-row">
+            <div class="col-sm-2 col-md-2 col-4 col-lg-4">
+              <img class='p-card-img' src="${product.image}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-sm-10 col-md-10 col-8 col-lg-8">
+              <div class="card-body p-0 p-md-none">
+                <h6 class="trim card-title">${product.title}</h6>
+                <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
+                <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${product.location}</span></p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
 
-    columnsContainer.appendChild(column);
+      columnsContainer.appendChild(column);
 
-    // Add click event listener to show product details
-    column.addEventListener("click", () => {
-      showProductDetails(product);
+      // Add click event listener to show product details
+      column.addEventListener("click", () => {
+        showProductDetails(product);
 
-      // Optional: Show offcanvas element on small screens
-      if (window.innerWidth <= 576) {
-        const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
-        offcanvasElement.show();
-      }
+        // Optional: Show offcanvas element on small screens
+        if (window.innerWidth <= 576) {
+          const offcanvasElement = new bootstrap.Offcanvas(document.getElementById("offcanvasBottom"));
+          offcanvasElement.show();
+        }
+      });
     });
-  });
-}
+  }
 
   // Show details of the first product if available
   if (filteredProducts.length > 0) {
