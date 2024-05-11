@@ -327,7 +327,6 @@ window.addEventListener("resize", function () {
 function shareToWhatsApp(product) {
   const { title, price, location, features, image } = product;
 
-<<<<<<< HEAD
   const message = `🏡 *${title}*\n💰 Price: €${price.toLocaleString("en-DE")} / Year\n📍 Location: ${location}\n\n🔗 Details: ${features}\n\nView more details: https://m2msearch.netlify.app/`;
   const encodedMessage = encodeURIComponent(message);
   const encodedImage = encodeURIComponent(image);
@@ -339,39 +338,10 @@ function shareToWhatsApp(product) {
   } else {
     console.log('Please use a mobile device with WhatsApp installed to share this content.');
   }
-=======
-  // Encode the message and image URL
-  var encodedMessage = encodeURIComponent(message);
-  var encodedImageUrl = encodeURIComponent(imageData);
-
-  // Construct the WhatsApp share URL
-  var whatsappUrl = `whatsapp://send?text=${encodedMessage}&image=${encodedImageUrl}`;
-
-  // Open the WhatsApp app with the pre-filled message and image
-  window.location.href = whatsappUrl;
->>>>>>> parent of 9ac3556 (latest commit)
 }
 
 
 
-
-
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> parent of 9ac3556 (latest commit)
 function showProductDetails(product) {
   if (isMobileView()) {
       // Show product details in offcanvas for mobile view
