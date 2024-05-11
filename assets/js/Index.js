@@ -43,13 +43,12 @@ function createFavoriteItem(productId) {
  
   
       <div class="detail-img">
-          <img src="${productId.image}" alt="Product Image">
+          <img src="${productId.image}" alt="Product Image" class="w-100">
       </div>
       <div class="d-flex align-items-center justify-content-between">
           <p style="font-size: 14px; color: orange">€${productId.price.toLocaleString(
             "en-DE"
           )}</p>
-          <i class="fa-solid fa-heart" style="font-size: 12px; color: red"></i>
       </div>
   </div>
   <div class="remove-fvrt">
@@ -257,9 +256,16 @@ function updateProductDetails(productId) {
     trimmedTitle =  trimText(productId.title, 30); 
   } else if (window.innerWidth <= 992) {
       trimmedTitle =  trimText(productId.title, 30); 
-  } else if (window.innerWidth <= 768) {
+  }else if (window.innerWidth <= 1024) {
+    trimmedTitle =  trimText(productId.title, 30); 
+}
+   else if (window.innerWidth <= 768) {
       trimmedTitle =  trimText(productId.title, 30); 
-  } else {
+  }
+  else if (window.innerWidth <= 1400) {
+    trimmedTitle =  trimText(productId.title, 35); 
+}
+   else {
     trimmedTitle = productId.title;
   }
   console.log("Original Title:", productId.title);
@@ -319,20 +325,19 @@ window.addEventListener("resize", function () {
 // share whatsapp funcation
 
 function shareToWhatsApp(product) {
-  // Extract product details
   const { title, price, location, features, image } = product;
 
-  // Construct the message
   const message = `🏡 *${title}*\n💰 Price: €${price.toLocaleString("en-DE")} / Year\n📍 Location: ${location}\n\n🔗 Details: ${features}\n\nView more details: https://m2msearch.netlify.app/`;
-
-  // Encode the message
   const encodedMessage = encodeURIComponent(message);
+  const encodedImage = encodeURIComponent(image);
 
-  // Construct the WhatsApp URL with text and image
-  const whatsappUrl = `whatsapp://send?text=${encodedMessage}&media=${image}`;
+  const whatsappUrl = `whatsapp://send?text=${encodedMessage}&media=${encodedImage}`;
 
-  // Open the WhatsApp app with the pre-filled message and image
-  window.location.href = whatsappUrl;
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    window.location.href = whatsappUrl;
+  } else {
+    console.log('Please use a mobile device with WhatsApp installed to share this content.');
+  }
 }
 
 
@@ -354,7 +359,7 @@ function shareToWhatsApp(product) {
 
 function showProductDetails(product) {
   if (isMobileView()) {
-    // Show product details in offcanvas for mobile view
+      // Show product details in offcanvas for mobile view
     const offcanvasBody = document
       .getElementById("offcanvasBottom")
       .querySelector(".offcanvas-body");

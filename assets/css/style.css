@@ -11,14 +11,10 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* scroll bar */
 
-body::-webkit-scrollbar {
-    width: 8px;
+body {
+    overflow: hidden;
 }
 
-body::-webkit-scrollbar-thumb {
-    background-color: var(--orange);
-    border-radius: 8px;
-}
 
 .columns-container::-webkit-scrollbar {
     width: 2px;
@@ -120,7 +116,6 @@ input:checked[type = 'checkbox'] {
 .heart-btn {
     width: 50px;
     height: 50px;
-    border: 1px solid #cfcfcf !important;
     display: flex !important;
     justify-content: center;
     align-items: center;
@@ -149,7 +144,9 @@ input:checked[type = 'checkbox'] {
     border-radius: 15px !important;
     cursor: pointer;
     max-height: 100vh;
+    height: 100%;
     overflow-y: auto;
+    padding-bottom: 120px;
 
 }
 
@@ -450,7 +447,8 @@ input:checked[type = 'checkbox'] {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--orange);
+    /* background: var(--orange); */
+    background-color: gray;
     color: white;
     border-radius: 50%;
     font-size: 12px;
@@ -492,6 +490,48 @@ input:checked[type = 'checkbox'] {
 .filter-container form > * {
     margin-block-end: 15px;
 }
+/* Styling for the filter container */
+#filter {
+    height: 100vh;
+    overflow-y: auto; 
+    padding-right: 15px; 
+    overflow-x: hidden;
+    padding-bottom:20px ;
+
+}
+
+
+#filter::-webkit-scrollbar {
+    width: 2px;
+}
+
+#filter::-webkit-scrollbar-thumb {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+/* scroll details*/
+.fixed-container{
+    max-height: 100vh;
+    overflow-y: auto;
+    height: 100%;
+    overflow-x: hidden;
+    /* padding-bottom: 120px; */
+}
+
+.fixed-container::-webkit-scrollbar {
+    width: 2px;
+}
+
+.fixed-container::-webkit-scrollbar-thumb {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+
+
 
 .detail-border {
     width: 60px;
@@ -579,6 +619,13 @@ input:checked[type = 'checkbox'] {
     display: flex;
 }
 
+
+.card-text {
+    align-items: center;
+}
+
+
+
 @media only screen and (max-width: 1600px ) and (min-width: 992px) {
     .p-card-row {
         gap: 10px !important;
@@ -595,6 +642,7 @@ input:checked[type = 'checkbox'] {
     #navbar {
         display: none;
     }
+   
 
 }
 
@@ -603,11 +651,19 @@ input:checked[type = 'checkbox'] {
         display: none;
     }
 }
-
+@media (max-width:1100px){
+    .slider-labels{
+        flex-direction: column;
+    }
+}
 @media (max-width: 991px) {
     #navbar {
         display: none;
     }
+    #filter{
+        
+    }
+
 
 }
 
@@ -790,7 +846,6 @@ input:checked[type = 'checkbox'] {
 
 
 }
-
 
 
 
