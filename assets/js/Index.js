@@ -174,28 +174,36 @@ async function renderProductCards(query = "") {
       const column = document.createElement("div");
       column.classList.add("column");
       column.innerHTML = `
-
-        <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
+      <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
           <div class="row align-items-center p-card-row">
-            <div class="col-sm-2 col-md-2 col-4 col-lg-4">
-              <img class='p-card-img' src="${
-                product.image
-              }" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-sm-10 col-md-10 col-8 col-lg-8">
-              <div class="card-body p-0 p-md-none">
-                <h6 class="trim card-title">${product.title}</h6>
-                <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString(
-                  "en-DE"
-                )}</p>
-                <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${
-                  product.location
-                }</span></p>
+              <div class="col-sm-2 col-md-2 col-4 col-lg-4">
+                  <img class='p-card-img' src="${product.image}" class="img-fluid rounded-start" alt="...">
               </div>
-            </div>
+              <div class="col-sm-10 col-md-10 col-8 col-lg-8">
+                  <div class="card-body p-0 p-md-none">
+                      <h6 class="trim card-title">${product.title}</h6>
+                      <div class="d-flex justify-content-around">
+                          <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
+                          <div class="d-flex  gap-2 mt-1">
+                              <div class="feature d-flex">
+                                  <img src="/assets/img/bed.svg" alt="">
+                                  <p class="m-0 ml-1">4</p>
+                              </div>
+                              <div class="feature d-flex align-items-center">
+                                  <img src="/assets/img/bath.svg" alt="">
+                                  <p class="m-0 ml-1">4</p>
+                              </div>
+                          </div>
+                      </div>
+                      <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${product.location}</span></p>
+                  </div>
+              </div>
           </div>
-        </div>
-      `;
+      </div>
+  `;
+  
+  
+  
 
       columnsContainer.appendChild(column);
 
@@ -939,9 +947,6 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
       loadMoreBtn.textContent = "Load Less";
       moreFeatures.style.maxHeight = moreFeatures.scrollHeight + "px";
-
-
-      
     } else {
       moreFeatures.style.maxHeight = "0";
       loadMoreBtn.textContent = "Load More";

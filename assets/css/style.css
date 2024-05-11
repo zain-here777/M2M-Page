@@ -422,6 +422,7 @@ input:checked[type = 'checkbox'] {
 
 [disabled].noUi-origin, [disabled] .noUi-handle {
     cursor: not-allowed;
+
 }
 
 /*  */
