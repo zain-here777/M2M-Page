@@ -36,12 +36,14 @@ function createFavoriteItem(productId) {
 
   const favoriteItem = document.createElement("div");
   favoriteItem.classList.add("col-lg-1");
+  favoriteItem.classList.add("col-xl-2");
+
   favoriteItem.classList.add("col-4");
   favoriteItem.innerHTML = ` 
   <div class="favorite-item">
       <div class="favorite-detail">
           <div class="detail-img">
-              <img src="${productId.image}" alt="Product Image" >
+              <img src="${productId.image}" alt="Product Image" class="img-fluid w-100  ">
           </div>
           <div class="d-flex align-items-center justify-content-between">
               <p style="font-size: 14px; color: orange">€${productId.price.toLocaleString(

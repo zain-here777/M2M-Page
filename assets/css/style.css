@@ -444,6 +444,8 @@ input:checked[type = 'checkbox'] {
     margin-bottom: 10px;
     border-radius: 10px;
     position: relative;
+    max-width: 100px;
+  
 }
 
 .remove-fvrt {
