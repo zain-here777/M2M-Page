@@ -37,6 +37,7 @@ function createFavoriteItem(productId) {
   const favoriteItem = document.createElement("div");
   favoriteItem.classList.add("col-lg-1");
   favoriteItem.classList.add("col-xl-2");
+  
 
   favoriteItem.classList.add("col-4");
   favoriteItem.innerHTML = ` 
@@ -184,7 +185,7 @@ async function renderProductCards(query = "") {
               <div class="col-sm-10 col-md-10 col-8 col-lg-8">
                   <div class="card-body p-0 p-md-none">
                       <h6 class="trim card-title">${product.title}</h6>
-                      <div class="d-flex justify-content-around">
+                      <div class="d-flex justify-content-between">
                           <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
                           <div class="d-flex  gap-2 mt-1">
                               <div class="feature d-flex">

@@ -522,6 +522,7 @@ input:checked[type = 'checkbox'] {
     margin-right: 10px;
 }
 
+
 /* scroll details*/
 .fixed-container{
     max-height: 100vh;
@@ -639,7 +640,11 @@ input:checked[type = 'checkbox'] {
 
 
 
-
+@media (max-width:991px){
+    #filter{
+        display: none;
+    }
+}
 
 @media only screen and (max-width: 1600px ) and (min-width: 992px) {
     .p-card-row {
@@ -653,6 +658,7 @@ input:checked[type = 'checkbox'] {
     .p-card-img {
         width: 100%;
     }
+   
 
     #navbar {
         display: none;
@@ -694,6 +700,9 @@ input:checked[type = 'checkbox'] {
 @media (max-width: 576px) {
     body{
         overflow: auto;
+    }
+    #bars-toogle{
+        display: none;
     }
     .share-btn-fvrt{
         width: 100%;
