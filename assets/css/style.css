@@ -357,7 +357,7 @@ input:checked[type = 'checkbox'] {
 }
 
 .noUi-horizontal .noUi-handle {
-    width: 18px;
+    width: 18px !important;
     height: 18px;
     border-radius: 50%;
     left: -7px;
@@ -365,9 +365,8 @@ input:checked[type = 'checkbox'] {
     background-color: #345DBB;
 }
 
-.noUi-horizontal .noUi-handle:focus{
-    width: 18px !important;
-}
+
+
 
 /* Styling;
  */
