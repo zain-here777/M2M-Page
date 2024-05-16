@@ -365,6 +365,10 @@ input:checked[type = 'checkbox'] {
     background-color: #345DBB;
 }
 
+.noUi-horizontal .noUi-handle:focus{
+    width: 18px !important;
+}
+
 /* Styling;
  */
 .noUi-background {
@@ -634,6 +638,9 @@ input:checked[type = 'checkbox'] {
 
 .card-text {
     align-items: center;
+}
+.slider-range:focus{
+    width: auto !important;
 }
 
 

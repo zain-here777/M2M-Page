@@ -6,8 +6,9 @@
         "image1": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/jssmwofogaykoord74csn1byecao",
         "image2": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/in7zkna5qy341k2b0087qev4phn3",
         "features": "3 Beds · 2 Baths · 1 m²",
-        "location": "Terry Lane, Golden CO 0987",
-        "refNo" : "#OB-78976"
+        "refNo" : "#OB-78976",
+        "location": "Marbella East",
+        "transactionType": "Buy"
        
     },
     {   "id":2,
@@ -17,7 +18,7 @@
         "image1": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/vjmahq1m91p5qb35n595ifp4rrnv",
         "image2": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/in7zkna5qy341k2b0087qev4phn3",
         "features": "4 Beds · 5 Baths · 434 m²",
-        "location": "Terry Lane, Golden CO 0987",
+        "location": " - Altos de los Monteros",
         "refNo" : "#OB-56565"
        
     },
@@ -30,7 +31,8 @@
 
         "features": "3 Beds · 4 Baths · 345 m²",
         "location": "Terry Lane, Golden CO 0987",
-        "refNo" : "#OB-56589"
+        "refNo" : "#OB-56589",
+        "transactionType": "Rent"
        
     },
     {   "id":4,

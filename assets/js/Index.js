@@ -149,16 +149,103 @@ async function fetchData() {
   }
 }
 
-async function renderProductCards(query = "") {
+// async function renderProductCards(query = "") {
+//   const columnsContainer = document.getElementById("columnsContainer");
+//   const products = await fetchData();
+
+//   // Filter products based on search query (title or location)
+//   const filteredProducts = products.filter(
+//     (product) =>
+//       product.title.toLowerCase().includes(query.toLowerCase()) ||
+//       product.location.toLowerCase().includes(query.toLowerCase())
+//   );
+
+//   // Clear existing content in columnsContainer before rendering new products
+//   columnsContainer.innerHTML = "";
+
+//   // Append initial content
+//   columnsContainer.innerHTML = `
+//       <h2 class="search-result-heading">Search Results</h2>
+//       <h5 class="pb-2 text-center text-secondary">356 Results</h5>
+//   `;
+
+//   // Render filtered products as product cards
+//   if (filteredProducts.length === 0) {
+//     columnsContainer.innerHTML += `no property are matched`;
+//   } else {
+//     filteredProducts.forEach((product) => {
+//       const column = document.createElement("div");
+//       column.classList.add("column");
+//       column.innerHTML = `
+//       <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
+//           <div class="row align-items-center p-card-row">
+//               <div class="col-sm-2 col-md-2 col-4 col-lg-4">
+//                   <img class='p-card-img' src="${product.image}" class="img-fluid rounded-start" alt="...">
+//               </div>
+//               <div class="col-sm-10 col-md-10 col-8 col-lg-8">
+//                   <div class="card-body p-0 p-md-none">
+//                       <h6 class="trim card-title">${product.title}</h6>
+//                       <div class="d-flex justify-content-between">
+//                           <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
+//                           <div class="d-flex  gap-2 mt-1">
+//                               <div class="feature d-flex">
+//                                   <img src="/assets/img/bed.svg" alt="">
+//                                   <p class="m-0 ml-1">4</p>
+//                               </div>
+//                               <div class="feature d-flex align-items-center">
+//                                   <img src="/assets/img/bath.svg" alt="">
+//                                   <p class="m-0 ml-1">4</p>
+//                               </div>
+//                           </div>
+//                       </div>
+//                       <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${product.location}</span></p>
+//                   </div>
+//               </div>
+//           </div>
+//       </div>
+//   `;
+  
+  
+  
+
+//       columnsContainer.appendChild(column);
+
+//       // Add click event listener to show product details
+//       column.addEventListener("click", () => {
+//         showProductDetails(product);
+
+//         // Optional: Show offcanvas element on small screens
+//         if (window.innerWidth <= 576) {
+//           const offcanvasElement = new bootstrap.Offcanvas(
+//             document.getElementById("offcanvasBottom")
+//           );
+//           offcanvasElement.show();
+//         }
+//       });
+//     });
+//   }
+
+//   // Show details of the first product if available
+//   if (filteredProducts.length > 0) {
+//     showProductDetails(filteredProducts[0]);
+//   }
+// }
+
+async function renderProductCards(locationQuery = "", transactionTypes = []) {
   const columnsContainer = document.getElementById("columnsContainer");
+
+  // Fetch product data (replace this with your actual data fetching method)
   const products = await fetchData();
 
-  // Filter products based on search query (title or location)
-  const filteredProducts = products.filter(
-    (product) =>
-      product.title.toLowerCase().includes(query.toLowerCase()) ||
-      product.location.toLowerCase().includes(query.toLowerCase())
-  );
+  // Filter products based on location and transaction types
+  const filteredProducts = products.filter((product) => {
+    const matchesLocation = product.location.toLowerCase().includes(locationQuery.toLowerCase());
+
+    const matchesTransactionType = transactionTypes.length === 0 ||
+      transactionTypes.includes(product.transactionType);
+
+    return matchesLocation && matchesTransactionType;
+  });
 
   // Clear existing content in columnsContainer before rendering new products
   columnsContainer.innerHTML = "";
@@ -166,47 +253,26 @@ async function renderProductCards(query = "") {
   // Append initial content
   columnsContainer.innerHTML = `
       <h2 class="search-result-heading">Search Results</h2>
-      <h5 class="pb-2 text-center text-secondary">356 Results</h5>
+      <h5 class="pb-2 text-center text-secondary">${filteredProducts.length} Results</h5>
   `;
 
   // Render filtered products as product cards
   if (filteredProducts.length === 0) {
-    columnsContainer.innerHTML += `no property are matched`;
+    columnsContainer.innerHTML += `No properties match the selected criteria.`;
   } else {
     filteredProducts.forEach((product) => {
       const column = document.createElement("div");
       column.classList.add("column");
       column.innerHTML = `
       <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
-          <div class="row align-items-center p-card-row">
-              <div class="col-sm-2 col-md-2 col-4 col-lg-4">
-                  <img class='p-card-img' src="${product.image}" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-sm-10 col-md-10 col-8 col-lg-8">
-                  <div class="card-body p-0 p-md-none">
-                      <h6 class="trim card-title">${product.title}</h6>
-                      <div class="d-flex justify-content-between">
-                          <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
-                          <div class="d-flex  gap-2 mt-1">
-                              <div class="feature d-flex">
-                                  <img src="/assets/img/bed.svg" alt="">
-                                  <p class="m-0 ml-1">4</p>
-                              </div>
-                              <div class="feature d-flex align-items-center">
-                                  <img src="/assets/img/bath.svg" alt="">
-                                  <p class="m-0 ml-1">4</p>
-                              </div>
-                          </div>
-                      </div>
-                      <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${product.location}</span></p>
-                  </div>
-              </div>
-          </div>
+          <!-- Product card content -->
+          <img src="${product.image}" alt="${product.title}" class="img-fluid">
+          <h5>${product.title}</h5>
+          <p>Location: ${product.location}</p>
+          <p>Transaction Type: ${product.transactionType}</p>
+          <p>Price: €${product.price.toLocaleString("en-DE")}</p>
       </div>
   `;
-  
-  
-  
 
       columnsContainer.appendChild(column);
 
@@ -230,6 +296,7 @@ async function renderProductCards(query = "") {
     showProductDetails(filteredProducts[0]);
   }
 }
+
 
 function trimText(text, maxLength) {
   if (text.length > maxLength) {
@@ -975,6 +1042,221 @@ searchInput.addEventListener("keyup", () => {
   renderProductCards(query);
 });
 
+
+
+
+// filter by locations
+document.addEventListener("DOMContentLoaded", () => {
+  const locationSelect = document.getElementById("locationsidd");
+
+  // Add event listener for 'change' event on location select dropdown
+  locationSelect.addEventListener("change", (event) => {
+    const selectedLocation = event.target.value;
+
+    // Call renderProductCards() with the selected location as the query
+    renderProductCards(selectedLocation);
+  });
+});
+
+async function renderProductCards(query = "") {
+  const columnsContainer = document.getElementById("columnsContainer");
+  const products = await fetchData();
+
+  // Filter products based on search query (title or location)
+  const filteredProducts = products.filter(
+    (product) =>
+      product.title.toLowerCase().includes(query.toLowerCase()) ||
+      product.location.toLowerCase().includes(query.toLowerCase())
+  );
+
+  // Clear existing content in columnsContainer before rendering new products
+  columnsContainer.innerHTML = "";
+
+  // Append initial content
+  columnsContainer.innerHTML = `
+      <h2 class="search-result-heading">Search Results</h2>
+      <h5 class="pb-2 text-center text-secondary">${filteredProducts.length} Results</h5>
+  `;
+
+  // Render filtered products as product cards
+  if (filteredProducts.length === 0) {
+    columnsContainer.innerHTML += `No properties match the selected location.`;
+  } else {
+    filteredProducts.forEach((product) => {
+      const column = document.createElement("div");
+      column.classList.add("column");
+      column.innerHTML = `
+      <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
+          <div class="row align-items-center p-card-row">
+              <div class="col-sm-2 col-md-2 col-4 col-lg-4">
+                  <img class='p-card-img' src="${product.image}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-sm-10 col-md-10 col-8 col-lg-8">
+                  <div class="card-body p-0 p-md-none">
+                      <h6 class="trim card-title">${product.title}</h6>
+                      <div class="d-flex justify-content-between">
+                          <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
+                          <div class="d-flex  gap-2 mt-1">
+                              <div class="feature d-flex">
+                                  <img src="/assets/img/bed.svg" alt="">
+                                  <p class="m-0 ml-1">4</p>
+                              </div>
+                              <div class="feature d-flex align-items-center">
+                                  <img src="/assets/img/bath.svg" alt="">
+                                  <p class="m-0 ml-1">4</p>
+                              </div>
+                          </div>
+                      </div>
+                      <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${product.location}</span></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  `;
+
+      columnsContainer.appendChild(column);
+
+      // Add click event listener to show product details
+      column.addEventListener("click", () => {
+        showProductDetails(product);
+
+        // Optional: Show offcanvas element on small screens
+        if (window.innerWidth <= 576) {
+          const offcanvasElement = new bootstrap.Offcanvas(
+            document.getElementById("offcanvasBottom")
+          );
+          offcanvasElement.show();
+        }
+      });
+    });
+  }
+
+  // Show details of the first product if available
+  if (filteredProducts.length > 0) {
+    showProductDetails(filteredProducts[0]);
+  }
+}
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const locationSelect = document.getElementById("locationsidd");
+  const buyCheckbox = document.getElementById("buy");
+  const rentCheckbox = document.getElementById("rent");
+  const shortTermCheckbox = document.getElementById("sterm");
+
+  // Add event listeners for checkboxes
+  buyCheckbox.addEventListener("change", () => {
+    renderProductCards(locationSelect.value, getSelectedTransactionTypes());
+  });
+
+  rentCheckbox.addEventListener("change", () => {
+    renderProductCards(locationSelect.value, getSelectedTransactionTypes());
+  });
+
+  shortTermCheckbox.addEventListener("change", () => {
+    renderProductCards(locationSelect.value, getSelectedTransactionTypes());
+  });
+
+  // Function to get selected transaction types
+  function getSelectedTransactionTypes() {
+    const selectedTypes = [];
+    if (buyCheckbox.checked) {
+      selectedTypes.push("Buy");
+    }
+    if (rentCheckbox.checked) {
+      selectedTypes.push("Rent");
+    }
+    if (shortTermCheckbox.checked) {
+      selectedTypes.push("Short Term");
+    }
+    return selectedTypes;
+  }
+});
+
+async function renderProductCards(query = "", transactionTypes = []) {
+  const columnsContainer = document.getElementById("columnsContainer");
+  const products = await fetchData();
+
+  // Filter products based on search query and selected transaction types
+  const filteredProducts = products.filter((product) => {
+    const matchesQuery = product.title.toLowerCase().includes(query.toLowerCase()) ||
+      product.location.toLowerCase().includes(query.toLowerCase());
+
+    if (transactionTypes.length === 0) {
+      return matchesQuery; // No transaction type filter applied
+    }
+
+    return matchesQuery && transactionTypes.includes(product.transactionType);
+  });
+
+  // Clear existing content in columnsContainer before rendering new products
+  columnsContainer.innerHTML = "";
+
+  // Append initial content
+  columnsContainer.innerHTML = `
+      <h2 class="search-result-heading">Search Results</h2>
+      <h5 class="pb-2 text-center text-secondary">${filteredProducts.length} Results</h5>
+  `;
+
+  // Render filtered products as product cards
+  if (filteredProducts.length === 0) {
+    columnsContainer.innerHTML += `No properties match the selected criteria.`;
+  } else {
+    filteredProducts.forEach((product) => {
+      const column = document.createElement("div");
+      column.classList.add("column");
+      column.innerHTML = `
+      <div class="card property-card-container mb-4 p-2" style="max-width: 100%;">
+          <div class="row align-items-center p-card-row">
+              <div class="col-sm-2 col-md-2 col-4 col-lg-4">
+                  <img class='p-card-img' src="${product.image}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-sm-10 col-md-10 col-8 col-lg-8">
+                  <div class="card-body p-0 p-md-none">
+                      <h6 class="trim card-title">${product.title}</h6>
+                      <div class="d-flex justify-content-between">
+                          <p class="p-card-price card-text m-0 py-2">€${product.price.toLocaleString("en-DE")}</p>
+                          <div class="d-flex  gap-2 mt-1">
+                              <div class="feature d-flex">
+                                  <img src="/assets/img/bed.svg" alt="">
+                                  <p class="m-0 ml-1">4</p>
+                              </div>
+                              <div class="feature d-flex align-items-center">
+                                  <img src="/assets/img/bath.svg" alt="">
+                                  <p class="m-0 ml-1">4</p>
+                              </div>
+                          </div>
+                      </div>
+                      <p class="card-text d-flex gap-2"><i class="fas fa-map-marker-alt" style="width:15px"></i><span class="trim">${product.location}</span></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  `;
+
+      columnsContainer.appendChild(column);
+
+      // Add click event listener to show product details
+      column.addEventListener("click", () => {
+        showProductDetails(product);
+
+        // Optional: Show offcanvas element on small screens
+        if (window.innerWidth <= 576) {
+          const offcanvasElement = new bootstrap.Offcanvas(
+            document.getElementById("offcanvasBottom")
+          );
+          offcanvasElement.show();
+        }
+      });
+    });
+  }
+
+  // Show details of the first product if available
+  if (filteredProducts.length > 0) {
+    showProductDetails(filteredProducts[0]);
+  }
+}
 
 
 
