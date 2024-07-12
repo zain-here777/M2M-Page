@@ -1,3 +1,111 @@
+
+// json data 
+
+
+let data = [
+  {   "id":1,
+      "title": "Duplex in costa del sol, santa clara, málaga",
+      "price":630000,
+      "image": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/vjmahq1m91p5qb35n595ifp4rrnv",
+      "image1": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/jssmwofogaykoord74csn1byecao",
+      "image2": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/in7zkna5qy341k2b0087qev4phn3",
+      "features": "3 Beds · 2 Baths · 1 m²",
+      "refNo" : "#OB-78976",
+      "location": "Marbella East",
+      "transactionType": "Buy"
+     
+  },
+  {   "id":2,
+      "title": "Villa in costa del sol, the golden mile, málaga",
+      "price":3500000,
+      "image": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/jssmwofogaykoord74csn1byecao",
+      "image1": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/vjmahq1m91p5qb35n595ifp4rrnv",
+      "image2": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/in7zkna5qy341k2b0087qev4phn3",
+      "features": "4 Beds · 5 Baths · 434 m²",
+      "location": " - Altos de los Monteros",
+      "refNo" : "#OB-56565"
+     
+  },
+  {   "id":3,
+      "title": "Villa in costa del sol, santa clara, málaga,",
+      "price":750000,
+      "image": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/in7zkna5qy341k2b0087qev4phn3",
+      "image1": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/jssmwofogaykoord74csn1byecao",
+      "image2": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/jssmwofogaykoord74csn1byecao",
+
+      "features": "3 Beds · 4 Baths · 345 m²",
+      "location": "Terry Lane, Golden CO 0987",
+      "refNo" : "#OB-56589",
+      "transactionType": "Rent"
+     
+  },
+  {   "id":4,
+      "title": "Villa in costa del sol, santa clara, málaga",
+      "price":2200000,
+      "image": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/yzzs1biteud9921npk6yyks1cdnq",
+      "image1": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/in7zkna5qy341k2b0087qev4phn3",
+      "image2": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/jssmwofogaykoord74csn1byecao",
+      "features": "4 Beds · 5 Baths · 1425 m²",
+      "location": "Terry Lane, Golden CO 0987",
+      "refNo" : "#OB-96605"
+     
+  },
+  {   "id":5,
+      "title": "Ground Floor in costa del sol, puerto banús, málaga",
+      "price":1575000,
+      "image": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/xwarulm5z78f923yla044bb808rz",
+      "image1":  "https://openbroker-aws.s3.eu-west-3.amazonaws.com/yzzs1biteud9921npk6yyks1cdnq",
+      "image2": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/in7zkna5qy341k2b0087qev4phn3",
+      "features": "4 Beds · 5 Baths · 1425 m²",
+      "location": "Terry Lane, Golden CO 0987",
+      "refNo" : "#OB-96455"
+  },
+  {   "id":6,
+  "title": "Ground Floor in costa del sol, puerto banús, málaga",
+  "price":1575000,
+  "image": " https://openbroker-aws.s3.eu-west-3.amazonaws.com/yzzs1biteud9921npk6yyks1cdnq",
+  "image1":  "https://openbroker-aws.s3.eu-west-3.amazonaws.com/xwarulm5z78f923yla044bb808rz",
+  "image2": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/in7zkna5qy341k2b0087qev4phn3",
+  "features": "4 Beds · 5 Baths · 1425 m²",
+  "location": "Terry Lane, Golden CO 0987",
+  "refNo" : "#OB-96455"
+},
+{   "id":7,
+"title": "Ground Floor in costa del sol, puerto banús, málaga",
+"price":1575000,
+"image": " https://openbroker-aws.s3.eu-west-3.amazonaws.com/in7zkna5qy341k2b0087qev4phn3",
+"image1":  "https://openbroker-aws.s3.eu-west-3.amazonaws.com/yzzs1biteud9921npk6yyks1cdnq",
+"image2": "https://openbroker-aws.s3.eu-west-3.amazonaws.com/xwarulm5z78f923yla044bb808rz",
+"features": "4 Beds · 5 Baths · 1425 m²",
+"location": "Terry Lane, Golden CO 0987",
+"refNo" : "#OB-96455"
+}
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const productDetails = document.getElementById("column");
 const shareBtn = document.getElementById("share-property");
 
@@ -136,10 +244,10 @@ function handleAddToFavorites(product) {
 
 async function fetchData() {
   try {
-    const response = await fetch("ApiData.json");
-    if (response.ok) {
-      const data = await response.json();
-      return data;
+    const response = await data;
+    console.log(response);
+    if (response) {
+      return response;
     } else {
       throw new Error("Failed to fetch data");
     }
